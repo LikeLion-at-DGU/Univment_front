@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-const AppRouter = () => {
+const AppRouter = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
-    <div>
+    <>
       <Router>
-        <Routes></Routes>
+        <Routes>
+          <Route path="/" element={isLoggedIn ? <Home /> : <SignIn />}></Route>
+        </Routes>
       </Router>
-    </div>
+    </>
   );
 };
 
