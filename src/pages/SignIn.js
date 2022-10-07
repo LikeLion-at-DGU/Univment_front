@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../static/css/SignIn.module.css";
 import {
   TextField,
   Checkbox,
@@ -42,7 +43,12 @@ const SignIn = () => {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5">
+            <Typography
+              component="h1"
+              variant="h5"
+              fontFamily="GangwonEduPowerExtraBoldA"
+              color="#e0952b"
+            >
               UNIVMENT 로그인
             </Typography>
             <Box
@@ -79,9 +85,9 @@ const SignIn = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, bgcolor: "#e0952b" }}
               >
-                Sign In
+                로그인
               </Button>
               <Grid container>
                 {/* <Grid item xs>
@@ -90,7 +96,12 @@ const SignIn = () => {
                   </Link>
                 </Grid> */}
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link
+                    href="#"
+                    variant="body2"
+                    fontFamily="GangwonEduPowerExtraBoldA"
+                    color="#e0952b"
+                  >
                     회원가입
                   </Link>
                 </Grid>
