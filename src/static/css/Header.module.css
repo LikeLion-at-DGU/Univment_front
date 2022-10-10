@@ -1,0 +1,11 @@
+.headerBody {
+  font-size: 2vw;
+  text-align: center;
+  background-color: #383b3d;
+  width: 100vw;
+  height: 5vh;
+}
+
+.text {
+  color: #fff;
+}
