@@ -4,16 +4,23 @@
   font-family: "Jeju Myeongjo", serif;
 }
 
-.textWrap {
+.container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
 }
 
-.mainText {
+.textWrap {
   display: flex;
-  align-items: center;
   font-family: "Jeju Myeongjo", serif;
   font-size: 3rem;
+}
+
+.btnWrap {
+  display: flex;
+  column-gap: 5vw;
+  font-family: "Jeju Myeongjo", serif;
 }
