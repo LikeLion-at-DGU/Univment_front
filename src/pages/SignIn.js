@@ -11,11 +11,13 @@ import {
   Box,
   Paper,
 } from "@mui/material/";
+import Header from "../components/Header";
 
 const SignIn = () => {
   return (
     <>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Header />
+      <Grid container component="main" sx={{ height: "93vh" }}>
         {/* <CssBaseline /> */}
         <Grid
           item
@@ -46,8 +48,8 @@ const SignIn = () => {
             <Typography
               component="h1"
               variant="h5"
-              fontFamily="GangwonEduPowerExtraBoldA"
-              color="#e0952b"
+              fontFamily="Jeju Myeongjo"
+              color="#383b3d"
             >
               UNIVMENT 로그인
             </Typography>
@@ -77,15 +79,20 @@ const SignIn = () => {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="로그인 유지"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, bgcolor: "#e0952b" }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  bgcolor: "#383b3d",
+                  fontFamily: "Jeju Myeongjo",
+                }}
               >
                 로그인
               </Button>
@@ -99,8 +106,8 @@ const SignIn = () => {
                   <Link
                     href="#"
                     variant="body2"
-                    fontFamily="GangwonEduPowerExtraBoldA"
-                    color="#e0952b"
+                    fontFamily="Jeju Myeongjo"
+                    color="#383b3d"
                   >
                     회원가입
                   </Link>
