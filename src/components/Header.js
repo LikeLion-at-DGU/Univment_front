@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <>
       <div className={styles.headerBody}>
-        <p className={styles.logo}>UNIVMENT</p>
+        <section className={styles.logo}>UNIVMENT</section>
       </div>
     </>
   );

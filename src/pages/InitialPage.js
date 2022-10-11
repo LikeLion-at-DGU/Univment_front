@@ -6,7 +6,7 @@ const InitialPage = () => {
   return (
     <>
       <Header />
-      <p>"오늘 기록하고 싶은 일이 있었나요?"</p>
+      <div className={styles.mainText} id="mainText"></div>
     </>
   );
 };

@@ -1,0 +1,12 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
+.jejumyeongjo * {
+  font-family: "Jeju Myeongjo", serif;
+}
+
+.mainText {
+  font-family: "Jeju Myeongjo", serif;
+  font-size: 2rem;
+  display: flex;
+  height: 100%;
+}
