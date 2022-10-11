@@ -4,8 +4,27 @@ import styles from "../static/css/InitialPage.module.css";
 import ReactTypingEffect from "react-typing-effect";
 import { Button } from "@mui/material";
 import { border, width } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
-const InitialPage = () => {
+const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
+  const navigate = useNavigate();
+
+  const yesClick = (e) => {
+    e.preventDefault();
+    if (isLoggedIn) {
+      navigate("/record", { replace: true });
+    } else {
+      navigate("/signin");
+    }
+  };
+  const noClick = (e) => {
+    e.preventDefault();
+    if (isLoggedIn) {
+      navigate("/home", { replace: true });
+    } else {
+      navigate("/signin");
+    }
+  };
   return (
     <>
       <Header />
@@ -25,6 +44,7 @@ const InitialPage = () => {
               width: "10vw",
               fontFamily: "Jeju Myeongjo",
             }}
+            onClick={yesClick}
           >
             네
           </Button>
@@ -36,6 +56,7 @@ const InitialPage = () => {
               width: "10vw",
               fontFamily: "Jeju Myeongjo",
             }}
+            onClick={noClick}
           >
             아니오
           </Button>

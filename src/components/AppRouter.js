@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import InitialPage from "../pages/InitialPage";
+import Record from "../pages/Record";
 import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
 
 const AppRouter = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
@@ -11,7 +13,33 @@ const AppRouter = ({ isLoggedIn, setIsLoggedIn }) => {
         <Routes>
           <Route
             path="/"
-            element={isLoggedIn ? <Home /> : <InitialPage />}
+            element={
+              <InitialPage
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
+          ></Route>
+          <Route
+            path="/signin"
+            element={
+              <SignIn isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }
+          ></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+        </Routes>
+        <Routes>
+          <Route
+            path="/home"
+            element={
+              <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }
+          ></Route>
+          <Route
+            path="/record"
+            element={
+              <Record isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }
           ></Route>
         </Routes>
       </Router>
