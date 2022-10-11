@@ -20,12 +20,7 @@ const AppRouter = ({ isLoggedIn, setIsLoggedIn }) => {
               />
             }
           ></Route>
-          <Route
-            path="/signin"
-            element={
-              <SignIn isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-            }
-          ></Route>
+          <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
         </Routes>
         <Routes>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../static/css/SignIn.module.css";
 import {
   TextField,
@@ -14,6 +14,30 @@ import {
 import Header from "../components/Header";
 
 const SignIn = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(false);
+
+  const onChange = (e) => {
+    const { value, email } = e.target;
+    setInputs({
+      ...inputs,
+      [email]: value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    console.log("로그인 요청됨");
+    setInputs({
+      ...inputs,
+      email: "",
+      password: "",
+    });
+  };
+
   return (
     <>
       <Header />
@@ -53,12 +77,7 @@ const SignIn = () => {
             >
               UNIVMENT 로그인
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              // onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" noValidate onSubmit={onSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -68,6 +87,7 @@ const SignIn = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={onChange}
               />
               <TextField
                 margin="normal"
@@ -78,6 +98,7 @@ const SignIn = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={onChange}
               />
               {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -104,7 +125,7 @@ const SignIn = () => {
                 </Grid> */}
                 <Grid item>
                   <Link
-                    href="#"
+                    href="/SignUp"
                     variant="body2"
                     fontFamily="Jeju Myeongjo"
                     color="#383b3d"
