@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../static/css/SignIn.module.css";
 import {
   TextField,
@@ -11,11 +11,37 @@ import {
   Box,
   Paper,
 } from "@mui/material/";
+import Header from "../components/Header";
 
 const SignIn = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(false);
+
+  const onChange = (e) => {
+    const { value, email } = e.target;
+    setInputs({
+      ...inputs,
+      [email]: value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    console.log("로그인 요청됨");
+    setInputs({
+      ...inputs,
+      email: "",
+      password: "",
+    });
+  };
+
   return (
     <>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Header />
+      <Grid container component="main" sx={{ height: "93vh" }}>
         {/* <CssBaseline /> */}
         <Grid
           item
@@ -46,17 +72,12 @@ const SignIn = () => {
             <Typography
               component="h1"
               variant="h5"
-              fontFamily="GangwonEduPowerExtraBoldA"
-              color="#e0952b"
+              fontFamily="Jeju Myeongjo"
+              color="#383b3d"
             >
               UNIVMENT 로그인
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              // onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" noValidate onSubmit={onSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -66,6 +87,7 @@ const SignIn = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={onChange}
               />
               <TextField
                 margin="normal"
@@ -76,16 +98,22 @@ const SignIn = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={onChange}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="로그인 유지"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, bgcolor: "#e0952b" }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  bgcolor: "#383b3d",
+                  fontFamily: "Jeju Myeongjo",
+                }}
               >
                 로그인
               </Button>
@@ -97,10 +125,10 @@ const SignIn = () => {
                 </Grid> */}
                 <Grid item>
                   <Link
-                    href="#"
+                    href="/SignUp"
                     variant="body2"
-                    fontFamily="GangwonEduPowerExtraBoldA"
-                    color="#e0952b"
+                    fontFamily="Jeju Myeongjo"
+                    color="#383b3d"
                   >
                     회원가입
                   </Link>
