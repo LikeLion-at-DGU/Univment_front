@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import FastRecord from "../pages/FastRecord";
 import Home from "../pages/Home";
 import InitialPage from "../pages/InitialPage";
 import Record from "../pages/Record";
@@ -22,6 +23,7 @@ const AppRouter = ({ isLoggedIn, setIsLoggedIn }) => {
           ></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/fastrecord" element={<FastRecord />}></Route>
         </Routes>
         <Routes>
           <Route

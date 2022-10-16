@@ -5,6 +5,7 @@ import ReactTypingEffect from "react-typing-effect";
 import { Button } from "@mui/material";
 import { border, width } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import FastRecord from "./FastRecord";
 
 const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -12,15 +13,15 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const yesClick = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      navigate("/record", { replace: true });
+      navigate("/record");
     } else {
-      navigate("/signin");
+      navigate("/fastrecord");
     }
   };
   const noClick = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      navigate("/home", { replace: true });
+      navigate("/home");
     } else {
       navigate("/signin");
     }
