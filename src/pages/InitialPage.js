@@ -13,7 +13,7 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const yesClick = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      navigate("/record", { replace: true });
+      navigate("/record");
     } else {
       navigate("/fastrecord");
     }
@@ -21,7 +21,7 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const noClick = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      navigate("/home", { replace: true });
+      navigate("/home");
     } else {
       navigate("/signin");
     }
