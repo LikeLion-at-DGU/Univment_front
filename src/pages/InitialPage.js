@@ -13,7 +13,7 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const yesClick = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      navigate("/fastrecord", { replace: true });
+      navigate("/record", { replace: true });
     } else {
       navigate("/fastrecord");
     }

@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import styles from "../static/css/SignIn.module.css";
 import {
   TextField,
-  Checkbox,
   Button,
-  FormControlLabel,
   Link,
   Grid,
   Typography,
@@ -16,23 +14,26 @@ import Header from "../components/Header";
 const SignIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [inputs, setInputs] = useState({
+    id: "",
     email: "",
     password: "",
   });
   const [error, setError] = useState(false);
 
   const onChange = (e) => {
-    const { value, email } = e.target;
+    const { value, name } = e.target;
     setInputs({
       ...inputs,
-      [email]: value,
+      [name]: value,
     });
   };
 
   const onSubmit = (e) => {
+    e.preventDefault();
     console.log("로그인 요청됨");
     setInputs({
       ...inputs,
+      id: "",
       email: "",
       password: "",
     });
@@ -82,11 +83,21 @@ const SignIn = () => {
                 margin="normal"
                 required
                 fullWidth
+                id="id"
+                label="ID"
+                name="id"
+                autoComplete="id"
+                autoFocus
+                onChange={onChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
                 onChange={onChange}
               />
               <TextField
