@@ -74,6 +74,41 @@ const SignUp = () => {
     [id]
   );
 
+  // Email 유효성 관리
+  const onChangeEmail = useCallback(
+    (e) => {
+      const emailRegex =
+        /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      const { value, name } = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+      if (!emailRegex.test(email)) {
+        setErrors({
+          ...errors,
+          emailError: "이메일 형식을 다시 확인해주세요",
+        });
+        setValidation({
+          ...validation,
+          isEmail: false,
+        });
+      } else {
+        setErrors({
+          ...errors,
+          emailError: "올바른 이메일 형식입니다.",
+        });
+        setValidation({
+          ...validation,
+          isEmail: true,
+        });
+      }
+    },
+    [email]
+  );
+
+  // 비밀번호 유효성 관리
+
   // Boxs Form 버튼 클릭 시 실행
   const onSubmit = (e) => {
     e.preventDefault();
@@ -138,6 +173,7 @@ const SignUp = () => {
                     id="email"
                     name="email"
                     label="이메일 주소"
+                    onChange={onChangeEmail}
                     error={errors.emailError !== "" || false}
                   />
                 </Grid>
