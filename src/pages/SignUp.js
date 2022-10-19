@@ -49,6 +49,7 @@ const SignUp = () => {
     isPassword: false,
     isPasswordConfirm: false,
   });
+  const { isId, isEmail, isPassword, isPasswordConfirm } = validation;
 
   // Id 유효성 관리
   const onChangeId = useCallback(
@@ -63,7 +64,7 @@ const SignUp = () => {
       else
         setErrors({
           ...errors,
-          idError: "",
+          idError: "올바른 아이디 형식입니다.",
         });
       const { value, name } = e.target;
       setInputs({
@@ -108,6 +109,67 @@ const SignUp = () => {
   );
 
   // 비밀번호 유효성 관리
+  const onChangePassword = useCallback(
+    (e) => {
+      const passwordRegex =
+        /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+      setInputs({
+        ...inputs,
+        password: e.target.value,
+      });
+      if (!passwordRegex.test(password)) {
+        setErrors({
+          ...errors,
+          passwordError:
+            "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.",
+        });
+        setValidation({
+          ...validation,
+          isPassword: false,
+        });
+      } else {
+        setErrors({
+          ...errors,
+          passwordError: "안전한 비밀번호입니다.",
+        });
+        setValidation({
+          ...validation,
+          isPassword: true,
+        });
+      }
+    },
+    [password]
+  );
+
+  // 비밀번호 확인 유효성 관리
+  const onChangePasswordConfirm = useCallback(
+    (e) => {
+      setInputs({
+        ...inputs,
+        passwordConfirm: e.target.value,
+      });
+      if (password === passwordConfirm) {
+        setErrors({
+          ...errors,
+          passwordConfirmError: "비밀번호를 똑같이 입력했어요.",
+        });
+        setValidation({
+          ...validation,
+          isPasswordConfirm: true,
+        });
+      } else {
+        setErrors({
+          ...errors,
+          passwordConfirmError: "비밀번호가 틀려요. 다시 확인해주세요.",
+        });
+        setValidation({
+          ...validation,
+          isPasswordConfirm: false,
+        });
+      }
+    },
+    [passwordConfirm]
+  );
 
   // Boxs Form 버튼 클릭 시 실행
   const onSubmit = (e) => {
@@ -118,7 +180,7 @@ const SignUp = () => {
       id: data.get("id"),
       email: data.get("email"),
       password: data.get("password"),
-      rePassword: data.get("rePassword"),
+      passwordConfirm: data.get("passwordConfirm"),
     };
     const { id, email, password, rePassword } = joinData;
     console.log(joinData);
@@ -161,7 +223,7 @@ const SignUp = () => {
                     name="id"
                     label="아이디"
                     onChange={onChangeId}
-                    error={errors.idError !== "" || false}
+                    // error={errors.idError !== "" || false}
                   />
                 </Grid>
                 <FormHelperTexts>{errors.idError}</FormHelperTexts>
@@ -174,7 +236,7 @@ const SignUp = () => {
                     name="email"
                     label="이메일 주소"
                     onChange={onChangeEmail}
-                    error={errors.emailError !== "" || false}
+                    // error={errors.emailError !== "" || false}
                   />
                 </Grid>
                 <FormHelperTexts>{errors.emailError}</FormHelperTexts>
@@ -186,30 +248,24 @@ const SignUp = () => {
                     id="password"
                     name="password"
                     label="비밀번호 (숫자+영문자+특수문자 8자리 이상)"
-                    error={errors.passwordState !== "" || false}
+                    onChange={onChangePassword}
+                    // error={password !== "" || false}
                   />
                 </Grid>
-                <FormHelperTexts>{errors.passwordState}</FormHelperTexts>
+                <FormHelperTexts>{errors.passwordError}</FormHelperTexts>
                 <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
                     type="password"
-                    id="rePassword"
-                    name="rePassword"
+                    id="passwordConfirm"
+                    name="passwordConfirm"
                     label="비밀번호 재입력"
-                    error={errors.passwordError !== "" || false}
+                    onChange={onChangePasswordConfirm}
+                    // error={errors.passwordError !== "" || false}
                   />
                 </Grid>
-                <FormHelperTexts>{errors.passwordError}</FormHelperTexts>
-                {/* <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox onChange={handleAgree} color="primary" />
-                    }
-                    label="Univment 회원가입에 동의합니다."
-                  />
-                </Grid> */}
+                <FormHelperTexts>{errors.passwordConfirmError}</FormHelperTexts>
               </Grid>
               <Button
                 type="submit"
@@ -218,6 +274,7 @@ const SignUp = () => {
                 sx={{ mt: 3, mb: 2, bgcolor: "#383b3d" }}
                 size="large"
                 style={{ height: "5.5vh" }}
+                disabled={!(isId && isEmail && isPassword && isPasswordConfirm)}
               >
                 회원가입 완료
               </Button>
