@@ -36,12 +36,14 @@ const SignUp = () => {
 
   // Name 유효성 관리
   const onChangeName = useCallback((e) => {
-    setName(e.target.value);
-    if (e.target.value.length < 1 || e.target.value.length > 5) {
-      setNameMessage("1글자 이상 5글자 미만으로 입력해주세요.");
+    const nameRegex = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{1,10}$/;
+    const nameCurrent = e.target.value;
+    setName(nameCurrent);
+    if (!nameRegex.test(nameCurrent)) {
+      setNameMessage("한글 또는 영문자만 가능합니다.[1~10글자]");
       setIsName(false);
     } else {
-      setNameMessage("올바른 이름 형식입니다 :)");
+      setNameMessage("올바른 이름 형식입니다");
       setIsName(true);
     }
   }, []);
@@ -53,10 +55,10 @@ const SignUp = () => {
     setEmail(emailCurrent);
 
     if (!emailRegex.test(emailCurrent)) {
-      setEmailMessage("이메일 형식이 틀렸어요! 다시 확인해주세요 ㅜ ㅜ");
+      setEmailMessage("이메일 형식이 틀렸습니다");
       setIsEmail(false);
     } else {
-      setEmailMessage("올바른 이메일 형식이에요 : )");
+      setEmailMessage("올바른 이메일 형식입니다");
       setIsEmail(true);
     }
   }, []);
@@ -68,10 +70,10 @@ const SignUp = () => {
     setPassword(passwordCurrent);
 
     if (!passwordRegex.test(passwordCurrent)) {
-      setPasswordMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!");
+      setPasswordMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요");
       setIsPassword(false);
     } else {
-      setPasswordMessage("안전한 비밀번호에요 : )");
+      setPasswordMessage("안전한 비밀번호입니다");
       setIsPassword(true);
     }
   }, []);
@@ -83,10 +85,10 @@ const SignUp = () => {
       setPasswordConfirm(passwordConfirmCurrent);
 
       if (password === passwordConfirmCurrent) {
-        setPasswordConfirmMessage("비밀번호를 똑같이 입력했어요 : )");
+        setPasswordConfirmMessage("비밀번호를 똑같이 입력했어요");
         setIsPasswordConfirm(true);
       } else {
-        setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요 ㅜ ㅜ");
+        setPasswordConfirmMessage("비밀번호가 틀렸습니다. 다시 확인해주세요");
         setIsPasswordConfirm(false);
       }
     },
@@ -140,55 +142,19 @@ const SignUp = () => {
             <FormControl component="fieldset" variant="standard">
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <TextField
-                    autoFocus
-                    required
-                    fullWidth
-                    id="nickname"
-                    name="nickname"
-                    label="닉네임"
-                    onChange={onChangeName}
-                    // error={errors.nicknameError !== "" || false}
-                  />
+                  <TextField autoFocus required fullWidth id="name" name="name" label="이름" onChange={onChangeName} />
                 </Grid>
                 <FormHelperTexts>{nameMessage}</FormHelperTexts>
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    type="email"
-                    id="email"
-                    name="email"
-                    label="이메일 주소"
-                    onChange={onChangeEmail}
-                    // error={errors.emailError !== "" || false}
-                  />
+                  <TextField required fullWidth type="email" id="email" name="email" label="이메일 주소" onChange={onChangeEmail} />
                 </Grid>
                 <FormHelperTexts>{emailMessage}</FormHelperTexts>
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    type="password"
-                    id="password"
-                    name="password"
-                    label="비밀번호 (숫자+영문자+특수문자 8자리 이상)"
-                    onChange={onChangePassword}
-                    // error={password !== "" || false}
-                  />
+                  <TextField required fullWidth type="password" id="password" name="password" label="비밀번호 (숫자+영문자+특수문자 8자리 이상)" onChange={onChangePassword} />
                 </Grid>
                 <FormHelperTexts>{passwordMessage}</FormHelperTexts>
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    type="password"
-                    id="passwordConfirm"
-                    name="passwordConfirm"
-                    label="비밀번호 재입력"
-                    onChange={onChangePasswordConfirm}
-                    // error={errors.passwordError !== "" || false}
-                  />
+                  <TextField required fullWidth type="password" id="passwordConfirm" name="passwordConfirm" label="비밀번호 재입력" onChange={onChangePasswordConfirm} />
                 </Grid>
                 <FormHelperTexts>{passwordConfirmMessage}</FormHelperTexts>
               </Grid>
