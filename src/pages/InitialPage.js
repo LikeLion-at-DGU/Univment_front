@@ -34,7 +34,7 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
           <ReactTypingEffect
             text={[" '오늘 기록하고 싶은 일이 있었나요?' "]}
             cursorRenderer={(cursor) => <h3>{cursor}</h3>}
-            speed={200}
+            speed={150}
           />
         </section>
         <section className={styles.btnWrap}>
