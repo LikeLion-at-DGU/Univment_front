@@ -1,15 +1,42 @@
 import React, { useCallback, useState } from "react";
-import { Button, CssBaseline, TextField, FormControl, FormHelperText, Grid, Box, Typography, Container } from "@mui/material/";
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  FormControl,
+  FormHelperText,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@mui/material/";
 import Header from "../components/Header";
 import styled from "styled-components";
 
-const FormHelperTexts = styled(FormHelperText)`
+const FormHelperNames = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: #d32f2f !important;
+  color: ${(props) => (props.isname ? "#71c4eb" : "#d32f2f")} !important;
 `;
-
+const FormHelperEmails = styled(FormHelperText)`
+  width: 100%;
+  padding-left: 16px;
+  font-weight: 700 !important;
+  color: ${(props) => (props.isemail ? "#71c4eb" : "#d32f2f")} !important;
+`;
+const FormHelperPWs = styled(FormHelperText)`
+  width: 100%;
+  padding-left: 16px;
+  font-weight: 700 !important;
+  color: ${(props) => (props.ispassword ? "#71c4eb" : "#d32f2f")} !important;
+`;
+const FormHelperPWCF = styled(FormHelperText)`
+  width: 100%;
+  padding-left: 16px;
+  font-weight: 700 !important;
+  color: ${(props) => (props.ispasswordConfirm ? "#71c4eb" : "#d32f2f")} !important;
+`;
 const Boxs = styled(Box)`
   padding-bottom: 40px !important;
 `;
@@ -50,7 +77,8 @@ const SignUp = () => {
 
   // Email 유효성 관리
   const onChangeEmail = useCallback((e) => {
-    const emailRegex = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     const emailCurrent = e.target.value;
     setEmail(emailCurrent);
 
@@ -96,22 +124,18 @@ const SignUp = () => {
   );
 
   // Boxs Form 버튼 클릭 시 실행
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
     const joinData = {
-      nickname: data.get("nickname"),
+      name: data.get("name"),
       email: data.get("email"),
       password: data.get("password"),
       passwordConfirm: data.get("passwordConfirm"),
     };
-    const { nickname, email, password, passwordConfirm } = joinData;
+    const { name, email, password, passwordConfirm } = joinData;
     console.log(joinData);
-  };
-
-  const onPost = async (data) => {
-    console.log("회원가입 포스트 정상 신청", data);
   };
 
   return (
@@ -121,14 +145,14 @@ const SignUp = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 10,
+            marginTop: 20,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             minHeight: "70vh",
           }}
         >
-          <Typography component="h1" variant="h5" fontFamily="AppleSDGothicNeoB00">
+          <Typography component="h1" variant="h5" fontFamily="Jeju Myeongjo" color="#383b3d">
             회원가입을 진행해주세요
           </Typography>
           <Boxs
@@ -142,21 +166,57 @@ const SignUp = () => {
             <FormControl component="fieldset" variant="standard">
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <TextField autoFocus required fullWidth id="name" name="name" label="이름" onChange={onChangeName} />
+                  <TextField
+                    autoFocus
+                    required
+                    fullWidth
+                    id="name"
+                    name="name"
+                    label="이름"
+                    onChange={onChangeName}
+                  />
                 </Grid>
-                <FormHelperTexts>{nameMessage}</FormHelperTexts>
+                <FormHelperNames isname={isName ? true : false}>{nameMessage}</FormHelperNames>
                 <Grid item xs={12}>
-                  <TextField required fullWidth type="email" id="email" name="email" label="이메일 주소" onChange={onChangeEmail} />
+                  <TextField
+                    required
+                    fullWidth
+                    type="email"
+                    id="email"
+                    name="email"
+                    label="이메일 주소"
+                    onChange={onChangeEmail}
+                  />
                 </Grid>
-                <FormHelperTexts>{emailMessage}</FormHelperTexts>
+                <FormHelperEmails isemail={isEmail ? true : false}>{emailMessage}</FormHelperEmails>
                 <Grid item xs={12}>
-                  <TextField required fullWidth type="password" id="password" name="password" label="비밀번호 (숫자+영문자+특수문자 8자리 이상)" onChange={onChangePassword} />
+                  <TextField
+                    required
+                    fullWidth
+                    type="password"
+                    id="password"
+                    name="password"
+                    label="비밀번호 (숫자+영문자+특수문자 8자리 이상)"
+                    onChange={onChangePassword}
+                  />
                 </Grid>
-                <FormHelperTexts>{passwordMessage}</FormHelperTexts>
+                <FormHelperPWs ispassword={isPassword ? true : false}>
+                  {passwordMessage}
+                </FormHelperPWs>
                 <Grid item xs={12}>
-                  <TextField required fullWidth type="password" id="passwordConfirm" name="passwordConfirm" label="비밀번호 재입력" onChange={onChangePasswordConfirm} />
+                  <TextField
+                    required
+                    fullWidth
+                    type="password"
+                    id="passwordConfirm"
+                    name="passwordConfirm"
+                    label="비밀번호 재입력"
+                    onChange={onChangePasswordConfirm}
+                  />
                 </Grid>
-                <FormHelperTexts>{passwordConfirmMessage}</FormHelperTexts>
+                <FormHelperPWCF ispasswordConfirm={isPasswordConfirm ? true : false}>
+                  {passwordConfirmMessage}
+                </FormHelperPWCF>
               </Grid>
               <Button
                 type="submit"
@@ -166,6 +226,7 @@ const SignUp = () => {
                   mt: 3,
                   mb: 2,
                   bgcolor: "#383b3d",
+                  fontFamily: "Jeju Myeongjo",
                 }}
                 size="large"
                 style={{
@@ -173,7 +234,7 @@ const SignUp = () => {
                 }}
                 disabled={!(isName && isEmail && isPassword && isPasswordConfirm)}
               >
-                회원가입 완료
+                회원가입 신청
               </Button>
             </FormControl>
           </Boxs>
