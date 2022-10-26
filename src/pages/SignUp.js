@@ -157,7 +157,6 @@ const SignUp = () => {
           </Typography>
           <Boxs
             component="form"
-            noValidate
             onSubmit={onSubmit}
             sx={{
               mt: 3,
