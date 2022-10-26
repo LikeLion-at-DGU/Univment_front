@@ -17,7 +17,7 @@ const FormHelperNames = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.isname ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.isUsername ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const FormHelperEmails = styled(FormHelperText)`
   width: 100%;
@@ -35,7 +35,7 @@ const FormHelperPWCF = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.ispasswordConfirm ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.ispassword2 ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const Boxs = styled(Box)`
   padding-bottom: 40px !important;
@@ -44,34 +44,34 @@ const Boxs = styled(Box)`
 const SignUp = () => {
   // 인풋 상태 관리
   //이름, 이메일, 비밀번호, 비밀번호 확인
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
 
   //오류메시지 상태저장
-  const [nameMessage, setNameMessage] = useState("");
+  const [usernameMessage, setUsernameMessage] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
-  const [passwordMessage, setPasswordMessage] = useState("");
-  const [passwordConfirmMessage, setPasswordConfirmMessage] = useState("");
+  const [password1Message, setPassword1Message] = useState("");
+  const [password2Message, setPassword2Message] = useState("");
 
   // 유효성 검사
-  const [isName, setIsName] = useState(false);
+  const [isUsername, setIsUsername] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
-  const [isPassword, setIsPassword] = useState(false);
-  const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+  const [isPassword1, setIsPassword1] = useState(false);
+  const [isPassword2, setIsPassword2] = useState(false);
 
-  // Name 유효성 관리
+  // Username 유효성 관리
   const onChangeName = useCallback((e) => {
-    const nameRegex = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{1,10}$/;
-    const nameCurrent = e.target.value;
-    setName(nameCurrent);
-    if (!nameRegex.test(nameCurrent)) {
-      setNameMessage("한글 또는 영문자만 가능합니다.[1~10글자]");
-      setIsName(false);
+    const usernameRegex = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{1,10}$/;
+    const usernameCurrent = e.target.value;
+    setUsername(usernameCurrent);
+    if (!usernameRegex.test(usernameCurrent)) {
+      setUsernameMessage("한글 또는 영문자만 가능합니다.[1~10글자]");
+      setIsUsername(false);
     } else {
-      setNameMessage("올바른 이름 형식입니다");
-      setIsName(true);
+      setUsernameMessage("올바른 이름 형식입니다");
+      setIsUsername(true);
     }
   }, []);
 
@@ -92,35 +92,35 @@ const SignUp = () => {
   }, []);
 
   // 비밀번호 유효성 관리
-  const onChangePassword = useCallback((e) => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-    const passwordCurrent = e.target.value;
-    setPassword(passwordCurrent);
+  const onChangePassword1 = useCallback((e) => {
+    const password1Regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    const password1Current = e.target.value;
+    setPassword1(password1Current);
 
-    if (!passwordRegex.test(passwordCurrent)) {
-      setPasswordMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요");
-      setIsPassword(false);
+    if (!password1Regex.test(password1Current)) {
+      setPassword1Message("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요");
+      setIsPassword1(false);
     } else {
-      setPasswordMessage("안전한 비밀번호입니다");
-      setIsPassword(true);
+      setPassword1Message("안전한 비밀번호입니다");
+      setIsPassword1(true);
     }
   }, []);
 
   // 비밀번호 확인 유효성 관리
-  const onChangePasswordConfirm = useCallback(
+  const onChangePassword2 = useCallback(
     (e) => {
-      const passwordConfirmCurrent = e.target.value;
-      setPasswordConfirm(passwordConfirmCurrent);
+      const password2Current = e.target.value;
+      setPassword2(password2Current);
 
-      if (password === passwordConfirmCurrent) {
-        setPasswordConfirmMessage("비밀번호를 똑같이 입력했어요");
-        setIsPasswordConfirm(true);
+      if (password1 === password2Current) {
+        setPassword2Message("비밀번호를 똑같이 입력했어요");
+        setIsPassword2(true);
       } else {
-        setPasswordConfirmMessage("비밀번호가 틀렸습니다. 다시 확인해주세요");
-        setIsPasswordConfirm(false);
+        setPassword2Message("비밀번호가 틀렸습니다. 다시 확인해주세요");
+        setIsPassword2(false);
       }
     },
-    [password]
+    [password1]
   );
 
   // Boxs Form 버튼 클릭 시 실행
@@ -129,12 +129,12 @@ const SignUp = () => {
 
     const data = new FormData(e.currentTarget);
     const joinData = {
-      name: data.get("name"),
+      username: data.get("username"),
       email: data.get("email"),
-      password: data.get("password"),
-      passwordConfirm: data.get("passwordConfirm"),
+      password1: data.get("password1"),
+      password2: data.get("password2"),
     };
-    const { name, email, password, passwordConfirm } = joinData;
+    const { username, email, password1, password2 } = joinData;
     console.log(joinData);
   };
 
@@ -169,13 +169,15 @@ const SignUp = () => {
                     autoFocus
                     required
                     fullWidth
-                    id="name"
-                    name="name"
+                    id="username"
+                    name="username"
                     label="이름"
                     onChange={onChangeName}
                   />
                 </Grid>
-                <FormHelperNames isname={isName ? true : false}>{nameMessage}</FormHelperNames>
+                <FormHelperNames isUsername={isUsername ? true : false}>
+                  {usernameMessage}
+                </FormHelperNames>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -193,28 +195,28 @@ const SignUp = () => {
                     required
                     fullWidth
                     type="password"
-                    id="password"
-                    name="password"
+                    id="password1"
+                    name="password1"
                     label="비밀번호 (숫자+영문자+특수문자 8자리 이상)"
-                    onChange={onChangePassword}
+                    onChange={onChangePassword1}
                   />
                 </Grid>
-                <FormHelperPWs ispassword={isPassword ? true : false}>
-                  {passwordMessage}
+                <FormHelperPWs ispassword={isPassword1 ? true : false}>
+                  {password1Message}
                 </FormHelperPWs>
                 <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
                     type="password"
-                    id="passwordConfirm"
-                    name="passwordConfirm"
+                    id="password2"
+                    name="password2"
                     label="비밀번호 재입력"
-                    onChange={onChangePasswordConfirm}
+                    onChange={onChangePassword2}
                   />
                 </Grid>
-                <FormHelperPWCF ispasswordConfirm={isPasswordConfirm ? true : false}>
-                  {passwordConfirmMessage}
+                <FormHelperPWCF ispassword2={isPassword2 ? true : false}>
+                  {password2Message}
                 </FormHelperPWCF>
               </Grid>
               <Button
@@ -231,7 +233,7 @@ const SignUp = () => {
                 style={{
                   height: "5.5vh",
                 }}
-                disabled={!(isName && isEmail && isPassword && isPasswordConfirm)}
+                disabled={!(isUsername && isEmail && isPassword1 && isPassword2)}
               >
                 회원가입 신청
               </Button>
