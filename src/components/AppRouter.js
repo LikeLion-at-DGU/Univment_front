@@ -22,8 +22,6 @@ const AppRouter = ({ isLoggedIn, setIsLoggedIn }) => {
             path="/fastrecord"
             element={<FastRecord isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
           ></Route>
-        </Routes>
-        <Routes>
           <Route
             path="/home"
             element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}

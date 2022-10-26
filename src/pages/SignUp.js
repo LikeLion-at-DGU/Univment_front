@@ -17,7 +17,7 @@ const FormHelperNames = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.isUsername ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.isusername ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const FormHelperEmails = styled(FormHelperText)`
   width: 100%;
@@ -29,7 +29,7 @@ const FormHelperPWs = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.ispassword ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.ispassword1 ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const FormHelperPWCF = styled(FormHelperText)`
   width: 100%;
@@ -175,7 +175,7 @@ const SignUp = () => {
                     onChange={onChangeName}
                   />
                 </Grid>
-                <FormHelperNames isUsername={isUsername ? true : false}>
+                <FormHelperNames isusername={isUsername ? "true" : "false"}>
                   {usernameMessage}
                 </FormHelperNames>
                 <Grid item xs={12}>
@@ -189,7 +189,9 @@ const SignUp = () => {
                     onChange={onChangeEmail}
                   />
                 </Grid>
-                <FormHelperEmails isemail={isEmail ? true : false}>{emailMessage}</FormHelperEmails>
+                <FormHelperEmails isemail={isEmail ? "true" : "false"}>
+                  {emailMessage}
+                </FormHelperEmails>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -201,7 +203,7 @@ const SignUp = () => {
                     onChange={onChangePassword1}
                   />
                 </Grid>
-                <FormHelperPWs ispassword={isPassword1 ? true : false}>
+                <FormHelperPWs ispassword1={isPassword1 ? "true" : "false"}>
                   {password1Message}
                 </FormHelperPWs>
                 <Grid item xs={12}>
@@ -215,7 +217,7 @@ const SignUp = () => {
                     onChange={onChangePassword2}
                   />
                 </Grid>
-                <FormHelperPWCF ispassword2={isPassword2 ? true : false}>
+                <FormHelperPWCF ispassword2={isPassword2 ? "true" : "false"}>
                   {password2Message}
                 </FormHelperPWCF>
               </Grid>
