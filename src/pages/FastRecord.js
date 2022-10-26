@@ -24,7 +24,7 @@ const FastRecord = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography component="h1" variant="h4" fontFamily="Jeju Myeongjo" color="#383b3d">
-                  오늘의 기록을 도와드릴게요.
+                  오늘의 빠른 기록을 도와드릴게요.
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={8}>
@@ -32,6 +32,7 @@ const FastRecord = () => {
                   autoFocus
                   required
                   fullWidth
+                  color="info"
                   id="title"
                   name="title"
                   label="제목을 입력하세요."
