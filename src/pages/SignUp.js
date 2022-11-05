@@ -17,25 +17,25 @@ const FormHelperNames = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.isname ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.isname === "true" ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const FormHelperEmails = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.isemail ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.isemail === "true" ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const FormHelperPWs = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.ispassword1 ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.ispassword1 === "true" ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const FormHelperPWCF = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.ispassword2 ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.ispassword2 === "true" ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const Boxs = styled(Box)`
   padding-bottom: 40px !important;
@@ -175,7 +175,7 @@ const SignUp = () => {
                     onChange={onChangeName}
                   />
                 </Grid>
-                <FormHelperNames isname={isName ? true : false}>{nameMessage}</FormHelperNames>
+                <FormHelperNames isname={isName ? "true" : "false"}>{nameMessage}</FormHelperNames>
                 <Grid item xs={12}>
                   <TextField
                     required
