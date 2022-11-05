@@ -17,7 +17,7 @@ const FormHelperNames = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
   font-weight: 700 !important;
-  color: ${(props) => (props.isusername ? "#71c4eb" : "#d32f2f")} !important;
+  color: ${(props) => (props.isname ? "#71c4eb" : "#d32f2f")} !important;
 `;
 const FormHelperEmails = styled(FormHelperText)`
   width: 100%;
@@ -44,34 +44,34 @@ const Boxs = styled(Box)`
 const SignUp = () => {
   // 인풋 상태 관리
   //이름, 이메일, 비밀번호, 비밀번호 확인
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
   //오류메시지 상태저장
-  const [usernameMessage, setUsernameMessage] = useState("");
+  const [nameMessage, setNameMessage] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
   const [password1Message, setPassword1Message] = useState("");
   const [password2Message, setPassword2Message] = useState("");
 
   // 유효성 검사
-  const [isUsername, setIsUsername] = useState(false);
+  const [isName, setIsName] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword1, setIsPassword1] = useState(false);
   const [isPassword2, setIsPassword2] = useState(false);
 
-  // Username 유효성 관리
+  // Name 유효성 관리
   const onChangeName = useCallback((e) => {
-    const usernameRegex = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{1,10}$/;
-    const usernameCurrent = e.target.value;
-    setUsername(usernameCurrent);
-    if (!usernameRegex.test(usernameCurrent)) {
-      setUsernameMessage("한글 또는 영문자만 가능합니다.[1~10글자]");
-      setIsUsername(false);
+    const nameRegex = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{1,10}$/;
+    const nameCurrent = e.target.value;
+    setName(nameCurrent);
+    if (!nameRegex.test(nameCurrent)) {
+      setNameMessage("한글 또는 영문자만 가능합니다.[1~10글자]");
+      setIsName(false);
     } else {
-      setUsernameMessage("올바른 이름 형식입니다");
-      setIsUsername(true);
+      setNameMessage("올바른 이름 형식입니다");
+      setIsName(true);
     }
   }, []);
 
@@ -129,12 +129,12 @@ const SignUp = () => {
 
     const data = new FormData(e.currentTarget);
     const joinData = {
-      username: data.get("username"),
+      name: data.get("name"),
       email: data.get("email"),
       password1: data.get("password1"),
       password2: data.get("password2"),
     };
-    const { username, email, password1, password2 } = joinData;
+    const { name, email, password1, password2 } = joinData;
     console.log(joinData);
   };
 
@@ -169,15 +169,13 @@ const SignUp = () => {
                     autoFocus
                     required
                     fullWidth
-                    id="username"
-                    name="username"
+                    id="name"
+                    name="name"
                     label="이름"
                     onChange={onChangeName}
                   />
                 </Grid>
-                <FormHelperNames isusername={isUsername ? "true" : "false"}>
-                  {usernameMessage}
-                </FormHelperNames>
+                <FormHelperNames isname={isName ? true : false}>{nameMessage}</FormHelperNames>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -235,7 +233,7 @@ const SignUp = () => {
                 style={{
                   height: "5.5vh",
                 }}
-                disabled={!(isUsername && isEmail && isPassword1 && isPassword2)}
+                disabled={!(isName && isEmail && isPassword1 && isPassword2)}
               >
                 회원가입 신청
               </Button>
