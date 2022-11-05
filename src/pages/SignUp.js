@@ -12,7 +12,9 @@ import {
 } from "@mui/material/";
 import Header from "../components/Header";
 import styled from "styled-components";
+import axios from "axios";
 
+// FormHelper--------------------------------------------------------------------------
 const FormHelperNames = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
@@ -41,25 +43,31 @@ const Boxs = styled(Box)`
   padding-bottom: 40px !important;
 `;
 
+// Axios Global settings-------------------------------------------------------------------
+axios.defaults.baseURL = "http://127.0.0.1:8000/";
+axios.defaults.withCredentials = true;
+
+// main Component--------------------------------------------------------------------------
 const SignUp = () => {
-  // 인풋 상태 관리
-  //이름, 이메일, 비밀번호, 비밀번호 확인
+  // Input State
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
-  //오류메시지 상태저장
+  // ErrorMessage State
   const [nameMessage, setNameMessage] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
   const [password1Message, setPassword1Message] = useState("");
   const [password2Message, setPassword2Message] = useState("");
 
-  // 유효성 검사
+  // Validation State
   const [isName, setIsName] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword1, setIsPassword1] = useState(false);
   const [isPassword2, setIsPassword2] = useState(false);
+
+  //--------------------------------------------------------------------------------------
 
   // Name 유효성 관리
   const onChangeName = useCallback((e) => {
@@ -134,8 +142,19 @@ const SignUp = () => {
       password1: data.get("password1"),
       password2: data.get("password2"),
     };
-    const { name, email, password1, password2 } = joinData;
-    console.log(joinData);
+    // const { name, email, password1, password2 } = joinData;
+    await axios
+      .post("http://127.0.0.1:8000/auth/registration/", joinData)
+      .then((response) => {
+        console.log(response);
+        const { accessToken } = response.data;
+
+        // API 요청 콜마다 헤더에 accessToken 담아 보내기
+        axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
