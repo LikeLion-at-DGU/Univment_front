@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   CssBaseline,
@@ -49,6 +50,7 @@ axios.defaults.withCredentials = true;
 
 // main Component--------------------------------------------------------------------------
 const SignUp = () => {
+  const navigate = useNavigate();
   // Input State
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -131,10 +133,9 @@ const SignUp = () => {
     [password1]
   );
 
-  // Boxs Form 버튼 클릭 시 실행
+  // Boxs Form 버튼 클릭 시 실행-------------------------------------------------------
   const onSubmit = async (e) => {
     e.preventDefault();
-
     const data = new FormData(e.currentTarget);
     const joinData = {
       name: data.get("name"),
