@@ -1,10 +1,11 @@
-# Getting Started with Create React App
+# 동국대학교 멋쟁이사자처럼 2학기 프로젝트 UNIVMENT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+오직 대학생을 위한 기록의 창구, UNIVMENT입니다.
 
-## Available Scripts
+## TEAM Composition
 
-In the project directory, you can run:
+Frontend : 오준서
+Backend : 박영신, 류슬기, 오민영
 
 ### `npm start`
 
