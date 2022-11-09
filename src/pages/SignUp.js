@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   CssBaseline,
@@ -49,6 +50,7 @@ axios.defaults.withCredentials = true;
 
 // main Component--------------------------------------------------------------------------
 const SignUp = () => {
+  const navigate = useNavigate();
   // Input State
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -131,10 +133,9 @@ const SignUp = () => {
     [password1]
   );
 
-  // Boxs Form 버튼 클릭 시 실행
+  // Boxs Form 버튼 클릭 시 실행-------------------------------------------------------
   const onSubmit = async (e) => {
     e.preventDefault();
-
     const data = new FormData(e.currentTarget);
     const joinData = {
       name: data.get("name"),
@@ -146,14 +147,16 @@ const SignUp = () => {
     await axios
       .post("http://127.0.0.1:8000/auth/registration/", joinData)
       .then((response) => {
-        console.log(response);
-        const { accessToken } = response.data;
-
+        console.log(response.data);
+        const accessToken = response.data.access_token;
         // API 요청 콜마다 헤더에 accessToken 담아 보내기
         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+        localStorage.setItem("refresh-token", response.data.refresh_token);
+        navigate("/signIn", { replace: true });
       })
       .catch((error) => {
         console.log(error);
+        alert("회원가입 요청 실패, 다시 시도해주세요.");
       });
   };
 
