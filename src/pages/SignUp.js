@@ -147,14 +147,16 @@ const SignUp = () => {
     await axios
       .post("http://127.0.0.1:8000/auth/registration/", joinData)
       .then((response) => {
-        console.log(response);
-        const { accessToken } = response.data;
-
+        console.log(response.data);
+        const accessToken = response.data.access_token;
         // API 요청 콜마다 헤더에 accessToken 담아 보내기
         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+        localStorage.setItem("refresh-token", response.data.refresh_token);
+        navigate("/signIn", { replace: true });
       })
       .catch((error) => {
         console.log(error);
+        alert("회원가입 요청 실패, 다시 시도해주세요.");
       });
   };
 
