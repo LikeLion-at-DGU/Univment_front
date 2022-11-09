@@ -25,7 +25,7 @@ instance.interceptors.response.use(
           // refresh token을 이용하여 access token 재발급
           async function regenerateToken() {
             return await axios
-              .post("api/user/token", {
+              .post("http://127.0.0.1:8000/auth/token/refresh/", {
                 refresh_token: preRefreshToken,
               })
               .then(async (res) => {

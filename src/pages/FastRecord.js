@@ -101,13 +101,13 @@ const FastRecord = () => {
                 <Button
                   variant="outlined"
                   color="info"
-                  sx={{ border: "1px solid #383b3d", color: "#383b3d" }}
+                  sx={{ border: "1px solid #18264f", color: "#18264f" }}
                 >
                   사진 첨부
                 </Button>
               </Grid>
               <Grid item xs={12}>
-                <Button fullWidth variant="contained" sx={{ backgroundColor: "#383b3d" }}>
+                <Button fullWidth variant="contained" sx={{ backgroundColor: "#18264f" }}>
                   기록
                 </Button>
               </Grid>
