@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button, Link, Grid, Typography, Box, Paper } from "@mui/material/";
-import Header from "../components/Header";
+import Header2 from "../components/Header2";
 
 const SignIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,7 +32,7 @@ const SignIn = () => {
 
   return (
     <>
-      <Header />
+      <Header2 />
       <Grid container component="main" sx={{ height: "93vh" }}>
         {/* <CssBaseline /> */}
         <Grid
@@ -43,12 +43,22 @@ const SignIn = () => {
           sx={{
             backgroundImage: "url(https://source.unsplash.com/random)",
             backgroundRepeat: "no-repeat",
-            backgroundColor: (t) => (t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900]),
+            backgroundColor: (t) =>
+              t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          sx={{ backgroundColor: "#f2f1d5" }}
+        >
           <Box
             sx={{
               my: 36,
@@ -58,12 +68,32 @@ const SignIn = () => {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5" fontFamily="Jeju Myeongjo" color="#383b3d">
+            <Typography component="h1" variant="h5" fontFamily="Jeju Myeongjo" color="#18264f">
               UNIVMENT 로그인
             </Typography>
             <Box component="form" noValidate onSubmit={onSubmit} sx={{ mt: 1 }}>
-              <TextField autoFocus margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={onChange} />
-              <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={onChange} />
+              <TextField
+                autoFocus
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                onChange={onChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={onChange}
+              />
               {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="로그인 유지"
@@ -75,7 +105,7 @@ const SignIn = () => {
                 sx={{
                   mt: 3,
                   mb: 2,
-                  bgcolor: "#383b3d",
+                  bgcolor: "#18264f",
                   fontFamily: "Jeju Myeongjo",
                 }}
               >
@@ -88,7 +118,7 @@ const SignIn = () => {
                   </Link>
                 </Grid> */}
                 <Grid item>
-                  <Link href="/SignUp" variant="body2" fontFamily="Jeju Myeongjo" color="#383b3d">
+                  <Link href="/SignUp" variant="body2" fontFamily="Jeju Myeongjo" color="#18264f">
                     회원가입
                   </Link>
                 </Grid>

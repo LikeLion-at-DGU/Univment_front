@@ -41,9 +41,10 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
           <Button
             variant="outlined"
             sx={{
-              color: "#383b3d",
+              color: "#fff",
+              backgroundColor: "#18264f",
               border: "1px solid #383b3d",
-              width: "10vw",
+              width: "11vh",
               fontFamily: "Jeju Myeongjo",
             }}
             onClick={yesClick}
@@ -53,9 +54,10 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
           <Button
             variant="outlined"
             sx={{
-              color: "#383b3d",
+              color: "#fff",
+              backgroundColor: "#18264f",
               border: "1px solid #383b3d",
-              width: "10vw",
+              width: "11vh",
               fontFamily: "Jeju Myeongjo",
             }}
             onClick={noClick}
