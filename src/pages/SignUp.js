@@ -197,7 +197,7 @@ const SignUp = () => {
                     name="name"
                     label="이름"
                     onChange={onChangeName}
-                    error={isName ? false : true}
+                    error={name !== "" && !isName}
                   />
                 </Grid>
                 <FormHelperNames isname={isName ? "true" : "false"}>{nameMessage}</FormHelperNames>
@@ -210,7 +210,7 @@ const SignUp = () => {
                     name="email"
                     label="이메일 주소"
                     onChange={onChangeEmail}
-                    error={isEmail ? false : true}
+                    error={email !== "" && !isEmail}
                   />
                 </Grid>
                 <FormHelperEmails isemail={isEmail ? "true" : "false"}>
@@ -225,7 +225,7 @@ const SignUp = () => {
                     name="password1"
                     label="비밀번호 (숫자+영문자+특수문자 8자리 이상)"
                     onChange={onChangePassword1}
-                    error={isPassword1 ? false : true}
+                    error={password1 !== "" && !isPassword1}
                   />
                 </Grid>
                 <FormHelperPWs ispassword1={isPassword1 ? "true" : "false"}>
@@ -240,7 +240,7 @@ const SignUp = () => {
                     name="password2"
                     label="비밀번호 재입력"
                     onChange={onChangePassword2}
-                    error={isPassword2 ? false : true}
+                    error={password2 !== "" && !isPassword2}
                   />
                 </Grid>
                 <FormHelperPWCF ispassword2={isPassword2 ? "true" : "false"}>
