@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Button, Link, Grid, Typography, Box, Paper } from "@mui/material/";
 import Header2 from "../components/Header2";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [inputs, setInputs] = useState({
-    id: "",
     email: "",
     password: "",
   });
@@ -19,15 +21,29 @@ const SignIn = () => {
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("로그인 요청됨");
-    setInputs({
-      ...inputs,
-      id: "",
-      email: "",
-      password: "",
-    });
+
+    const { email, password } = inputs;
+    const user = {
+      email,
+      password,
+    };
+
+    await axios
+      .post("http://127.0.0.1:8000/auth/login/", user)
+      .then((response) => {
+        const accessToken = response.data.access_token;
+        // API 요청 콜마다 헤더에 accessToken 담아 보내기
+        axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+        setIsLoggedIn(true);
+        alert("로그인 성공");
+        navigate("/home", { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("이메일 또는 비밀번호가 일치하지 않습니다");
+      });
   };
 
   return (
@@ -57,7 +73,7 @@ const SignIn = () => {
           component={Paper}
           elevation={6}
           square
-          sx={{ backgroundColor: "#f2f1d5" }}
+          sx={{ backgroundColor: "#f0efdd" }}
         >
           <Box
             sx={{

@@ -152,11 +152,13 @@ const SignUp = () => {
         // API 요청 콜마다 헤더에 accessToken 담아 보내기
         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
         localStorage.setItem("refresh-token", response.data.refresh_token);
+        alert("회원가입 성공");
         navigate("/signIn", { replace: true });
       })
       .catch((error) => {
         console.log(error);
         alert("회원가입 요청 실패, 다시 시도해주세요.");
+        // 동일 사용자 필터링 추가 필요
       });
   };
 
@@ -195,6 +197,7 @@ const SignUp = () => {
                     name="name"
                     label="이름"
                     onChange={onChangeName}
+                    error={isName ? false : true}
                   />
                 </Grid>
                 <FormHelperNames isname={isName ? "true" : "false"}>{nameMessage}</FormHelperNames>
@@ -207,6 +210,7 @@ const SignUp = () => {
                     name="email"
                     label="이메일 주소"
                     onChange={onChangeEmail}
+                    error={isEmail ? false : true}
                   />
                 </Grid>
                 <FormHelperEmails isemail={isEmail ? "true" : "false"}>
@@ -221,6 +225,7 @@ const SignUp = () => {
                     name="password1"
                     label="비밀번호 (숫자+영문자+특수문자 8자리 이상)"
                     onChange={onChangePassword1}
+                    error={isPassword1 ? false : true}
                   />
                 </Grid>
                 <FormHelperPWs ispassword1={isPassword1 ? "true" : "false"}>
@@ -235,6 +240,7 @@ const SignUp = () => {
                     name="password2"
                     label="비밀번호 재입력"
                     onChange={onChangePassword2}
+                    error={isPassword2 ? false : true}
                   />
                 </Grid>
                 <FormHelperPWCF ispassword2={isPassword2 ? "true" : "false"}>
