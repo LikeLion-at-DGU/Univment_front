@@ -152,11 +152,13 @@ const SignUp = () => {
         // API 요청 콜마다 헤더에 accessToken 담아 보내기
         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
         localStorage.setItem("refresh-token", response.data.refresh_token);
+        alert("회원가입 성공");
         navigate("/signIn", { replace: true });
       })
       .catch((error) => {
         console.log(error);
         alert("회원가입 요청 실패, 다시 시도해주세요.");
+        // 동일 사용자 필터링 추가 필요
       });
   };
 

@@ -4,13 +4,9 @@
   font-family: "Jeju Myeongjo", serif;
 }
 
-body {
-  background-color: #f2f1d5;
-}
-
 .headerBody {
   position: relative;
-  background-color: #f2f1d5;
+  background-color: #f0f0e4;
   top: 0;
   left: 50%;
   right: 0;
