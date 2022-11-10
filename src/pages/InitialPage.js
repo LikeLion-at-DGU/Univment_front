@@ -39,12 +39,12 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
         </section>
         <section className={styles.btnWrap}>
           <Button
-            variant="outlined"
+            variant="contained"
             sx={{
               color: "#fff",
               backgroundColor: "#18264f",
               border: "1px solid #383b3d",
-              width: "11vh",
+              width: "12vh",
               fontFamily: "Jeju Myeongjo",
             }}
             onClick={yesClick}
@@ -52,12 +52,12 @@ const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
             네
           </Button>
           <Button
-            variant="outlined"
+            variant="contained"
             sx={{
               color: "#fff",
               backgroundColor: "#18264f",
               border: "1px solid #383b3d",
-              width: "11vh",
+              width: "12vh",
               fontFamily: "Jeju Myeongjo",
             }}
             onClick={noClick}
