@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import { Button, Grid, Typography, Container } from "@mui/material/";
+import MypageComponent from "../components/MypageComponent";
+import styles from "../static/css/Home.module.css";
 
 // xs, extra-small: 0px
 // sm, small: 600px
@@ -8,10 +10,18 @@ import { Button, Grid, Typography, Container } from "@mui/material/";
 // lg, large: 1200px
 // xl, extra-large: 1536px
 const Home = ({ isLoggedIn, setIsLoggedIn }) => {
-  const [category, setCategory] = useState(["동아리", "대외활동", "공모전", "학생회", "수업"]);
+  const [category, setCategory] = useState([
+    "동아리",
+    "대외활동",
+    "공모전",
+    "학생회",
+    "수업",
+    "취미",
+  ]);
   return (
     <>
       <Header />
+      <MypageComponent />
       <Container
         fixed
         maxWidth="xl"
@@ -20,7 +30,7 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
         <Grid
           container
           sx={{
-            border: "5px solid #18264f",
+            borderBottom: "4px solid #18264f",
             height: "30%",
             marginTop: 2.2,
             alignItems: "flex-end",
@@ -30,8 +40,9 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
         >
           <Grid
             item
+            className={styles.bookshadow}
             sx={{
-              border: "3px solid black",
+              border: "none",
               width: "10vw",
               height: "95%",
               display: "flex",
@@ -41,12 +52,13 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
               color: "#f0f0e4",
             }}
           >
-            <Typography>동아리</Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>동아리</Typography>
           </Grid>
           <Grid
             item
+            className={styles.bookshadow}
             sx={{
-              border: "3px solid black",
+              border: "none",
               width: "10vw",
               height: "95%",
               display: "flex",
@@ -56,12 +68,13 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
               color: "#f0f0e4",
             }}
           >
-            <Typography>대외활동</Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>대외활동</Typography>
           </Grid>
           <Grid
             item
+            className={styles.bookshadow}
             sx={{
-              border: "3px solid black",
+              border: "none",
               width: "10vw",
               height: "95%",
               display: "flex",
@@ -71,11 +84,97 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
               color: "#f0f0e4",
             }}
           >
-            <Typography>공모전</Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>공모전</Typography>
           </Grid>
         </Grid>
-        <Grid container sx={{ border: "5px solid #18264f", height: "30%", marginTop: 2.2 }}></Grid>
-        <Grid container sx={{ border: "5px solid #18264f", height: "30%", marginTop: 2.2 }}></Grid>
+        <Grid
+          container
+          sx={{
+            borderBottom: "4px solid #18264f",
+            height: "30%",
+            marginTop: 2.2,
+            alignItems: "flex-end",
+            justifyContent: "center",
+            gridGap: 70,
+          }}
+        >
+          <Grid
+            item
+            className={styles.bookshadow}
+            sx={{
+              border: "none",
+              width: "10vw",
+              height: "95%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#ca7070",
+              color: "#f0f0e4",
+            }}
+          >
+            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>학생회</Typography>
+          </Grid>
+          <Grid
+            item
+            className={styles.bookshadow}
+            sx={{
+              border: "none",
+              width: "10vw",
+              height: "95%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#427563",
+              color: "#f0f0e4",
+            }}
+          >
+            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>수업</Typography>
+          </Grid>
+          <Grid
+            item
+            className={styles.bookshadow}
+            sx={{
+              border: "none",
+              width: "10vw",
+              height: "95%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#3293a8",
+              color: "#f0f0e4",
+            }}
+          >
+            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>취미</Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          sx={{
+            borderBottom: "4px solid #18264f",
+            height: "30%",
+            marginTop: 2.2,
+            alignItems: "flex-end",
+            justifyContent: "center",
+            gridGap: 70,
+          }}
+        >
+          <Grid
+            item
+            className={styles.bookshadow}
+            sx={{
+              border: "none",
+              width: "10vw",
+              height: "95%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#f0f0e4",
+              color: "#18264f",
+            }}
+          >
+            <Typography sx={{ fontSize: 40, fontFamily: "Jeju Myeongjo" }}>+</Typography>
+          </Grid>
+        </Grid>
       </Container>
     </>
   );
