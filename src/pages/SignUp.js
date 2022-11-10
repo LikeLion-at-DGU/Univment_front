@@ -176,7 +176,7 @@ const SignUp = () => {
             minHeight: "70vh",
           }}
         >
-          <Typography component="h1" variant="h5" fontFamily="Jeju Myeongjo" color="#383b3d">
+          <Typography component="h1" variant="h5" fontFamily="Jeju Myeongjo" color="#18264f">
             회원가입을 진행해주세요
           </Typography>
           <Boxs
