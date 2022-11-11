@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { Button, Grid, Typography, Container } from "@mui/material/";
 import MypageComponent from "../components/MypageComponent";
 import styles from "../static/css/Home.module.css";
+import Logout from "../components/Logout";
 
 // xs, extra-small: 0px
 // sm, small: 600px
@@ -22,6 +23,7 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
     <>
       <Header />
       <MypageComponent />
+      <Logout />
       <Container
         fixed
         maxWidth="xl"

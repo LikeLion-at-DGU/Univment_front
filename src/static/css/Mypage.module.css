@@ -22,9 +22,8 @@
   text-decoration: none;
 }
 .sidebar:hover {
-  background-color: #18264f;
-  color: #f0f0e4;
-  border-left: 4px solid brown;
+  color: #18264f;
+  border: 3px solid #18264f;
   border-radius: 5px;
-  transition: all 1s ease-out;
+  transition: border 1s ease;
 }
