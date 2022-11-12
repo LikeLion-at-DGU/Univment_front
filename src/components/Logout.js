@@ -11,16 +11,21 @@ const Logout = () => {
   const onLogout = async () => {
     if (window.confirm("정말 로그아웃하시겠습니까?")) {
       await axios
-        .post("http://127.0.0.1:8000/auth/logout/")
+        .post("http://127.0.0.1:8000/auth/logout/", {
+          headers: {
+            Authorization: `Bearer + ${refreshToken}`,
+          },
+        })
         .then(() => {
+          axios.defaults.headers.common["Authorization"] = refreshToken;
+          setIsLoggedIn(false);
+          localStorage.clear();
           window.location.replace("/");
         })
         .catch((error) => {
           console.log(error);
           alert("로그아웃에 실패하였습니다.");
         });
-      setIsLoggedIn(false);
-      // localStorage.clear();
     } else {
       return;
     }

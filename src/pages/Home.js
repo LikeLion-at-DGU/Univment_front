@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Button, Grid, Typography, Container } from "@mui/material/";
 import MypageComponent from "../components/MypageComponent";
 import styles from "../static/css/Home.module.css";
 import Logout from "../components/Logout";
+import axios from "axios";
 
 // xs, extra-small: 0px
 // sm, small: 600px
 // md, medium: 900px
 // lg, large: 1200px
 // xl, extra-large: 1536px
-const Home = ({ isLoggedIn, setIsLoggedIn }) => {
+const Home = () => {
+  // useEffect(() => {
+  //   axios.get("/components/Interceptors").then((response) => {
+  //     console.log(response.data);
+  //   });
+  // }, []);
   const [category, setCategory] = useState([
     "동아리",
     "대외활동",
