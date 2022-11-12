@@ -152,6 +152,8 @@ const SignUp = () => {
         // API 요청 콜마다 헤더에 accessToken 담아 보내기
         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
         localStorage.setItem("refresh-token", response.data.refresh_token);
+        localStorage.setItem("id", response.data.user.pk);
+        localStorage.setItem("username", response.data.user.name);
         alert("회원가입 성공");
         navigate("/signIn", { replace: true });
       })

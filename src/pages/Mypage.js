@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import { Box, Container, Grid } from "@mui/material/";
+// import styles from "../static/css/Mypage.module.css";
+import DefaultImg from "../components/DefaultImg";
 
 // xs, extra-small: 0px
 // sm, small: 600px
@@ -8,6 +10,13 @@ import { Box, Container, Grid } from "@mui/material/";
 // lg, large: 1200px
 // xl, extra-large: 1536px
 const Mypage = () => {
+  const id = localStorage.getItem("id");
+  const username = localStorage.getItem("username");
+  const [profile, setProfile] = useState({
+    user: id,
+    birthday: "",
+    major: "",
+  });
   return (
     <>
       <Header />
@@ -28,11 +37,7 @@ const Mypage = () => {
               alignItems: "center",
             }}
           >
-            <Box
-              sx={{ border: "1px solid #18264f", borderRadius: 5, width: "20vh", height: "20vh" }}
-            >
-              Profile
-            </Box>
+            <DefaultImg />
           </Grid>
           <Grid
             item

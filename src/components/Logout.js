@@ -12,14 +12,12 @@ const Logout = () => {
     if (window.confirm("정말 로그아웃하시겠습니까?")) {
       await axios
         .post("http://127.0.0.1:8000/auth/logout/", {
-          headers: {
-            Authorization: `Bearer + ${refreshToken}`,
-          },
+          refresh: refreshToken,
         })
         .then(() => {
-          axios.defaults.headers.common["Authorization"] = refreshToken;
           setIsLoggedIn(false);
           localStorage.clear();
+          alert("로그아웃되었습니다.");
           window.location.replace("/");
         })
         .catch((error) => {
