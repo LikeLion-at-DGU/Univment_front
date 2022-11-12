@@ -1,13 +1,14 @@
 import { useState } from "react";
 import AppRouter from "./components/AppRouter";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <div className="App">
-      <AppRouter isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-    </div>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <AppRouter />
+    </AuthContext.Provider>
   );
 }
 
