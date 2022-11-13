@@ -136,7 +136,7 @@ const Mypage = () => {
               border: "1px solid #18264f",
               borderRadius: 5,
               boxShadow: "7px 5px 15px -12px rgba(0, 0, 0, 0.5)",
-              height: "20vh",
+              minHeight: "20vh",
               position: "relative",
             }}
           >
@@ -176,11 +176,30 @@ const Mypage = () => {
               border: "1px solid #18264f",
               borderRadius: 5,
               boxShadow: "7px 5px 15px -12px rgba(0, 0, 0, 0.5)",
-              height: "20vh",
+              minHeight: "20vh",
               alignItems: "flex-end",
               position: "relative",
             }}
           >
+            {category.map((cg) => (
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{
+                  fontFamily: "Jeju Myeongjo",
+                  margin: 0.8,
+                }}
+              >
+                {cg}
+              </Button>
+            ))}
+            {categoryModal && (
+              <CategoryModal
+                setCategoryModal={setCategoryModal}
+                category={category}
+                setCategory={setCategory}
+              />
+            )}
             <Button
               variant="contained"
               className={styles.categoryBtn}
@@ -195,16 +214,6 @@ const Mypage = () => {
             >
               등록
             </Button>
-            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              카테고리
-            </Typography>
-            {categoryModal && (
-              <CategoryModal
-                setCategoryModal={setCategoryModal}
-                category={category}
-                setCategory={setCategory}
-              />
-            )}
           </Grid>
           {/* 클럽 그리드------------------------------------------------ */}
           <Grid
@@ -214,7 +223,7 @@ const Mypage = () => {
               border: "1px solid #18264f",
               borderRadius: 5,
               boxShadow: "7px 5px 15px -12px rgba(0, 0, 0, 0.5)",
-              height: "20vh",
+              minHeight: "20vh",
               position: "relative",
             }}
           >
