@@ -5,6 +5,7 @@ import styles from "../static/css/Mypage.module.css";
 import DefaultImg from "../components/DefaultImg";
 import axios from "axios";
 import BasicModal from "../components/BasicModal";
+import CategoryModal from "../components/CategoryModal";
 
 const Mypage = () => {
   const id = localStorage.getItem("id");
@@ -25,6 +26,16 @@ const Mypage = () => {
     major: "",
     image: null,
   });
+
+  // Category
+  const [category, setCategory] = useState([
+    "동아리",
+    "대외활동",
+    "공모전",
+    "학생회",
+    "수업",
+    "취미",
+  ]);
   const onLoadFile = (e) => {
     const file = e.target.files[0];
     setProfile({
@@ -180,12 +191,20 @@ const Mypage = () => {
                 fontFamily: "Jeju Myeongjo",
                 position: "absolute",
               }}
+              onClick={() => setCategoryModal(true)}
             >
               등록
             </Button>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               카테고리
             </Typography>
+            {categoryModal && (
+              <CategoryModal
+                setCategoryModal={setCategoryModal}
+                category={category}
+                setCategory={setCategory}
+              />
+            )}
           </Grid>
           {/* 클럽 그리드------------------------------------------------ */}
           <Grid
