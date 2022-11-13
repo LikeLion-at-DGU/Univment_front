@@ -4,36 +4,49 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material/";
 import styles from "../static/css/Mypage.module.css";
 import DefaultImg from "../components/DefaultImg";
 import axios from "axios";
+import BasicModal from "../components/BasicModal";
 
-// xs, extra-small: 0px
-// sm, small: 600px
-// md, medium: 900px
-// lg, large: 1200px
-// xl, extra-large: 1536px
 const Mypage = () => {
   const id = localStorage.getItem("id");
-  const username = localStorage.getItem("username");
+
+  // Modal
+  const [basicModal, setBasicModal] = useState(false);
+  const [categoryModal, setCategoryModal] = useState(false);
+  const [clubModal, setClubModal] = useState(false);
+
+  // Profile
   const [profile, setProfile] = useState({
     user: id,
     birthday: "",
     major: "",
-    profileimage: null,
+    image: null,
   });
   const onLoadFile = async (e) => {
     e.preventDefault();
     const file = e.target.files[0];
     setProfile({
       ...profile,
-      profileimage: file,
+      image: file,
     });
     let formData = new FormData();
-    if (profile?.profileimage) {
-      formData.append("image", profile.profileimage);
+    if (profile?.image) {
+      formData.append("image", profile.image);
     } else {
       window.alert("이미지를 첨부해주세요.");
       return;
     }
-    // await axios
+    await axios
+      .patch("http://127.0.0.1:8000/auth/user/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log("이미지 첨부 성공", response);
+      })
+      .catch((error) => {
+        console.log("이미지 첨부 실패", error);
+      });
   };
   return (
     <>
@@ -96,10 +109,12 @@ const Mypage = () => {
                 fontFamily: "Jeju Myeongjo",
                 position: "absolute",
               }}
+              onClick={() => setBasicModal(true)}
             >
               수정
             </Button>
           </Grid>
+          {basicModal && <BasicModal setBasicModal={setBasicModal} />}
           {/* 카테고리 그리드------------------------------------------------ */}
           <Grid
             item
