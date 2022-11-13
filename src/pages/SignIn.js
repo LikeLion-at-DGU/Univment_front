@@ -39,7 +39,6 @@ const SignIn = () => {
         localStorage.setItem("auth", true); // 로그인 설정
         localStorage.setItem("refresh-token", response.data.refresh_token);
         localStorage.setItem("id", response.data.user.pk);
-        localStorage.setItem("username", response.data.user.name);
         setIsLoggedIn(true);
         alert("로그인 성공");
         navigate("/home", { replace: true });
@@ -69,19 +68,10 @@ const SignIn = () => {
             backgroundPosition: "center",
           }}
         />
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper}
-          elevation={6}
-          square
-          sx={{ backgroundColor: "#f0efdd" }}
-        >
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              my: 36,
+              my: 25,
               mx: 4,
               display: "flex",
               flexDirection: "column",
