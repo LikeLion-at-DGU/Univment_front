@@ -11,6 +11,7 @@ const Mypage = () => {
   const userMyname = localStorage.getItem("profileMyname");
   const userEmail = localStorage.getItem("profileEmail");
   const userMajor = localStorage.getItem("profileMajor");
+  const userImage = localStorage.getItem("profileImage");
   // Modal
   const [basicModal, setBasicModal] = useState(false);
   const [categoryModal, setCategoryModal] = useState(false);
@@ -24,13 +25,21 @@ const Mypage = () => {
     major: "",
     image: null,
   });
-  const onLoadFile = async (e) => {
-    e.preventDefault();
+  const onLoadFile = (e) => {
     const file = e.target.files[0];
     setProfile({
       ...profile,
       image: file,
     });
+    if (profile.image) {
+      alert("이미지 첨부 성공, 등록 버튼을 눌러 수정사항을 저장하세요.");
+    } else {
+      alert("이미지 첨부 실패, 다시 시도하세요.");
+    }
+  };
+
+  const fileSubmit = async (e) => {
+    e.preventDefault();
     let formData = new FormData();
     if (profile?.image) {
       formData.append("image", profile.image);
@@ -39,16 +48,22 @@ const Mypage = () => {
       return;
     }
     await axios
-      .patch("http://127.0.0.1:8000/auth/user/", formData, {
+      .put("http://127.0.0.1:8000/auth/user/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
-        console.log("이미지 첨부 성공", response);
+        alert("프로필 이미지 등록 성공");
+        localStorage.setItem("profileImage", response.data.image);
+        setProfile({
+          ...profile,
+          image: response.data.image,
+        });
       })
       .catch((error) => {
-        console.log("이미지 첨부 실패", error);
+        alert("이미지 첨부 실패");
+        localStorage.removeItem("profileImage");
       });
   };
   return (
@@ -74,7 +89,7 @@ const Mypage = () => {
             }}
           >
             <label htmlFor="mainProfile">
-              <div className={styles.profileBtn}>등록</div>
+              <div className={styles.profileBtn}>첨부</div>
             </label>
             <input
               type="file"
@@ -84,7 +99,22 @@ const Mypage = () => {
               style={{ display: `none` }}
               onChange={onLoadFile}
             />
-            <DefaultImg />
+            <Button
+              variant="contained"
+              className={styles.basicBtn}
+              sx={{
+                color: "#fff",
+                backgroundColor: "#18264f",
+                border: "1px solid #383b3d",
+                fontFamily: "Jeju Myeongjo",
+                position: "absolute",
+              }}
+              onClick={fileSubmit}
+              // disabled={}
+            >
+              등록
+            </Button>
+            <DefaultImg profileImage={userImage} />
           </Grid>
           {/* 베이직 그리드------------------------------------------------ */}
           <Grid
