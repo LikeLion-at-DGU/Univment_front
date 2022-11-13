@@ -32,10 +32,10 @@
 .profileBtn {
   display: flex;
   position: absolute;
-  top: 1vh;
+  bottom: 1vh;
   right: 0;
-  width: 5vh;
-  height: 3vh;
+  width: 5.5vh;
+  height: 2.5vh;
   color: #f0f0e4;
   background-color: #18264f;
   border: 1px solid #18264f;
@@ -47,20 +47,17 @@
 }
 
 .basicBtn {
-  position: absolute;
   bottom: 1vh;
   right: 1vh;
   height: 3vh;
 }
 
 .categoryBtn {
-  position: absolute;
   bottom: 1vh;
   right: 1vh;
   height: 3vh;
 }
 .clubBtn {
-  position: absolute;
   bottom: 1vh;
   right: 1vh;
   height: 3vh;

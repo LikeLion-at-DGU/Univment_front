@@ -43,7 +43,8 @@ const Mypage = () => {
         maxWidth="md"
         sx={{ border: "1px solid black", minHeight: "90vh" }}
       >
-        <Grid container rowGap={4} justifyContent="space-between" position="relative">
+        <Grid container rowGap={4} justifyContent="space-between">
+          {/* 프로필 그리드------------------------------------------------ */}
           <Grid
             item
             xs={12}
@@ -53,6 +54,7 @@ const Mypage = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              position: "relative",
             }}
           >
             <label htmlFor="mainProfile">
@@ -68,6 +70,7 @@ const Mypage = () => {
             />
             <DefaultImg />
           </Grid>
+          {/* 베이직 그리드------------------------------------------------ */}
           <Grid
             item
             xs={12}
@@ -77,25 +80,27 @@ const Mypage = () => {
               borderRadius: 5,
               boxShadow: "7px 5px 15px -12px rgba(0, 0, 0, 0.5)",
               height: "20vh",
+              position: "relative",
             }}
-            position="relative"
           >
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               이름, 전공, 컨택 이메일을 입력해주세요
             </Typography>
             <Button
               variant="contained"
+              className={styles.basicBtn}
               sx={{
                 color: "#fff",
                 backgroundColor: "#18264f",
                 border: "1px solid #383b3d",
                 fontFamily: "Jeju Myeongjo",
+                position: "absolute",
               }}
-              className={styles.basicBtn}
             >
               수정
             </Button>
           </Grid>
+          {/* 카테고리 그리드------------------------------------------------ */}
           <Grid
             item
             xs={12}
@@ -106,18 +111,19 @@ const Mypage = () => {
               boxShadow: "7px 5px 15px -12px rgba(0, 0, 0, 0.5)",
               height: "20vh",
               alignItems: "flex-end",
+              position: "relative",
             }}
-            position="relative"
           >
             <Button
               variant="contained"
+              className={styles.categoryBtn}
               sx={{
                 color: "#fff",
                 backgroundColor: "#18264f",
                 border: "1px solid #383b3d",
                 fontFamily: "Jeju Myeongjo",
+                position: "absolute",
               }}
-              className={styles.categoryBtn}
             >
               수정
             </Button>
@@ -125,6 +131,7 @@ const Mypage = () => {
               카테고리
             </Typography>
           </Grid>
+          {/* 클럽 그리드------------------------------------------------ */}
           <Grid
             item
             xs={12}
@@ -133,17 +140,19 @@ const Mypage = () => {
               borderRadius: 5,
               boxShadow: "7px 5px 15px -12px rgba(0, 0, 0, 0.5)",
               height: "20vh",
+              position: "relative",
             }}
           >
             <Button
               variant="contained"
+              className={styles.clubBtn}
               sx={{
                 color: "#fff",
                 backgroundColor: "#18264f",
                 border: "1px solid #383b3d",
                 fontFamily: "Jeju Myeongjo",
+                position: "absolute",
               }}
-              className={styles.clubBtn}
             >
               수정
             </Button>

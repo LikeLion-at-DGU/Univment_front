@@ -153,7 +153,6 @@ const SignUp = () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
         localStorage.setItem("refresh-token", response.data.refresh_token);
         localStorage.setItem("id", response.data.user.pk);
-        localStorage.setItem("username", response.data.user.name);
         alert("회원가입 성공");
         navigate("/signIn", { replace: true });
       })
