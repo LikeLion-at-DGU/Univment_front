@@ -45,7 +45,7 @@ const Mypage = () => {
     if (profile.image) {
       alert("이미지 첨부 성공, 등록 버튼을 눌러 수정사항을 저장하세요.");
     } else {
-      alert("이미지 첨부 실패, 다시 시도하세요.");
+      alert("이미지 첨부 실패, 잠시 후 다시 시도하세요.");
     }
   };
 
@@ -73,7 +73,8 @@ const Mypage = () => {
         });
       })
       .catch((error) => {
-        alert("이미지 첨부 실패");
+        alert("프로필 이미지 등록 실패");
+        console.log(error);
         localStorage.removeItem("profileImage");
       });
   };
@@ -181,8 +182,9 @@ const Mypage = () => {
               position: "relative",
             }}
           >
-            {category.map((cg) => (
+            {category.map((cg, idx) => (
               <Button
+                key={idx}
                 variant="contained"
                 color="secondary"
                 sx={{
