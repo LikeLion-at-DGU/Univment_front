@@ -8,7 +8,9 @@ import BasicModal from "../components/BasicModal";
 
 const Mypage = () => {
   const id = localStorage.getItem("id");
-
+  const userMyname = localStorage.getItem("profileMyname");
+  const userEmail = localStorage.getItem("profileEmail");
+  const userMajor = localStorage.getItem("profileMajor");
   // Modal
   const [basicModal, setBasicModal] = useState(false);
   const [categoryModal, setCategoryModal] = useState(false);
@@ -17,7 +19,8 @@ const Mypage = () => {
   // Profile
   const [profile, setProfile] = useState({
     user: id,
-    birthday: "",
+    myname: "",
+    email: "",
     major: "",
     image: null,
   });
@@ -71,7 +74,7 @@ const Mypage = () => {
             }}
           >
             <label htmlFor="mainProfile">
-              <div className={styles.profileBtn}>수정</div>
+              <div className={styles.profileBtn}>등록</div>
             </label>
             <input
               type="file"
@@ -97,7 +100,13 @@ const Mypage = () => {
             }}
           >
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              이름, 전공, 컨택 이메일을 입력해주세요
+              {userMyname ? "이름 : " + userMyname : "이름, 전공, 컨택 이메일을 입력해주세요"}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {userEmail ? "컨택 이메일 : " + userEmail : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {userMajor ? "전공 : " + userMajor : ""}
             </Typography>
             <Button
               variant="contained"
@@ -111,10 +120,12 @@ const Mypage = () => {
               }}
               onClick={() => setBasicModal(true)}
             >
-              수정
+              등록
             </Button>
           </Grid>
-          {basicModal && <BasicModal setBasicModal={setBasicModal} />}
+          {basicModal && (
+            <BasicModal setBasicModal={setBasicModal} profile={profile} setProfile={setProfile} />
+          )}
           {/* 카테고리 그리드------------------------------------------------ */}
           <Grid
             item
@@ -140,7 +151,7 @@ const Mypage = () => {
                 position: "absolute",
               }}
             >
-              수정
+              등록
             </Button>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               카테고리
@@ -169,7 +180,7 @@ const Mypage = () => {
                 position: "absolute",
               }}
             >
-              수정
+              등록
             </Button>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               클럽

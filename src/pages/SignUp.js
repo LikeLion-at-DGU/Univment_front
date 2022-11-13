@@ -159,7 +159,11 @@ const SignUp = () => {
       .catch((error) => {
         console.log(error);
         alert("회원가입 요청 실패, 다시 시도해주세요.");
-        // 동일 사용자 필터링 추가 필요
+        const message = error.request.responseText;
+        if (message.includes(`이미 이 이메일 주소로 등록된 사용자가 있습니다.`)) {
+          setIsEmail(false);
+          setEmailMessage("이미 이 이메일 주소로 등록된 사용자가 있습니다.");
+        }
       });
   };
 
@@ -170,7 +174,7 @@ const SignUp = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 20,
+            marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
