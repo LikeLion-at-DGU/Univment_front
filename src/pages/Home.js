@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Button, Grid, Typography, Container } from "@mui/material/";
 import MypageComponent from "../components/MypageComponent";
-
 import Logout from "../components/Logout";
 import axios from "axios";
 
@@ -25,45 +24,81 @@ const Home = () => {
     { name: "수업", color: "#427563" },
     { name: "취미", color: "#3293a8" },
   ]);
+  const addCategory = [
+    <Grid
+      item
+      key="add"
+      variant="contained"
+      xs={4}
+      md={3}
+      lg={2.3}
+      xl={2}
+      sx={{
+        border: "none",
+        width: "10vw",
+        height: "95%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 1,
+        backgroundColor: "#f0f0e4",
+        color: "#18264f",
+        boxShadow: "7px -1px 2px 3px rgba(0, 0, 0, 0.5)",
+        cursor: "pointer",
+        "&:hover": {
+          color: "brown",
+        },
+      }}
+    >
+      <Typography sx={{ fontFamily: "Jeju Myeongjo", textAlign: "center" }}>
+        카테고리
+        <br />
+        추가
+      </Typography>
+    </Grid>,
+  ];
+  const categoryBook = [
+    category.map((value, idx) => (
+      <Grid
+        item
+        key={idx}
+        xs={4}
+        md={3}
+        lg={2.3}
+        xl={2}
+        sx={{
+          border: "none",
+          width: "10vw",
+          height: "95%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 1,
+          backgroundColor: value.color,
+          color: "#f0f0e4",
+          boxShadow: "7px -1px 2px 3px rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>{value.name}</Typography>
+      </Grid>
+    )),
+  ];
   return (
     <>
       <Header />
       <MypageComponent />
       <Logout />
-      <Container fixed maxWidth="xl" sx={{ borderRadius: 5, marginTop: 7, height: "80vh" }}>
+      <Container fixed sx={{ height: "60vh" }}>
         <Grid
           container
           sx={{
             height: "45%",
-            marginTop: 5,
+            marginTop: 7,
             justifyContent: "center",
             gridGap: 30,
           }}
         >
-          {category.map((value, idx) => (
-            <Grid
-              item
-              key={idx}
-              xs={4}
-              md={3}
-              lg={2.3}
-              xl={2}
-              sx={{
-                border: "none",
-                width: "10vw",
-                height: "95%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 1,
-                backgroundColor: value.color,
-                color: "#f0f0e4",
-                boxShadow: "7px -1px 2px 3px rgba(0, 0, 0, 0.5)",
-              }}
-            >
-              <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>{value.name}</Typography>
-            </Grid>
-          ))}
+          {category.length < 9 ? [...categoryBook, addCategory] : [categoryBook]}
         </Grid>
       </Container>
     </>
