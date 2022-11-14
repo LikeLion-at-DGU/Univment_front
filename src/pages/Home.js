@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Button, Grid, Typography, Container } from "@mui/material/";
 import MypageComponent from "../components/MypageComponent";
-import Logout from "../components/Logout";
 import axios from "axios";
 import CategoryModal from "../components/CategoryModal";
+import { AuthContext } from "../context/AuthContext";
 
 // xs, extra-small: 0px
 // sm, small: 600px
@@ -18,18 +18,8 @@ const Home = () => {
   //   });
   // }, []);
   const [categoryModal, setCategoryModal] = useState(false);
-  const addCategoryBtn = (e) => {
-    e.preventDefault();
-    setCategoryModal(true);
-  };
-  const [category, setCategory] = useState([
-    { name: "동아리", color: "#3A4CA8" },
-    { name: "대외활동", color: "#9d533c" },
-    { name: "공모전", color: "#267d53" },
-    { name: "학생회", color: "#ca7070" },
-    { name: "수업", color: "#427563" },
-    { name: "취미", color: "#3293a8" },
-  ]);
+  const { category, setCategory } = useContext(AuthContext);
+
   const addCategory = [
     <Grid
       item
@@ -55,7 +45,9 @@ const Home = () => {
           color: "brown",
         },
       }}
-      onClick={addCategoryBtn}
+      onClick={() => {
+        setCategoryModal(true);
+      }}
     >
       <Typography sx={{ fontFamily: "Jeju Myeongjo", textAlign: "center" }}>
         카테고리
@@ -94,7 +86,7 @@ const Home = () => {
     <>
       <Header />
       <MypageComponent category={category} setCategory={setCategory} />
-      <Logout />
+
       <Container fixed sx={{ height: "60vh" }}>
         <Grid
           container
@@ -108,13 +100,7 @@ const Home = () => {
           {category.length < 9 ? [...categoryBook, addCategory] : [categoryBook]}
         </Grid>
       </Container>
-      {categoryModal && (
-        <CategoryModal
-          setCategoryModal={setCategoryModal}
-          category={category}
-          setCategory={setCategory}
-        />
-      )}
+      {categoryModal && <CategoryModal setCategoryModal={setCategoryModal} />}
       {/* <Button
         variant="contained"
         sx={{

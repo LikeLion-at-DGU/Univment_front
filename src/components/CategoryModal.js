@@ -4,7 +4,8 @@ import React, { memo, useContext, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import styles from "../static/css/Modal.module.css";
 
-const CategoryModal = ({ setCategoryModal, category, setCategory }) => {
+const CategoryModal = ({ setCategoryModal }) => {
+  const { category, setCategory } = useContext(AuthContext);
   // Modal
   const outSection = useRef();
   const closeModal = (e) => {
@@ -69,15 +70,16 @@ const CategoryModal = ({ setCategoryModal, category, setCategory }) => {
             onChange={onChange}
           />
           <Grid item sx={{ display: "flex", flexDirection: "row", marginTop: 10, gridGap: 10 }}>
-            {category.map((cg) => (
+            {category.map((value, idx) => (
               <Button
                 variant="contained"
-                color="secondary"
+                key={idx}
                 sx={{
                   fontFamily: "Jeju Myeongjo",
+                  backgroundColor: value.color,
                 }}
               >
-                {cg}
+                {value.name}
               </Button>
             ))}
           </Grid>

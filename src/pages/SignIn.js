@@ -10,7 +10,7 @@ const SignIn = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/home");
+      navigate("/home", { replace: true });
     }
   }, []);
   const [inputs, setInputs] = useState({
