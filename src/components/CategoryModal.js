@@ -32,6 +32,7 @@ const CategoryModal = ({ setCategoryModal }) => {
             height: "70vh",
             position: "absolute",
             flexDirection: "column",
+            justifyContent: "flex-start",
             alignItems: "center",
             top: "50%",
             left: "50%",
@@ -69,7 +70,7 @@ const CategoryModal = ({ setCategoryModal }) => {
             sx={{ marginTop: 5, maxWidth: "sm" }}
             onChange={onChange}
           />
-          <Grid item sx={{ display: "flex", flexDirection: "row", marginTop: 10, gridGap: 10 }}>
+          <Grid item sx={{ marginTop: 10 }}>
             {category.map((value, idx) => (
               <Button
                 variant="contained"
@@ -96,7 +97,7 @@ const CategoryModal = ({ setCategoryModal }) => {
             }}
             onClick={onSubmit}
           >
-            등록
+            수정
           </Button>
         </Grid>
       </Container>

@@ -1,7 +1,7 @@
 .logout {
   position: absolute;
   right: 1vw;
-  bottom: 2vh;
+  top: 2vh;
   border: none;
   cursor: pointer;
 }

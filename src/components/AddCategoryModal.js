@@ -1,27 +1,51 @@
 import { Grid, TextField, Container, Typography, Button } from "@mui/material";
 import axios from "axios";
-import React, { memo, useContext, useRef, useState } from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import styles from "../static/css/Modal.module.css";
 
 const AddCategoryModal = ({ setAddCategoryModal }) => {
   const { category, setCategory } = useContext(AuthContext);
+  const [input, setInput] = useState("");
+  const [newCategory, setNewCategory] = useState({ name: "", color: "" });
+  const id = localStorage.getItem("id");
   // Modal
   const outSection = useRef();
   const closeModal = (e) => {
     if (e.target === outSection.current) setAddCategoryModal(false);
   };
   const onChange = (e) => {
-    setCategory([e.target.value]);
+    setInput(e.target.value);
   };
+  useEffect(() => {
+    setNewCategory({ name: input, color: "#f0f0e4" });
+  }, [input]);
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    setCategory([...category, newCategory]);
+    const addCategoryData = {
+      name: input,
+      isDefault: false,
+      generated_user: id,
+    };
+    await axios
+      .post("http://127.0.0.1:8000/post/category/", addCategoryData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setInput("");
   };
   return (
     <>
       <Container className={styles.modalContainer} ref={outSection} onClick={closeModal}>
         <Grid
+          component="form"
           container
+          wrap="nowrap"
           sx={{
             border: "3px solid #18264f",
             borderRadius: 10,
@@ -32,6 +56,7 @@ const AddCategoryModal = ({ setAddCategoryModal }) => {
             height: "70vh",
             position: "absolute",
             flexDirection: "column",
+            justifyContent: "flex-start",
             alignItems: "center",
             top: "50%",
             left: "50%",
@@ -69,7 +94,7 @@ const AddCategoryModal = ({ setAddCategoryModal }) => {
             sx={{ marginTop: 5, maxWidth: "sm" }}
             onChange={onChange}
           />
-          <Grid item sx={{ display: "flex", flexDirection: "row", marginTop: 10, gridGap: 10 }}>
+          <Grid item sx={{ marginTop: 10 }}>
             {category.map((value, idx) => (
               <Button
                 variant="contained"

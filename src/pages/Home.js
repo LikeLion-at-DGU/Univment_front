@@ -17,8 +17,20 @@ const Home = () => {
   //     console.log(response.data);
   //   });
   // }, []);
-  const [addCategoryModal, setAddCategoryModal] = useState(false);
+  const id = localStorage.getItem("id");
   const { category, setCategory } = useContext(AuthContext);
+  const [addCategoryModal, setAddCategoryModal] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/post/category/${id}/`)
+      .then((response) => {
+        console.log("fetch 성공", response);
+      })
+      .catch((error) => {
+        console.log("fetch 실패", error);
+      });
+  }, [category]);
 
   const addCategory = [
     <Grid

@@ -204,7 +204,7 @@ const Mypage = () => {
               }}
               onClick={() => setCategoryModal(true)}
             >
-              등록
+              수정
             </Button>
           </Grid>
           {/* 클럽 그리드------------------------------------------------ */}

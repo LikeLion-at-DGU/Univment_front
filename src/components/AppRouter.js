@@ -8,6 +8,7 @@ import Mypage from "../pages/Mypage";
 import Record from "../pages/Record";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import Storage from "../pages/Storage";
 
 const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/record" element={<Record />}></Route>
+          <Route path="/storage/:id" element={<Storage />}></Route>
         </Routes>
       </Router>
     </>
