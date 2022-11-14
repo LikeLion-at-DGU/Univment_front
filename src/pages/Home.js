@@ -98,7 +98,6 @@ const Home = () => {
     <>
       <Header />
       <MypageComponent category={category} setCategory={setCategory} />
-
       <Container fixed sx={{ height: "60vh" }}>
         <Grid
           container

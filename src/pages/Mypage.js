@@ -32,6 +32,11 @@ const Mypage = () => {
   };
   useEffect(() => {
     fetchData();
+    return () => {
+      localStorage.removeItem("userMyname");
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("userMajor");
+    };
   }, []);
   const userMyname = localStorage.getItem("userMyname");
   const userEmail = localStorage.getItem("userEmail");
