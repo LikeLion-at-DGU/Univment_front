@@ -37,7 +37,7 @@ const Mypage = () => {
       ...profile,
       image: file,
     });
-    if (profile.image) {
+    if (profile?.image) {
       alert("이미지 첨부 성공, 등록 버튼을 눌러 수정사항을 저장하세요.");
     } else {
       alert("이미지 첨부 실패, 잠시 후 다시 시도하세요.");

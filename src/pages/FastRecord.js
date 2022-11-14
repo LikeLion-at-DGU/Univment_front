@@ -12,44 +12,77 @@ import {
 } from "@mui/material/";
 import Header from "../components/Header";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
 
 const FastRecord = () => {
   const { setIsLoggedIn, category } = useContext(AuthContext);
-
   const [inputs, setInputs] = useState({
     title: "",
-    answers1: "",
-    answers2: "",
-    answers3: "",
-    answers4: "",
+    answer1: "",
+    answer2: "",
+    answer3: "",
+    answer4: "",
     image: null,
+    category: "",
     timeline: true,
     email: "",
     password: "",
   });
 
-  const categoryChange = (e) => {};
+  const categoryChange = (e) => {
+    setInputs({
+      ...inputs,
+      category: e.target.value,
+    });
+    console.log(e);
+  };
   const onChange = (e) => {
     const { value, name } = e.target;
     setInputs({
       ...inputs,
       [name]: value,
     });
-    console.log(inputs);
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const joinData = {
-      user: "",
-      title: "",
-      answers: [],
-      category: "",
-      email: "",
-      password: "",
-    };
-    setIsLoggedIn(true);
+  const onLoadFile = (e) => {
+    const file = e.target.files[0];
+    setInputs({
+      ...inputs,
+      image: file,
+    });
   };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    if (inputs?.image) {
+      formData.append("image", inputs.image, inputs.image.name);
+    } else {
+      window.alert("이미지를 다시 첨부하세요.");
+    }
+    formData.append("title", inputs.title);
+    formData.append("answer1", inputs.answer1);
+    formData.append("answer2", inputs.answer2);
+    formData.append("answer3", inputs.answer3);
+    formData.append("answer4", inputs.answer4);
+    formData.append("category", inputs.category);
+    formData.append("timeline", inputs.timeline);
+    formData.append("email", inputs.email);
+    formData.append("password", inputs.password);
+    await axios
+      .post("http://127.0.0.1:8000/post/postwithlogin/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        // setIsLoggedIn(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <Header />
@@ -85,11 +118,14 @@ const FastRecord = () => {
                   id="category"
                   name="category"
                   label="카테고리"
+                  value={inputs.category}
                   onChange={categoryChange}
                   helperText="등록될 카테고리를 선택해주세요."
                 >
                   {category.map((value, idx) => (
-                    <MenuItem key={idx}>{value.name}</MenuItem>
+                    <MenuItem key={idx} value={value.name}>
+                      {value.name}
+                    </MenuItem>
                   ))}
                 </TextField>
               </Grid>
@@ -101,7 +137,7 @@ const FastRecord = () => {
                   color="info"
                   minRows={5}
                   id="experience"
-                  name="answers1"
+                  name="answer1"
                   label="어떤 경험인가요?"
                   multiline
                   onChange={onChange}
@@ -115,7 +151,7 @@ const FastRecord = () => {
                   color="info"
                   minRows={3}
                   id="nice"
-                  name="answers2"
+                  name="answer2"
                   label="좋았던 점"
                   multiline
                   onChange={onChange}
@@ -129,7 +165,7 @@ const FastRecord = () => {
                   color="info"
                   minRows={3}
                   id="bad"
-                  name="answers3"
+                  name="answer3"
                   label="아쉬웠던 점"
                   multiline
                   onChange={onChange}
@@ -143,21 +179,42 @@ const FastRecord = () => {
                   color="info"
                   minRows={4}
                   id="learn"
-                  name="answers4"
+                  name="answer4"
                   label="무엇을 배웠나요?"
                   multiline
                   onChange={onChange}
                 />
               </Grid>
-              {/* <Grid item xs={12}>
+              <Grid item xs={12}>
+                {inputs.image ? (
+                  <Grid
+                    sx={{
+                      border: "none",
+                      borderRadius: 5,
+                      width: "20vh",
+                      height: "20vh",
+                      backgroundImage: `url(${inputs.image})`,
+                      backgroundSize: `cover`,
+                      backgroundRepeat: `no-repeat`,
+                      backgroundPosition: `center`,
+                      boxShadow: "7px 5px 15px -7px rgba(0, 0, 0, 0.5)",
+                    }}
+                  ></Grid>
+                ) : (
+                  <Grid hidden></Grid>
+                )}
+              </Grid>
+              <Grid item xs={12}>
                 <Button
-                  variant="outlined"
+                  variant="contained"
+                  component="label"
                   color="info"
-                  sx={{ border: "1px solid #18264f", color: "#18264f" }}
+                  sx={{ border: "1px solid #18264f", backgroundColor: "#18264f", color: "f0f0e4" }}
                 >
                   사진 첨부
+                  <input hidden accept="image/*" multiple type="file" onChange={onLoadFile} />
                 </Button>
-              </Grid> */}
+              </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
                   margin="normal"
