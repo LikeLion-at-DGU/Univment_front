@@ -4,12 +4,12 @@ import React, { memo, useContext, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import styles from "../static/css/Modal.module.css";
 
-const CategoryModal = ({ setCategoryModal }) => {
+const AddCategoryModal = ({ setAddCategoryModal }) => {
   const { category, setCategory } = useContext(AuthContext);
   // Modal
   const outSection = useRef();
   const closeModal = (e) => {
-    if (e.target === outSection.current) setCategoryModal(false);
+    if (e.target === outSection.current) setAddCategoryModal(false);
   };
   const onChange = (e) => {
     setCategory([e.target.value]);
@@ -38,7 +38,7 @@ const CategoryModal = ({ setCategoryModal }) => {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <span className={styles.modalClose} onClick={() => setCategoryModal(false)}>
+          <span className={styles.modalClose} onClick={() => setAddCategoryModal(false)}>
             X
           </span>
           <Typography
@@ -48,7 +48,7 @@ const CategoryModal = ({ setCategoryModal }) => {
             color="#f0f0e4"
             marginTop={10}
           >
-            카테고리를 수정, 삭제하세요.
+            새로운 카테고리를 추가하세요.
           </Typography>
           <TextField
             autoFocus
@@ -104,4 +104,4 @@ const CategoryModal = ({ setCategoryModal }) => {
   );
 };
 
-export default memo(CategoryModal);
+export default memo(AddCategoryModal);

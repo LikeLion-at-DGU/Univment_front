@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { Button, Grid, Typography, Container } from "@mui/material/";
 import MypageComponent from "../components/MypageComponent";
 import axios from "axios";
-import CategoryModal from "../components/CategoryModal";
+import AddCategoryModal from "../components/AddCategoryModal";
 import { AuthContext } from "../context/AuthContext";
 
 // xs, extra-small: 0px
@@ -17,7 +17,7 @@ const Home = () => {
   //     console.log(response.data);
   //   });
   // }, []);
-  const [categoryModal, setCategoryModal] = useState(false);
+  const [addCategoryModal, setAddCategoryModal] = useState(false);
   const { category, setCategory } = useContext(AuthContext);
 
   const addCategory = [
@@ -46,7 +46,7 @@ const Home = () => {
         },
       }}
       onClick={() => {
-        setCategoryModal(true);
+        setAddCategoryModal(true);
       }}
     >
       <Typography sx={{ fontFamily: "Jeju Myeongjo", textAlign: "center" }}>
@@ -100,7 +100,7 @@ const Home = () => {
           {category.length < 9 ? [...categoryBook, addCategory] : [categoryBook]}
         </Grid>
       </Container>
-      {categoryModal && <CategoryModal setCategoryModal={setCategoryModal} />}
+      {addCategoryModal && <AddCategoryModal setAddCategoryModal={setAddCategoryModal} />}
       {/* <Button
         variant="contained"
         sx={{
