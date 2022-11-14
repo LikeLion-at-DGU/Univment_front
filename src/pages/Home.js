@@ -4,6 +4,7 @@ import { Button, Grid, Typography, Container } from "@mui/material/";
 import MypageComponent from "../components/MypageComponent";
 import Logout from "../components/Logout";
 import axios from "axios";
+import CategoryModal from "../components/CategoryModal";
 
 // xs, extra-small: 0px
 // sm, small: 600px
@@ -16,6 +17,11 @@ const Home = () => {
   //     console.log(response.data);
   //   });
   // }, []);
+  const [categoryModal, setCategoryModal] = useState(false);
+  const addCategoryBtn = (e) => {
+    e.preventDefault();
+    setCategoryModal(true);
+  };
   const [category, setCategory] = useState([
     { name: "동아리", color: "#3A4CA8" },
     { name: "대외활동", color: "#9d533c" },
@@ -49,6 +55,7 @@ const Home = () => {
           color: "brown",
         },
       }}
+      onClick={addCategoryBtn}
     >
       <Typography sx={{ fontFamily: "Jeju Myeongjo", textAlign: "center" }}>
         카테고리
@@ -86,7 +93,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <MypageComponent />
+      <MypageComponent category={category} setCategory={setCategory} />
       <Logout />
       <Container fixed sx={{ height: "60vh" }}>
         <Grid
@@ -101,6 +108,27 @@ const Home = () => {
           {category.length < 9 ? [...categoryBook, addCategory] : [categoryBook]}
         </Grid>
       </Container>
+      {categoryModal && (
+        <CategoryModal
+          setCategoryModal={setCategoryModal}
+          category={category}
+          setCategory={setCategory}
+        />
+      )}
+      {/* <Button
+        variant="contained"
+        sx={{
+          mt: 3,
+          bgcolor: "#18264f",
+          fontFamily: "Jeju Myeongjo",
+          position: "absolute",
+          left: "1vw",
+          bottom: "1vh",
+        }}
+        size="large"
+      >
+        기록하러 가기
+      </Button> */}
     </>
   );
 };
