@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Header from "../components/Header";
 import { Box, Button, Container, Grid, Typography } from "@mui/material/";
 import styles from "../static/css/Mypage.module.css";
 import DefaultImg from "../components/DefaultImg";
+import Logout from "../components/Logout";
 import axios from "axios";
 import BasicModal from "../components/BasicModal";
 import CategoryModal from "../components/CategoryModal";
+import { AuthContext } from "../context/AuthContext";
 
 const Mypage = () => {
   const id = localStorage.getItem("id");
@@ -13,6 +15,8 @@ const Mypage = () => {
   const userEmail = localStorage.getItem("profileEmail");
   const userMajor = localStorage.getItem("profileMajor");
   const userImage = localStorage.getItem("profileImage");
+  const { category, setCategory } = useContext(AuthContext);
+
   // Modal
   const [basicModal, setBasicModal] = useState(false);
   const [categoryModal, setCategoryModal] = useState(false);
@@ -27,15 +31,6 @@ const Mypage = () => {
     image: null,
   });
 
-  // Category
-  const [category, setCategory] = useState([
-    "동아리",
-    "대외활동",
-    "공모전",
-    "학생회",
-    "수업",
-    "취미",
-  ]);
   const onLoadFile = (e) => {
     const file = e.target.files[0];
     setProfile({
@@ -81,6 +76,7 @@ const Mypage = () => {
   return (
     <>
       <Header />
+      <Logout />
       <Container
         component="main"
         maxWidth="md"
@@ -182,26 +178,20 @@ const Mypage = () => {
               position: "relative",
             }}
           >
-            {category.map((cg, idx) => (
+            {category.map((value, idx) => (
               <Button
                 key={idx}
                 variant="contained"
-                color="secondary"
                 sx={{
                   fontFamily: "Jeju Myeongjo",
                   margin: 0.8,
+                  backgroundColor: value.color,
                 }}
               >
-                {cg}
+                {value.name}
               </Button>
             ))}
-            {categoryModal && (
-              <CategoryModal
-                setCategoryModal={setCategoryModal}
-                category={category}
-                setCategory={setCategory}
-              />
-            )}
+            {categoryModal && <CategoryModal setCategoryModal={setCategoryModal} />}
             <Button
               variant="contained"
               className={styles.categoryBtn}
@@ -214,7 +204,7 @@ const Mypage = () => {
               }}
               onClick={() => setCategoryModal(true)}
             >
-              등록
+              수정
             </Button>
           </Grid>
           {/* 클럽 그리드------------------------------------------------ */}

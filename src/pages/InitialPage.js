@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../components/Header";
 import styles from "../static/css/InitialPage.module.css";
 import ReactTypingEffect from "react-typing-effect";
@@ -6,9 +6,11 @@ import { Button } from "@mui/material";
 import { border, width } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import FastRecord from "./FastRecord";
+import { AuthContext } from "../context/AuthContext";
 
-const InitialPage = ({ isLoggedIn, setIsLoggedIn }) => {
+const InitialPage = () => {
   const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   const yesClick = (e) => {
     e.preventDefault();

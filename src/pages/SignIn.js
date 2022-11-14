@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TextField, Button, Link, Grid, Typography, Box, Paper } from "@mui/material/";
 import Header2 from "../components/Header2";
 import { json, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/home", { replace: true });
+    }
+  }, []);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -23,7 +29,6 @@ const SignIn = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     const { email, password } = inputs;
     const user = {
       email,

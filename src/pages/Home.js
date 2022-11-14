@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Button, Grid, Typography, Container } from "@mui/material/";
 import MypageComponent from "../components/MypageComponent";
-import styles from "../static/css/Home.module.css";
-import Logout from "../components/Logout";
 import axios from "axios";
+import AddCategoryModal from "../components/AddCategoryModal";
+import { AuthContext } from "../context/AuthContext";
 
 // xs, extra-small: 0px
 // sm, small: 600px
@@ -17,197 +17,118 @@ const Home = () => {
   //     console.log(response.data);
   //   });
   // }, []);
-  const [category, setCategory] = useState([
-    "동아리",
-    "대외활동",
-    "공모전",
-    "학생회",
-    "수업",
-    "취미",
-  ]);
+  const id = localStorage.getItem("id");
+  const { category, setCategory } = useContext(AuthContext);
+  const [addCategoryModal, setAddCategoryModal] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/post/category/${id}/`)
+      .then((response) => {
+        console.log("fetch 성공", response);
+      })
+      .catch((error) => {
+        console.log("fetch 실패", error);
+      });
+  }, [category]);
+
+  const addCategory = [
+    <Grid
+      item
+      key="add"
+      variant="contained"
+      xs={4}
+      md={3}
+      lg={2.3}
+      xl={2}
+      sx={{
+        border: "none",
+        width: "10vw",
+        height: "95%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 1,
+        backgroundColor: "#f0f0e4",
+        color: "#18264f",
+        boxShadow: "7px -1px 2px 3px rgba(0, 0, 0, 0.5)",
+        cursor: "pointer",
+        "&:hover": {
+          color: "brown",
+        },
+      }}
+      onClick={() => {
+        setAddCategoryModal(true);
+      }}
+    >
+      <Typography sx={{ fontFamily: "Jeju Myeongjo", textAlign: "center" }}>
+        카테고리
+        <br />
+        추가
+      </Typography>
+    </Grid>,
+  ];
+  const categoryBook = [
+    category.map((value, idx) => (
+      <Grid
+        item
+        key={idx}
+        xs={4}
+        md={3}
+        lg={2.3}
+        xl={2}
+        sx={{
+          border: "none",
+          width: "10vw",
+          height: "95%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 1,
+          backgroundColor: value.color,
+          color: "#f0f0e4",
+          boxShadow: "7px -1px 2px 3px rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>{value.name}</Typography>
+      </Grid>
+    )),
+  ];
   return (
     <>
       <Header />
-      <MypageComponent />
-      <Logout />
-      <Container
-        fixed
-        maxWidth="xl"
-        sx={{ border: "5px solid #18264f", borderRadius: 5, marginTop: 7, height: "80vh" }}
-      >
+      <MypageComponent category={category} setCategory={setCategory} />
+
+      <Container fixed sx={{ height: "60vh" }}>
         <Grid
           container
           sx={{
-            borderBottom: "4px solid #18264f",
-            height: "30%",
-            marginTop: 2.2,
-            alignItems: "flex-end",
+            height: "45%",
+            marginTop: 7,
             justifyContent: "center",
-            gridGap: 70,
+            gridGap: 30,
           }}
         >
-          <Grid
-            item
-            className={styles.bookshadow}
-            sx={{
-              border: "none",
-              width: "10vw",
-              height: "95%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#3A4CA8",
-              color: "#f0f0e4",
-            }}
-          >
-            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>동아리</Typography>
-          </Grid>
-          <Grid
-            item
-            className={styles.bookshadow}
-            sx={{
-              border: "none",
-              width: "10vw",
-              height: "95%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#9d533c",
-              color: "#f0f0e4",
-            }}
-          >
-            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>대외활동</Typography>
-          </Grid>
-          <Grid
-            item
-            className={styles.bookshadow}
-            sx={{
-              border: "none",
-              width: "10vw",
-              height: "95%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#267d53",
-              color: "#f0f0e4",
-            }}
-          >
-            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>공모전</Typography>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          sx={{
-            borderBottom: "4px solid #18264f",
-            height: "30%",
-            marginTop: 2.2,
-            alignItems: "flex-end",
-            justifyContent: "center",
-            gridGap: 70,
-          }}
-        >
-          <Grid
-            item
-            className={styles.bookshadow}
-            sx={{
-              border: "none",
-              width: "10vw",
-              height: "95%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#ca7070",
-              color: "#f0f0e4",
-            }}
-          >
-            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>학생회</Typography>
-          </Grid>
-          <Grid
-            item
-            className={styles.bookshadow}
-            sx={{
-              border: "none",
-              width: "10vw",
-              height: "95%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#427563",
-              color: "#f0f0e4",
-            }}
-          >
-            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>수업</Typography>
-          </Grid>
-          <Grid
-            item
-            className={styles.bookshadow}
-            sx={{
-              border: "none",
-              width: "10vw",
-              height: "95%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#3293a8",
-              color: "#f0f0e4",
-            }}
-          >
-            <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>취미</Typography>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          sx={{
-            borderBottom: "4px solid #18264f",
-            height: "30%",
-            marginTop: 2.2,
-            alignItems: "flex-end",
-            justifyContent: "center",
-            gridGap: 70,
-          }}
-        >
-          <Grid
-            item
-            className={styles.bookshadow}
-            sx={{
-              border: "none",
-              width: "10vw",
-              height: "95%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#f0f0e4",
-              color: "#18264f",
-            }}
-          >
-            <Typography sx={{ fontSize: 40, fontFamily: "Jeju Myeongjo" }}>+</Typography>
-          </Grid>
+          {category.length < 9 ? [...categoryBook, addCategory] : [categoryBook]}
         </Grid>
       </Container>
+      {addCategoryModal && <AddCategoryModal setAddCategoryModal={setAddCategoryModal} />}
+      {/* <Button
+        variant="contained"
+        sx={{
+          mt: 3,
+          bgcolor: "#18264f",
+          fontFamily: "Jeju Myeongjo",
+          position: "absolute",
+          left: "1vw",
+          bottom: "1vh",
+        }}
+        size="large"
+      >
+        기록하러 가기
+      </Button> */}
     </>
   );
 };
 
 export default Home;
-
-<Grid
-  container
-  direction="row"
-  justifyContent="flex-start"
-  alignItems="center"
-  component="main"
-  sx={{ marginTop: "5vh", border: "1px solid black", textAlign: "center" }}
->
-  <Grid item xs={12} md={6} lg={4} xl={3} sx={{ border: "1px solid black" }}>
-    동아리
-  </Grid>
-  <Grid item xs={12} md={6} lg={4} xl={3} sx={{ border: "1px solid black" }}>
-    대외활동
-  </Grid>
-  <Grid item xs={12} md={6} lg={4} xl={3} sx={{ border: "1px solid black" }}>
-    공모전
-  </Grid>
-  <Grid item xs={12} md={6} lg={4} xl={3} sx={{ border: "1px solid black" }}>
-    +
-  </Grid>
-</Grid>;

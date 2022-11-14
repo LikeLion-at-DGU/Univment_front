@@ -16,7 +16,9 @@ const Logout = () => {
         })
         .then(() => {
           setIsLoggedIn(false);
-          localStorage.clear();
+          localStorage.removeItem("refresh-token");
+          localStorage.removeItem("auth");
+          localStorage.removeItem("id");
           alert("로그아웃되었습니다.");
           window.location.replace("/");
         })
