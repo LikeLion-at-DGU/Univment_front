@@ -40,16 +40,16 @@ const BasicModal = ({ setBasicModal, profile, setProfile }) => {
       .post(`http://127.0.0.1:8000/mypage/namecardprofile/`, profile)
       .then((response) => {
         console.log(response);
-        localStorage.setItem("profileMyname", profile.myname);
-        localStorage.setItem("profileEmail", profile.email);
-        localStorage.setItem("profileMajor", profile.major);
         setBasicModal(false);
         alert("프로필 기본 정보 등록 성공");
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status === 403) {
+          alert(error.request.response);
+        }
         setNameMessage(error.response);
-        localStorage.removeItem("profile");
+        setBasicModal(false);
       });
   };
   return (

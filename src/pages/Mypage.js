@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
-import { Box, Button, Container, Grid, Typography } from "@mui/material/";
+import { Button, Container, Grid, Typography } from "@mui/material/";
 import styles from "../static/css/Mypage.module.css";
 import DefaultImg from "../components/DefaultImg";
 import Logout from "../components/Logout";
@@ -14,10 +14,6 @@ import ProjectModal from "../components/ProjectModal";
 
 const Mypage = () => {
   const id = localStorage.getItem("id");
-  const userMyname = localStorage.getItem("profileMyname");
-  const userEmail = localStorage.getItem("profileEmail");
-  const userMajor = localStorage.getItem("profileMajor");
-  const userImage = localStorage.getItem("profileImage");
   const { category, setCategory } = useContext(AuthContext);
 
   // Fetch
@@ -25,7 +21,10 @@ const Mypage = () => {
     await axios
       .get(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
+        localStorage.setItem("userMyname", response.data.myname);
+        localStorage.setItem("userEmail", response.data.email);
+        localStorage.setItem("userMajor", response.data.major);
       })
       .catch((error) => {
         console.log(error);
@@ -34,6 +33,10 @@ const Mypage = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  const userMyname = localStorage.getItem("userMyname");
+  const userEmail = localStorage.getItem("userEmail");
+  const userMajor = localStorage.getItem("userMajor");
+  const userImage = localStorage.getItem("profileImage");
 
   // Modal
   const [basicModal, setBasicModal] = useState(false);
