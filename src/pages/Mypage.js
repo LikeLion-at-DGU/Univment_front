@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Box, Button, Container, Grid, Typography } from "@mui/material/";
 import styles from "../static/css/Mypage.module.css";
@@ -8,6 +8,9 @@ import axios from "axios";
 import BasicModal from "../components/BasicModal";
 import CategoryModal from "../components/CategoryModal";
 import { AuthContext } from "../context/AuthContext";
+import ClubModal from "../components/ClubModal";
+import ContestModal from "../components/ContestModal";
+import ProjectModal from "../components/ProjectModal";
 
 const Mypage = () => {
   const id = localStorage.getItem("id");
@@ -17,10 +20,27 @@ const Mypage = () => {
   const userImage = localStorage.getItem("profileImage");
   const { category, setCategory } = useContext(AuthContext);
 
+  // Fetch
+  const fetchData = async () => {
+    await axios
+      .get(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   // Modal
   const [basicModal, setBasicModal] = useState(false);
   const [categoryModal, setCategoryModal] = useState(false);
   const [clubModal, setClubModal] = useState(false);
+  const [contestModal, setContestModal] = useState(false);
+  const [projectModal, setProjectModal] = useState(false);
 
   // Profile
   const [profile, setProfile] = useState({
@@ -113,7 +133,7 @@ const Mypage = () => {
               sx={{
                 color: "#fff",
                 backgroundColor: "#18264f",
-                border: "1px solid #383b3d",
+                border: "1px solid #18264f",
                 fontFamily: "Jeju Myeongjo",
                 position: "absolute",
               }}
@@ -229,12 +249,77 @@ const Mypage = () => {
                 fontFamily: "Jeju Myeongjo",
                 position: "absolute",
               }}
+              onClick={() => setClubModal(true)}
             >
               등록
             </Button>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               클럽
             </Typography>
+            {clubModal && <ClubModal setClubModal={setClubModal} />}
+          </Grid>
+          {/* 대회 그리드------------------------------------------------ */}
+          <Grid
+            item
+            xs={12}
+            sx={{
+              border: "1px solid #18264f",
+              borderRadius: 5,
+              boxShadow: "7px 5px 15px -12px rgba(0, 0, 0, 0.5)",
+              minHeight: "20vh",
+              position: "relative",
+            }}
+          >
+            <Button
+              variant="contained"
+              className={styles.clubBtn}
+              sx={{
+                color: "#fff",
+                backgroundColor: "#18264f",
+                border: "1px solid #383b3d",
+                fontFamily: "Jeju Myeongjo",
+                position: "absolute",
+              }}
+              onClick={() => setContestModal(true)}
+            >
+              등록
+            </Button>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              대회
+            </Typography>
+            {contestModal && <ContestModal setContestModal={setContestModal} />}
+          </Grid>
+          {/* 프로젝트 그리드------------------------------------------------ */}
+          <Grid
+            item
+            xs={12}
+            sx={{
+              border: "1px solid #18264f",
+              borderRadius: 5,
+              boxShadow: "7px 5px 15px -12px rgba(0, 0, 0, 0.5)",
+              minHeight: "20vh",
+              position: "relative",
+              marginBottom: 10,
+            }}
+          >
+            <Button
+              variant="contained"
+              className={styles.clubBtn}
+              sx={{
+                color: "#fff",
+                backgroundColor: "#18264f",
+                border: "1px solid #383b3d",
+                fontFamily: "Jeju Myeongjo",
+                position: "absolute",
+              }}
+              onClick={() => setProjectModal(true)}
+            >
+              등록
+            </Button>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              프로젝트
+            </Typography>
+            {projectModal && <ProjectModal setProjectModal={setProjectModal} />}
           </Grid>
         </Grid>
       </Container>

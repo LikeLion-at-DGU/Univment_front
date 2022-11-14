@@ -22,7 +22,7 @@ const AppRouter = () => {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/record" element={<Record />}></Route>
-          <Route path="/storage/:id" element={<Storage />}></Route>
+          <Route path="/storage" element={<Storage />}></Route>
         </Routes>
       </Router>
     </>
