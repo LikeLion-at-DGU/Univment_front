@@ -1,6 +1,8 @@
 # 동국대학교 멋쟁이사자처럼 2학기 프로젝트 UNIVMENT
 
+```
 오직 대학생을 위한 기록의 창구, UNIVMENT입니다.
+```
 
 ## TEAM Composition
 
@@ -11,7 +13,7 @@ Backend : 박영신, 류슬기, 오민영
 
 ## Prologue
 
-### `👀취업할 때 되니 내가 어떤 대학 생활을 했는지, 궁금한 적 없으신가요?`\
+### `👀취업할 때 되니 내가 어떤 대학 생활을 했는지, \궁금한 적 없으신가요?`
 
 동아리, 대외 활동, 공모전, 학생회..\
 여러분들의 대학 생활은 어떠했나요?\
@@ -22,8 +24,7 @@ Backend : 박영신, 류슬기, 오민영
 
 ## Tool
 
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/>
-<img src="https://img.shields.io/badge/django-092E20?style=flat-square&logo=django&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/><img src="https://img.shields.io/badge/django-092E20?style=flat-square&logo=django&logoColor=white"/>
 
 ## Perpose
 
