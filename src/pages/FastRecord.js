@@ -29,12 +29,12 @@ const FastRecord = () => {
     password: "",
   });
 
+  // Handling
   const categoryChange = (e) => {
     setInputs({
       ...inputs,
       category: e.target.value,
     });
-    console.log(e);
   };
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -51,6 +51,7 @@ const FastRecord = () => {
       image: file,
     });
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
@@ -193,7 +194,7 @@ const FastRecord = () => {
                       borderRadius: 5,
                       width: "20vh",
                       height: "20vh",
-                      backgroundImage: `url(${inputs.image})`,
+                      backgroundImage: `url(http://127.0.0.1:8000/media/${inputs.image.name})`,
                       backgroundSize: `cover`,
                       backgroundRepeat: `no-repeat`,
                       backgroundPosition: `center`,
