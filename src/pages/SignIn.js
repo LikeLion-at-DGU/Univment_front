@@ -18,7 +18,6 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState(false);
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -45,11 +44,12 @@ const SignIn = () => {
         localStorage.setItem("auth", true); // 로그인 설정
         localStorage.setItem("id", response.data.user.pk);
         localStorage.setItem("refresh-token", response.data.refresh_token);
-        localStorage.setItem("access-token", response.data.access_token);
+        // localStorage.setItem("access-token", response.data.access_token);
+        console.log("ACCESS_TOKEN", response.data.access_token);
         setCookie("access-token", response.data.access_token, {
           path: "/",
           // secure: true,
-          httpOnly: true,
+          // httpOnly: true,
         });
         setIsLoggedIn(true);
         alert("로그인 성공");

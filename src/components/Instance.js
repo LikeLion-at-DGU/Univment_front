@@ -1,9 +1,9 @@
 import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "./cookie";
 
-const ACCESS_TOKEN = localStorage.getItem("access-token");
+const ACCESS_TOKEN = getCookie("access-token");
 const REFRESH_TOKEN = localStorage.getItem("refresh-token");
-export const instance = axios.create({
+export const Instance = axios.create({
   baseURL: "http://54.180.165.166/",
   withCredentials: true,
   headers: {
@@ -12,64 +12,73 @@ export const instance = axios.create({
   },
 });
 
-instance.interceptors.response.use(
+Instance.interceptors.request.use(
+  (config) => {
+    const accessToken = ACCESS_TOKEN;
+    if (accessToken) {
+      config.headers["Authorization"] = "Bearer " + accessToken;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+Instance.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
     // response에서 error가 발생했을 경우 catch로 넘어가기 전에 처리
     try {
-      const errResponseStatus = error.response.status;
-      const errResponseData = error.response.data;
+      const errResponseStatus = error.response?.status;
+      const errResponseData = error.response?.data;
       const prevRequest = error.config;
 
       // 새로고침 ACCESS_TOKEN 재발급--------------------------------------------
       if (errResponseStatus === 403) {
-        const accessToken = localStorage.getItem("ACCESS_TOKEN");
-        const refreshToken = localStorage.getItem("REFRESH_TOKEN");
-
+        const refreshToken = REFRESH_TOKEN;
         try {
-          const { data } = await axios({
-            method: "post",
-            url: "http://54.180.165.166/auth/token/refresh/",
-            data: { accessToken, refreshToken },
+          const { data } = await axios.post("http://54.180.165.166/auth/token/refresh/", {
+            refresh: refreshToken,
           });
-          const newAccessToken = data.data.accessToken;
-          const newRefreshToken = data.data.refreshToken;
-          originalRequest.headers = {
+          const newAccessToken = data.data.access;
+          // const newRefreshToken = data.data.refresh;
+          prevRequest.headers = {
             "Content-Type": "application/json",
             Authorization: "Bearer " + newAccessToken,
           };
-          localStorage.setItem("ACCESS_TOKEN", newAccessToken);
-          localStorage.setItem("REFRESH_TOKEN", newRefreshToken);
+          setCookie("access-token", newAccessToken);
+          // localStorage.setItem("refresh-token", newRefreshToken);
           return await axios(prevRequest);
-        } catch (err) {
-          new Error(err);
+        } catch (error) {
+          new Error(error);
         }
       }
-      // ----------------------------------------------------------------
+
       // access token이 만료되어 발생하는 에러인 경우
-      if (errResponseData.error?.message === "jwt expired" || errResponseStatus === 401) {
-        const preRefreshToken = getCookie(REFRESH_TOKEN);
+      if (errResponseData?.error?.message === "jwt expired" || errResponseStatus === 401) {
+        const preRefreshToken = getCookie("refresh-token");
         if (preRefreshToken) {
           // refresh token을 이용하여 access token 재발급
           async function regenerateToken() {
             return await axios
               .post("http://54.180.165.166/auth/token/refresh/", {
-                refresh_token: preRefreshToken,
+                refresh: preRefreshToken,
               })
               .then(async (res) => {
-                const { access_token, refresh_token } = res.data;
+                const { access, refresh } = res.data;
                 // 새로 받은 token들 저장
-                setCookie(ACCESS_TOKEN, access_token, {
+                setCookie("access-token", access, {
                   path: "/" /*httpOnly: true */,
                 });
-                setCookie(REFRESH_TOKEN, refresh_token, {
+                setCookie("refresh-token", refresh, {
                   path: "/" /*httpOnly: true */,
                 });
 
                 // header 새로운 token으로 재설정
-                prevRequest.headers.Authorization = `Bearer ${access_token}`;
+                prevRequest.headers.Authorization = `Bearer ${access}`;
 
                 // 실패했던 기존 request 재시도
                 return await axios(prevRequest);
@@ -79,8 +88,8 @@ instance.interceptors.response.use(
                   token 재발행 또는 기존 요청 재시도 실패 시
                   기존 token 제거
                  */
-                removeCookie(ACCESS_TOKEN);
-                removeCookie(REFRESH_TOKEN);
+                removeCookie("access-token");
+                removeCookie("refresh-token");
                 window.location.href = "/";
 
                 return new Error(e);

@@ -6,6 +6,8 @@ import axios from "axios";
 import AddCategoryModal from "../components/AddCategoryModal";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { removeCookie } from "../components/cookie";
+import { Instance } from "../components/Instance";
 
 // xs, extra-small: 0px
 // sm, small: 600px
@@ -20,16 +22,17 @@ const Home = () => {
   const [newCategory, setNewCategory] = useState([]);
   const fetchData = async () => {
     try {
-      const request = await axios.get("http://54.180.165.166/post/category/", {
+      const request = await Instance.get("http://54.180.165.166/post/category/", {
         onlyusercontent: true,
       });
 
-      setNewCategory({ name: request.data.name, color: "#18264f" });
+      setNewCategory({ name: request?.data.name, color: "#18264f" });
     } catch (error) {
       console.log(error);
-      if (error.response.status === 403) {
+      if (error?.response?.status === 403) {
         alert("사용자 정보를 찾을 수 없습니다. 다시 로그인해주세요.");
         localStorage.clear();
+        removeCookie("access-token");
         setIsLoggedIn(false);
         navigate("/signin");
       }
