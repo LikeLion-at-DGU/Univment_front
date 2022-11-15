@@ -11,7 +11,7 @@ const DefaultImg = ({ profileImage }) => {
             borderRadius: 5,
             width: "20vh",
             height: "20vh",
-            backgroundImage: `url(${profileImage})`,
+            backgroundImage: `url(http://127.0.0.1:8000/media/${profileImage.name})`,
             backgroundSize: `cover`,
             backgroundRepeat: `no-repeat`,
             backgroundPosition: `center`,

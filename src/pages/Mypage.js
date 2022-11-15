@@ -11,45 +11,12 @@ import { AuthContext } from "../context/AuthContext";
 import ClubModal from "../components/ClubModal";
 import ContestModal from "../components/ContestModal";
 import ProjectModal from "../components/ProjectModal";
+import { useNavigate } from "react-router-dom";
 
 const Mypage = () => {
   const id = localStorage.getItem("id");
-  const { category, setCategory } = useContext(AuthContext);
-
-  // Fetch
-  const fetchData = async () => {
-    await axios
-      .get(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`)
-      .then((response) => {
-        // console.log(response);
-        localStorage.setItem("userMyname", response.data.myname);
-        localStorage.setItem("userEmail", response.data.email);
-        localStorage.setItem("userMajor", response.data.major);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  useEffect(() => {
-    fetchData();
-    return () => {
-      localStorage.removeItem("userMyname");
-      localStorage.removeItem("userEmail");
-      localStorage.removeItem("userMajor");
-    };
-  }, []);
-  const userMyname = localStorage.getItem("userMyname");
-  const userEmail = localStorage.getItem("userEmail");
-  const userMajor = localStorage.getItem("userMajor");
-  const userImage = localStorage.getItem("profileImage");
-
-  // Modal
-  const [basicModal, setBasicModal] = useState(false);
-  const [categoryModal, setCategoryModal] = useState(false);
-  const [clubModal, setClubModal] = useState(false);
-  const [contestModal, setContestModal] = useState(false);
-  const [projectModal, setProjectModal] = useState(false);
-
+  const navigate = useNavigate();
+  const { category, setCategory, setIsLoggedIn } = useContext(AuthContext);
   // Profile
   const [profile, setProfile] = useState({
     user: id,
@@ -59,6 +26,42 @@ const Mypage = () => {
     image: null,
   });
 
+  // Modal
+  const [basicModal, setBasicModal] = useState(false);
+  const [categoryModal, setCategoryModal] = useState(false);
+  const [clubModal, setClubModal] = useState(false);
+  const [contestModal, setContestModal] = useState(false);
+  const [projectModal, setProjectModal] = useState(false);
+
+  // Fetch
+  const fetchData = async () => {
+    try {
+      const requestImg = await axios.get("http://127.0.0.1:8000/auth/user/");
+      const request = await axios.get(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`);
+      console.log("마이페이지 Didmount", requestImg, request);
+      setProfile({
+        ...profile,
+        myname: request.data.myname,
+        email: request.data.email,
+        major: request.data.major,
+        image: requestImg.data.image,
+      });
+    } catch (error) {
+      if (error.response.status === 403) {
+        alert("사용자 정보를 찾을 수 없습니다. 다시 로그인해주세요.");
+        localStorage.clear();
+        setIsLoggedIn(false);
+        navigate("/signin");
+      }
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Handling
   const onLoadFile = (e) => {
     const file = e.target.files[0];
     setProfile({
@@ -89,7 +92,7 @@ const Mypage = () => {
       })
       .then((response) => {
         alert("프로필 이미지 등록 성공");
-        localStorage.setItem("profileImage", response.data.image);
+        // localStorage.setItem("profileImage", response.data.image);
         setProfile({
           ...profile,
           image: response.data.image,
@@ -124,17 +127,23 @@ const Mypage = () => {
               position: "relative",
             }}
           >
-            <label htmlFor="mainProfile">
-              <div className={styles.profileBtn}>첨부</div>
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              name="image"
-              id="mainProfile"
-              style={{ display: `none` }}
-              onChange={onLoadFile}
-            />
+            <Button
+              variant="contained"
+              component="label"
+              color="info"
+              sx={{
+                border: "1px solid #18264f",
+                backgroundColor: "#18264f",
+                color: "f0f0e4",
+                fontFamily: "Jeju Myeongjo",
+                position: "absolute",
+                bottom: "1vh",
+                height: "3vh",
+              }}
+            >
+              첨부
+              <input hidden accept="image/*" multiple type="file" onChange={onLoadFile} />
+            </Button>
             <Button
               variant="contained"
               className={styles.basicBtn}
@@ -150,7 +159,7 @@ const Mypage = () => {
             >
               등록
             </Button>
-            <DefaultImg profileImage={userImage} />
+            <DefaultImg profileImage={profile.image} />
           </Grid>
           {/* 베이직 그리드------------------------------------------------ */}
           <Grid
@@ -166,13 +175,15 @@ const Mypage = () => {
             }}
           >
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              {userMyname ? "이름 : " + userMyname : "이름, 전공, 컨택 이메일을 입력해주세요"}
+              {profile.myname
+                ? "이름 : " + profile.myname
+                : "이름, 전공, 컨택 이메일을 입력해주세요"}
             </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              {userEmail ? "컨택 이메일 : " + userEmail : ""}
+              {profile.email ? "컨택 이메일 : " + profile.email : ""}
             </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              {userMajor ? "전공 : " + userMajor : ""}
+              {profile.major ? "전공 : " + profile.major : ""}
             </Typography>
             <Button
               variant="contained"
