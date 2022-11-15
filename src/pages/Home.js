@@ -98,6 +98,7 @@ const Home = () => {
           color: "#f0f0e4",
           boxShadow: "7px -1px 2px 3px rgba(0, 0, 0, 0.5)",
         }}
+        onClick={() => navigate(`/storage/`)}
       >
         <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>{value.name}</Typography>
       </Grid>

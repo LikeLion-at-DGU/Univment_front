@@ -459,7 +459,9 @@ const Mypage = () => {
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               {profile.club5 ? `CLUB[5]: ${profile.club5}  ` : ""}
             </Typography>
-            {clubModal && <ClubModal setClubModal={setClubModal} />}
+            {clubModal && (
+              <ClubModal setClubModal={setClubModal} profile={profile} setProfile={setProfile} />
+            )}
           </Grid>
           {/* 대회 그리드------------------------------------------------ */}
           <Grid
@@ -529,7 +531,13 @@ const Mypage = () => {
               {profile.contest5 ? `CONTEST[5]: ${profile.contest5}  ` : ""}
             </Typography>
 
-            {contestModal && <ContestModal setContestModal={setContestModal} />}
+            {contestModal && (
+              <ContestModal
+                setContestModal={setContestModal}
+                profile={profile}
+                setProfile={setProfile}
+              />
+            )}
           </Grid>
           {/* 프로젝트 그리드------------------------------------------------ */}
           <Grid
@@ -598,7 +606,13 @@ const Mypage = () => {
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               {profile.project5 ? `PROJECT[5]: ${profile.project5}  ` : ""}
             </Typography>
-            {projectModal && <ProjectModal setProjectModal={setProjectModal} />}
+            {projectModal && (
+              <ProjectModal
+                setProjectModal={setProjectModal}
+                profile={profile}
+                setProfile={setProfile}
+              />
+            )}
           </Grid>
         </Grid>
       </Container>

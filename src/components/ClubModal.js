@@ -4,11 +4,10 @@ import React, { memo, useRef, useState } from "react";
 
 import styles from "../static/css/Modal.module.css";
 
-const ClubModal = ({ setClubModal }) => {
+const ClubModal = ({ setClubModal, profile, setProfile }) => {
   const id = localStorage.getItem("id");
   // State
-  const [club, setClub] = useState({
-    user: id,
+  const [newClub, setNewClub] = useState({
     club1: "",
     club2: "",
     club3: "",
@@ -23,19 +22,35 @@ const ClubModal = ({ setClubModal }) => {
   };
   const onChange = (e) => {
     const { name, value } = e.target;
-    setClub({
-      ...club,
+    setNewClub({
+      ...newClub,
       [name]: value,
     });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const joinData = {
+      user: id,
+      club1: newClub.club1,
+      club2: newClub.club2,
+      club3: newClub.club3,
+      club4: newClub.club4,
+      club5: newClub.club5,
+    };
     await axios
-      .post("http://54.180.165.166/mypage/namecardclubs/", club)
+      .post("http://54.180.165.166/mypage/namecardclubs/", joinData)
       .then((response) => {
         console.log(response);
         alert("프로필 클럽(동아리) 정보 등록 성공");
+        setProfile({
+          ...profile,
+          club1: response.data.club1,
+          club2: response.data.club2,
+          club3: response.data.club3,
+          club4: response.data.club4,
+          club5: response.data.club5,
+        });
         setClubModal(false);
       })
       .catch((error) => {

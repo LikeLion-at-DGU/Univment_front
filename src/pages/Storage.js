@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import axios from "axios";
 import React, { useEffect } from "react";
@@ -31,15 +31,42 @@ const Storage = () => {
     // )),
   ];
   const nonPostCard = [
-    <Typography sx={{ fontFamily: "Jeju Myeongjo", textAlign: "center" }}>
-      등록된 게시물이 없습니다.
-    </Typography>,
+    <Typography sx={{ fontFamily: "Jeju Myeongjo" }}>등록된 게시물이 없습니다.</Typography>,
   ];
   return (
     <>
       <Header />
-      <Container sx={{ border: "1px solid #18264f", minHeight: "90vh" }}>
+      <Container
+        sx={{
+          border: "1px solid #18264f",
+          borderRadius: 5,
+          marginTop: 5,
+          maxWidth: "90vw",
+          minHeight: "85vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {/* <Grid Container>{postList ? [postCard] : [nonPostCard]}</Grid> */}
+        {nonPostCard}
+        <Button
+          variant="contained"
+          sx={{
+            bgcolor: "#18264f",
+            fontFamily: "Jeju Myeongjo",
+            position: "absolute",
+            bottom: "5vh",
+            left: "50%",
+            transform: "translate(-50%, 0)",
+          }}
+          size="large"
+          style={{
+            height: "5.5vh",
+          }}
+        >
+          기록 작성
+        </Button>
       </Container>
     </>
   );
