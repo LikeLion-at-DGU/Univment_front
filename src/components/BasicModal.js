@@ -27,20 +27,24 @@ const BasicModal = ({ setBasicModal }) => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .post(`http://127.0.0.1:8000/mypage/namecardprofile/`, basic)
-      .then((response) => {
-        console.log(response);
-        alert("프로필 기본 정보 등록 성공");
-        setBasicModal(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.response.status === 403) {
-          alert(error.request.response);
-        }
-        setBasicModal(false);
-      });
+    if (basic.myname && basic.email) {
+      await axios
+        .post(`http://127.0.0.1:8000/mypage/namecardprofile/`, basic)
+        .then((response) => {
+          console.log(response);
+          alert("프로필 기본 정보 등록 성공");
+          setBasicModal(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.status === 403) {
+            alert(error.request.response);
+          }
+          setBasicModal(false);
+        });
+    } else {
+      alert("이름과 이메일은 빈칸으로 등록할 수 없습니다.");
+    }
   };
   return (
     <>

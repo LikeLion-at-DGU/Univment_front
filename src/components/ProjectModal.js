@@ -47,7 +47,7 @@ const ProjectModal = ({ setProjectModal }) => {
         }
       });
   };
-
+  console.log(project);
   return (
     <>
       <Container className={styles.modalContainer} ref={outSection} onClick={closeModal}>
@@ -90,8 +90,8 @@ const ProjectModal = ({ setProjectModal }) => {
             fullWidth
             variant="filled"
             color="info"
-            id="club1"
-            name="club1"
+            id="project1"
+            name="project1"
             label="프로젝트1 추가"
             inputProps={{
               style: {
@@ -107,8 +107,8 @@ const ProjectModal = ({ setProjectModal }) => {
             fullWidth
             variant="filled"
             color="info"
-            id="club"
-            name="club2"
+            id="project"
+            name="project2"
             label="프로젝트2 추가 - 선택"
             inputProps={{
               style: {
@@ -124,8 +124,8 @@ const ProjectModal = ({ setProjectModal }) => {
             fullWidth
             variant="filled"
             color="info"
-            id="club"
-            name="club3"
+            id="project"
+            name="project3"
             label="프로젝트3 추가 - 선택"
             inputProps={{
               style: {
@@ -141,8 +141,8 @@ const ProjectModal = ({ setProjectModal }) => {
             fullWidth
             variant="filled"
             color="info"
-            id="club"
-            name="club4"
+            id="project"
+            name="project4"
             label="프로젝트4 추가 - 선택"
             inputProps={{
               style: {
@@ -158,8 +158,8 @@ const ProjectModal = ({ setProjectModal }) => {
             fullWidth
             variant="filled"
             color="info"
-            id="club"
-            name="club5"
+            id="project"
+            name="project5"
             label="프로젝트5 추가 - 선택"
             inputProps={{
               style: {

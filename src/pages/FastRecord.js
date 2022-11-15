@@ -96,7 +96,13 @@ const FastRecord = () => {
           <FormControl component="fieldset">
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography component="h1" variant="h4" fontFamily="Jeju Myeongjo" color="#383b3d">
+                <Typography
+                  component="h1"
+                  variant="h4"
+                  fontFamily="Jeju Myeongjo"
+                  fontSize="3.5vh"
+                  color="#383b3d"
+                >
                   오늘의 빠른 기록을 도와드릴게요.
                 </Typography>
               </Grid>

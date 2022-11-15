@@ -70,6 +70,12 @@
   height: 3vh;
 }
 
+.deleteBtn {
+  bottom: 4.5vh;
+  right: 1vh;
+  height: 3vh;
+}
+
 .categoryBtn {
   bottom: 1vh;
   right: 1vh;
