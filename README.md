@@ -1,13 +1,13 @@
 # 동국대학교 멋쟁이사자처럼 2학기 프로젝트 UNIVMENT
 
 ```
-📚오직 대학생을 위한 기록의 창구, UNIVMENT입니다✏
+📚오직 대학생을 위한 기록의 창구, UNIVMENT입니다.
 ```
 
 ## TEAM Composition
 
-`Frontend :` 오준서\
-`Backend :` 박영신, 류슬기, 오민영
+`Frontend` : 오준서\
+`Backend` : 박영신, 류슬기, 오민영
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## Tool
 
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/><img src="https://img.shields.io/badge/django-092E20?style=flat-square&logo=django&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/django-092E20?style=flat-square&logo=django&logoColor=white"/>
 
 ## Perpose
 
