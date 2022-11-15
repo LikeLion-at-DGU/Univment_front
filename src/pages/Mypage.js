@@ -24,6 +24,16 @@ const Mypage = () => {
     email: "",
     major: "",
     image: null,
+    club1: "",
+    club2: "",
+    club3: "",
+    club4: "",
+    club5: "",
+    contest1: "",
+    contest2: "",
+    contest3: "",
+    contest4: "",
+    contest5: "",
   });
 
   // Modal
@@ -37,19 +47,32 @@ const Mypage = () => {
   const fetchData = async () => {
     try {
       const requestImg = await axios.get("http://127.0.0.1:8000/auth/user/");
-      const request = await axios.get(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`);
-      console.log("마이페이지 Didmount", requestImg, request);
+      const requestBasic = await axios.get(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`);
+      const requestClub = await axios.get("http://127.0.0.1:8000/mypage/namecardclubs/");
+      const requestContest = await axios.get("http://127.0.0.1:8000/mypage/namecardcontests/");
+      console.log("마이페이지 Didmount", requestImg, requestBasic, requestClub);
       setProfile({
         ...profile,
-        myname: request.data.myname,
-        email: request.data.email,
-        major: request.data.major,
+        myname: requestBasic.data.myname,
+        email: requestBasic.data.email,
+        major: requestBasic.data.major,
         image: requestImg.data.image,
+        club1: requestClub.data[0].club1,
+        club2: requestClub.data[0].club2,
+        club3: requestClub.data[0].club3,
+        club4: requestClub.data[0].club4,
+        club5: requestClub.data[0].club5,
+        contest1: requestContest.data[0].contest1,
+        contest2: requestContest.data[0].contest2,
+        contest3: requestContest.data[0].contest3,
+        contest4: requestContest.data[0].contest4,
+        contest5: requestContest.data[0].contest5,
       });
     } catch (error) {
       if (error.response.status === 403) {
         alert("사용자 정보를 찾을 수 없습니다. 다시 로그인해주세요.");
         localStorage.clear();
+        console.clear();
         setIsLoggedIn(false);
         navigate("/signin");
       }
@@ -60,6 +83,7 @@ const Mypage = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  console.log(profile);
 
   // Handling
   const onLoadFile = (e) => {
@@ -174,6 +198,15 @@ const Mypage = () => {
               position: "relative",
             }}
           >
+            <Typography
+              sx={{
+                fontFamily: "Jeju Myeongjo",
+                fontWeight: "bold",
+                margin: "1vh 0 0 1.5vh",
+              }}
+            >
+              기본 정보
+            </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               {profile.myname
                 ? "이름 : " + profile.myname
@@ -217,6 +250,15 @@ const Mypage = () => {
               position: "relative",
             }}
           >
+            <Typography
+              sx={{
+                fontFamily: "Jeju Myeongjo",
+                fontWeight: "bold",
+                margin: "1vh 0 0 1.5vh",
+              }}
+            >
+              카테고리
+            </Typography>
             {category.map((value, idx) => (
               <Button
                 key={idx}
@@ -250,6 +292,7 @@ const Mypage = () => {
           <Grid
             item
             xs={12}
+            md={5.85}
             sx={{
               border: "1px solid #18264f",
               borderRadius: 5,
@@ -272,8 +315,29 @@ const Mypage = () => {
             >
               등록
             </Button>
+            <Typography
+              sx={{
+                fontFamily: "Jeju Myeongjo",
+                fontWeight: "bold",
+                margin: "1vh 0 0 1.5vh",
+              }}
+            >
+              클럽(동아리)
+            </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              클럽
+              {profile.club1 ? `CLUB[1]: ${profile.club1}  ` : "등록된 클럽이 없습니다."}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.club1 ? `CLUB[2]: ${profile.club2}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.club1 ? `CLUB[3]: ${profile.club3}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.club1 ? `CLUB[4]: ${profile.club4}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.club1 ? `CLUB[5]: ${profile.club5}  ` : ""}
             </Typography>
             {clubModal && <ClubModal setClubModal={setClubModal} />}
           </Grid>
@@ -281,6 +345,7 @@ const Mypage = () => {
           <Grid
             item
             xs={12}
+            md={5.85}
             sx={{
               border: "1px solid #18264f",
               borderRadius: 5,
@@ -303,9 +368,33 @@ const Mypage = () => {
             >
               등록
             </Button>
-            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              대회
+            <Typography
+              sx={{
+                fontFamily: "Jeju Myeongjo",
+                fontWeight: "bold",
+                margin: "1vh 0 0 1.5vh",
+              }}
+            >
+              (경진)대회
             </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.contest1
+                ? `CONTEST[1]: ${profile.contest1}`
+                : "등록된 대회 경력이 없습니다."}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.contest2 ? `CONTEST[2]: ${profile.contest2}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.contest3 ? `CONTEST[3]: ${profile.contest3}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.contest4 ? `CONTEST[4]: ${profile.contest4}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.contest5 ? `CONTEST[5]: ${profile.contest5}  ` : ""}
+            </Typography>
+
             {contestModal && <ContestModal setContestModal={setContestModal} />}
           </Grid>
           {/* 프로젝트 그리드------------------------------------------------ */}
@@ -335,6 +424,15 @@ const Mypage = () => {
             >
               등록
             </Button>
+            <Typography
+              sx={{
+                fontFamily: "Jeju Myeongjo",
+                fontWeight: "bold",
+                margin: "1vh 0 0 1.5vh",
+              }}
+            >
+              프로젝트
+            </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
               프로젝트
             </Typography>

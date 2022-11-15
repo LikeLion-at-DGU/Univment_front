@@ -6,46 +6,46 @@ import styles from "../static/css/Modal.module.css";
 
 const ContestModal = ({ setContestModal }) => {
   const id = localStorage.getItem("id");
-  const [input, setInput] = useState("");
   // State
   const [contest, setContest] = useState({
-    id: id,
+    user: id,
     contest1: "",
     contest2: "",
     contest3: "",
     contest4: "",
     contest5: "",
   });
+
   // Modal
   const outSection = useRef();
   const closeModal = (e) => {
     if (e.target === outSection.current) setContestModal(false);
   };
   const onChange = (e) => {
-    setInput(e.target.value);
+    const { name, value } = e.target;
+    setContest({
+      ...contest,
+      [name]: value,
+    });
   };
-  // useEffect(() => {
-  //   setNewClub({ name: input, color: "#f0f0e4" });
-  // }, [input]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // setNewClub([...category, newCategory]);
-    // const addCategoryData = {
-    //   name: input,
-    //   isDefault: false,
-    //   generated_user: id,
-    // };
-    // await axios
-    //   .post("http://127.0.0.1:8000/post/category/", addCategoryData)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    setInput("");
+    await axios
+      .post("http://127.0.0.1:8000/mypage/namecardcontests/", contest)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 403) {
+          alert(error.request.response);
+          setContestModal(false);
+          console.clear();
+        }
+      });
   };
+
   return (
     <>
       <Container className={styles.modalContainer} ref={outSection} onClick={closeModal}>
@@ -88,9 +88,77 @@ const ContestModal = ({ setContestModal }) => {
             fullWidth
             variant="filled"
             color="info"
-            id="category"
-            name="category"
-            label="참여 (경진)대회 경력 추가"
+            id="contest1"
+            name="contest1"
+            label="(경진)대회1 추가"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="contest2"
+            label="(경진)대회2 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="contest3"
+            label="(경진)대회3 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="contest4"
+            label="(경진)대회4 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="contest5"
+            label="(경진)대회5 추가 - 선택"
             inputProps={{
               style: {
                 backgroundColor: "#f0f0e4",

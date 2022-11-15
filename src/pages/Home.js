@@ -5,6 +5,7 @@ import MypageComponent from "../components/MypageComponent";
 import axios from "axios";
 import AddCategoryModal from "../components/AddCategoryModal";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 // xs, extra-small: 0px
 // sm, small: 600px
@@ -12,25 +13,31 @@ import { AuthContext } from "../context/AuthContext";
 // lg, large: 1200px
 // xl, extra-large: 1536px
 const Home = () => {
-  // useEffect(() => {
-  //   axios.get("/components/Interceptors").then((response) => {
-  //     console.log(response.data);
-  //   });
-  // }, []);
   const id = localStorage.getItem("id");
-  const { category, setCategory } = useContext(AuthContext);
+  const { category, setCategory, setIsLoggedIn } = useContext(AuthContext);
   const [addCategoryModal, setAddCategoryModal] = useState(false);
+  const navigate = useNavigate();
+  const [newCategory, setNewCategory] = useState([]);
+  const fetchData = async () => {
+    try {
+      const request = await axios.get("http://127.0.0.1:8000/post/category/", {
+        onlyusercontent: true,
+      });
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://127.0.0.1:8000/post/category/${id}/`)
-  //     .then((response) => {
-  //       console.log("fetch 성공", response);
-  //     })
-  //     .catch((error) => {
-  //       console.log("fetch 실패", error);
-  //     });
-  // }, [category]);
+      setNewCategory({ name: request.data.name, color: "#18264f" });
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 403) {
+        alert("사용자 정보를 찾을 수 없습니다. 다시 로그인해주세요.");
+        localStorage.clear();
+        setIsLoggedIn(false);
+        navigate("/signin");
+      }
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, [category]);
 
   const addCategory = [
     <Grid
