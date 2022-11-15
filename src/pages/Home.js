@@ -21,16 +21,16 @@ const Home = () => {
   const { category, setCategory } = useContext(AuthContext);
   const [addCategoryModal, setAddCategoryModal] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/post/category/${id}/`)
-      .then((response) => {
-        console.log("fetch 성공", response);
-      })
-      .catch((error) => {
-        console.log("fetch 실패", error);
-      });
-  }, [category]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://127.0.0.1:8000/post/category/${id}/`)
+  //     .then((response) => {
+  //       console.log("fetch 성공", response);
+  //     })
+  //     .catch((error) => {
+  //       console.log("fetch 실패", error);
+  //     });
+  // }, [category]);
 
   const addCategory = [
     <Grid
@@ -98,7 +98,6 @@ const Home = () => {
     <>
       <Header />
       <MypageComponent category={category} setCategory={setCategory} />
-
       <Container fixed sx={{ height: "60vh" }}>
         <Grid
           container
