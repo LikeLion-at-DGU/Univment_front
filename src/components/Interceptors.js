@@ -23,7 +23,7 @@ instance.interceptors.response.use(
       const errResponseData = error.response.data;
       const prevRequest = error.config;
 
-      // 로컬 스토리지 테스트--------------------------------------------
+      // 새로고침 ACCESS_TOKEN 재발급--------------------------------------------
       if (errResponseStatus === 403) {
         const accessToken = localStorage.getItem("ACCESS_TOKEN");
         const refreshToken = localStorage.getItem("REFRESH_TOKEN");
