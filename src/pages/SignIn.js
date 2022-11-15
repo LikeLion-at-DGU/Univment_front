@@ -37,7 +37,7 @@ const SignIn = () => {
     };
 
     await axios
-      .post("http://127.0.0.1:8000/auth/login/", user)
+      .post("http://54.180.165.166/auth/login/", user)
       .then((response) => {
         const accessToken = response.data.access_token;
         // API 요청 콜마다 헤더에 accessToken 담아 보내기

@@ -32,7 +32,7 @@ const ContestModal = ({ setContestModal }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://127.0.0.1:8000/mypage/namecardcontests/", contest)
+      .post("http://54.180.165.166/mypage/namecardcontests/", contest)
       .then((response) => {
         console.log(response);
         alert("프로필 (경진)대회 정보 등록 성공");

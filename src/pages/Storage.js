@@ -7,7 +7,7 @@ import Header from "../components/Header";
 const Storage = () => {
   const id = localStorage.getItem("id");
   // useEffect(() => {
-  //   axios.get(`http://127.0.0.1:8000/post/category/${id}/`);
+  //   axios.get(`http://54.180.165.166/post/category/${id}/`);
   // }, []);
   const postCard = [
     // postList.map((value, idx) => (

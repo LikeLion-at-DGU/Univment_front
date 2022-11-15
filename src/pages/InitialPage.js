@@ -3,9 +3,7 @@ import Header from "../components/Header";
 import styles from "../static/css/InitialPage.module.css";
 import ReactTypingEffect from "react-typing-effect";
 import { Button } from "@mui/material";
-import { border, width } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-import FastRecord from "./FastRecord";
 import { AuthContext } from "../context/AuthContext";
 
 const InitialPage = () => {
