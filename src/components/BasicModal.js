@@ -1,15 +1,6 @@
-import {
-  Grid,
-  TextField,
-  Container,
-  Typography,
-  Button,
-  FormControl,
-  FormHelperText,
-} from "@mui/material";
+import { Grid, TextField, Container, Typography, Button, FormControl } from "@mui/material";
 import axios from "axios";
 import React, { memo, useRef, useState } from "react";
-import styled from "styled-components";
 import styles from "../static/css/Modal.module.css";
 
 const BasicModal = ({ setBasicModal }) => {
@@ -18,7 +9,6 @@ const BasicModal = ({ setBasicModal }) => {
     user: id,
     myname: "",
     email: "",
-    birthday: "",
     major: "",
   });
   // Modal
@@ -41,8 +31,8 @@ const BasicModal = ({ setBasicModal }) => {
       .post(`http://127.0.0.1:8000/mypage/namecardprofile/`, basic)
       .then((response) => {
         console.log(response);
-        setBasicModal(false);
         alert("프로필 기본 정보 등록 성공");
+        setBasicModal(false);
       })
       .catch((error) => {
         console.log(error);

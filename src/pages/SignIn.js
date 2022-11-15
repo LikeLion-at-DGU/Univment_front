@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TextField, Button, Link, Grid, Typography, Box, Paper } from "@mui/material/";
 import Header2 from "../components/Header2";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { setCookie } from "../components/cookie";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -42,8 +43,14 @@ const SignIn = () => {
         // API 요청 콜마다 헤더에 accessToken 담아 보내기
         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
         localStorage.setItem("auth", true); // 로그인 설정
-        localStorage.setItem("refresh-token", response.data.refresh_token);
         localStorage.setItem("id", response.data.user.pk);
+        localStorage.setItem("refresh-token", response.data.refresh_token);
+        localStorage.setItem("access-token", response.data.access_token);
+        setCookie("access-token", response.data.access_token, {
+          path: "/",
+          // secure: true,
+          httpOnly: true,
+        });
         setIsLoggedIn(true);
         alert("로그인 성공");
         navigate("/home", { replace: true });

@@ -53,31 +53,31 @@ const Mypage = () => {
   const fetchData = async () => {
     try {
       const requestImg = await axios.get("http://127.0.0.1:8000/auth/user/");
-      const requestBasic = await axios.get(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`);
+      const requestBasic = await axios.get("http://127.0.0.1:8000/mypage/namecardprofile/");
       const requestClub = await axios.get("http://127.0.0.1:8000/mypage/namecardclubs/");
       const requestContest = await axios.get("http://127.0.0.1:8000/mypage/namecardcontests/");
       const requestProject = await axios.get("http://127.0.0.1:8000/mypage/namecardprojects/");
       setProfile({
         ...profile,
-        myname: requestBasic.data.myname,
-        email: requestBasic.data.email,
-        major: requestBasic.data.major,
-        image: requestImg.data.image,
-        club1: requestClub.data[0].club1,
-        club2: requestClub.data[0].club2,
-        club3: requestClub.data[0].club3,
-        club4: requestClub.data[0].club4,
-        club5: requestClub.data[0].club5,
-        contest1: requestContest.data[0].contest1,
-        contest2: requestContest.data[0].contest2,
-        contest3: requestContest.data[0].contest3,
-        contest4: requestContest.data[0].contest4,
-        contest5: requestContest.data[0].contest5,
-        proejct1: requestProject.data[0].project1,
-        proejct2: requestProject.data[0].project2,
-        proejct3: requestProject.data[0].project3,
-        proejct4: requestProject.data[0].project4,
-        proejct5: requestProject.data[0].project5,
+        myname: requestBasic?.data[0]?.myname,
+        email: requestBasic?.data[0]?.email,
+        major: requestBasic?.data[0]?.major,
+        image: requestImg?.data?.image,
+        club1: requestClub?.data[0]?.club1,
+        club2: requestClub?.data[0]?.club2,
+        club3: requestClub?.data[0]?.club3,
+        club4: requestClub?.data[0]?.club4,
+        club5: requestClub?.data[0]?.club5,
+        contest1: requestContest?.data[0]?.contest1,
+        contest2: requestContest?.data[0]?.contest2,
+        contest3: requestContest?.data[0]?.contest3,
+        contest4: requestContest?.data[0]?.contest4,
+        contest5: requestContest?.data[0]?.contest5,
+        project1: requestProject?.data[0]?.project1,
+        project2: requestProject?.data[0]?.project2,
+        project3: requestProject?.data[0]?.project3,
+        project4: requestProject?.data[0]?.project4,
+        project5: requestProject?.data[0]?.project5,
       });
     } catch (error) {
       if (error.response.status === 403) {
@@ -94,7 +94,6 @@ const Mypage = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(profile);
 
   // Handling
   const onLoadFile = (e) => {
@@ -104,11 +103,6 @@ const Mypage = () => {
       image: file,
     });
     setImgLoading(true);
-    // if (profile?.image) {
-    //   alert("이미지 첨부 성공, 등록 버튼을 눌러 수정사항을 저장하세요.");
-    // } else {
-    //   alert("이미지 첨부 실패, 잠시 후 다시 시도하세요.");
-    // }
   };
 
   const fileSubmit = async (e) => {
@@ -139,15 +133,12 @@ const Mypage = () => {
         console.log(error);
       });
   };
+  console.log(profile);
   return (
     <>
       <Header />
       <Logout />
-      <Container
-        component="main"
-        maxWidth="md"
-        sx={{ border: "1px solid black", minHeight: "90vh" }}
-      >
+      <Container component="main" maxWidth="md" sx={{ minHeight: "90vh" }}>
         <Grid container rowGap={4} justifyContent="space-between">
           {/* 프로필 그리드------------------------------------------------ */}
           <Grid

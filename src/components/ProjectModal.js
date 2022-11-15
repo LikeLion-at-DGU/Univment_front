@@ -35,6 +35,8 @@ const ProjectModal = ({ setProjectModal }) => {
       .post("http://127.0.0.1:8000/mypage/namecardclubs/", project)
       .then((response) => {
         console.log(response);
+        alert("프로필 프로젝트 정보 등록 성공");
+        setProjectModal(false);
       })
       .catch((error) => {
         console.log(error);

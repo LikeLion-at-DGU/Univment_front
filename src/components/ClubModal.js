@@ -35,6 +35,8 @@ const ClubModal = ({ setClubModal }) => {
       .post("http://127.0.0.1:8000/mypage/namecardclubs/", club)
       .then((response) => {
         console.log(response);
+        alert("프로필 클럽(동아리) 정보 등록 성공");
+        setClubModal(false);
       })
       .catch((error) => {
         console.log(error);

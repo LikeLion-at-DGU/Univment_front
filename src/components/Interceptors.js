@@ -1,15 +1,20 @@
 import axios from "axios";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../localKey";
-import { getCookie, removeCookie, setCookie } from "../utils/cookie";
+import { getCookie, removeCookie, setCookie } from "./cookie";
 
+const ACCESS_TOKEN = localStorage.getItem("access-token");
+const REFRESH_TOKEN = localStorage.getItem("refresh-token");
 export const instance = axios.create({
   baseURL: "http://localhost:8000/",
-  headers: { Authorization: `Bearer ${default_access_token}` },
+  withCredentials: true,
+  headers: {
+    Authorization: `Bearer ` + ACCESS_TOKEN,
+    "Access-Control-Allow-Origin": "http://localhost:8080",
+  },
 });
 
 instance.interceptors.response.use(
-  (res) => {
-    return res;
+  (response) => {
+    return response;
   },
   async (error) => {
     // response에서 error가 발생했을 경우 catch로 넘어가기 전에 처리
@@ -18,6 +23,31 @@ instance.interceptors.response.use(
       const errResponseData = error.response.data;
       const prevRequest = error.config;
 
+      // 로컬 스토리지 테스트--------------------------------------------
+      if (errResponseStatus === 403) {
+        const accessToken = localStorage.getItem("ACCESS_TOKEN");
+        const refreshToken = localStorage.getItem("REFRESH_TOKEN");
+
+        try {
+          const { data } = await axios({
+            method: "post",
+            url: "http://127.0.0.1:8000/auth/token/refresh/",
+            data: { accessToken, refreshToken },
+          });
+          const newAccessToken = data.data.accessToken;
+          const newRefreshToken = data.data.refreshToken;
+          originalRequest.headers = {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + newAccessToken,
+          };
+          localStorage.setItem("ACCESS_TOKEN", newAccessToken);
+          localStorage.setItem("REFRESH_TOKEN", newRefreshToken);
+          return await axios(prevRequest);
+        } catch (err) {
+          new Error(err);
+        }
+      }
+      // ----------------------------------------------------------------
       // access token이 만료되어 발생하는 에러인 경우
       if (errResponseData.error?.message === "jwt expired" || errResponseStatus === 401) {
         const preRefreshToken = getCookie(REFRESH_TOKEN);

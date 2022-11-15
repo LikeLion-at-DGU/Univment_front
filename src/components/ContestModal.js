@@ -35,6 +35,8 @@ const ContestModal = ({ setContestModal }) => {
       .post("http://127.0.0.1:8000/mypage/namecardcontests/", contest)
       .then((response) => {
         console.log(response);
+        alert("프로필 (경진)대회 정보 등록 성공");
+        setContestModal(false);
       })
       .catch((error) => {
         console.log(error);

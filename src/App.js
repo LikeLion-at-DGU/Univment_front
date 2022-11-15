@@ -12,6 +12,7 @@ function App() {
     { name: "수업", color: "#427563" },
     { name: "취미", color: "#3293a8" },
   ]);
+
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("auth")) === true) {
       setIsLoggedIn(true);

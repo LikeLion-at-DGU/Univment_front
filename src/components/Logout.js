@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { removeCookie } from "./cookie";
 
 const Logout = () => {
   const { setIsLoggedIn } = useContext(AuthContext);
@@ -17,6 +18,7 @@ const Logout = () => {
         .then(() => {
           setIsLoggedIn(false);
           localStorage.clear();
+          removeCookie();
           alert("로그아웃되었습니다.");
           window.location.replace("/");
         })
