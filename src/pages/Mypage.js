@@ -34,6 +34,11 @@ const Mypage = () => {
     contest3: "",
     contest4: "",
     contest5: "",
+    project1: "",
+    project2: "",
+    project3: "",
+    project4: "",
+    project5: "",
   });
 
   // Modal
@@ -50,7 +55,7 @@ const Mypage = () => {
       const requestBasic = await axios.get(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`);
       const requestClub = await axios.get("http://127.0.0.1:8000/mypage/namecardclubs/");
       const requestContest = await axios.get("http://127.0.0.1:8000/mypage/namecardcontests/");
-      console.log("마이페이지 Didmount", requestImg, requestBasic, requestClub);
+      const requestProject = await axios.get("http://127.0.0.1:8000/mypage/namecardprojects/");
       setProfile({
         ...profile,
         myname: requestBasic.data.myname,
@@ -67,6 +72,11 @@ const Mypage = () => {
         contest3: requestContest.data[0].contest3,
         contest4: requestContest.data[0].contest4,
         contest5: requestContest.data[0].contest5,
+        proejct1: requestProject.data[0].project1,
+        proejct2: requestProject.data[0].project2,
+        proejct3: requestProject.data[0].project3,
+        proejct4: requestProject.data[0].project4,
+        proejct5: requestProject.data[0].project5,
       });
     } catch (error) {
       if (error.response.status === 403) {
@@ -92,11 +102,11 @@ const Mypage = () => {
       ...profile,
       image: file,
     });
-    if (profile?.image) {
-      alert("이미지 첨부 성공, 등록 버튼을 눌러 수정사항을 저장하세요.");
-    } else {
-      alert("이미지 첨부 실패, 잠시 후 다시 시도하세요.");
-    }
+    // if (profile?.image) {
+    //   alert("이미지 첨부 성공, 등록 버튼을 눌러 수정사항을 저장하세요.");
+    // } else {
+    //   alert("이미지 첨부 실패, 잠시 후 다시 시도하세요.");
+    // }
   };
 
   const fileSubmit = async (e) => {
@@ -116,7 +126,6 @@ const Mypage = () => {
       })
       .then((response) => {
         alert("프로필 이미지 등록 성공");
-        // localStorage.setItem("profileImage", response.data.image);
         setProfile({
           ...profile,
           image: response.data.image,
@@ -125,7 +134,6 @@ const Mypage = () => {
       .catch((error) => {
         alert("프로필 이미지 등록 실패");
         console.log(error);
-        localStorage.removeItem("profileImage");
       });
   };
   return (
@@ -434,7 +442,21 @@ const Mypage = () => {
               프로젝트
             </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              프로젝트
+              {profile.project1
+                ? `PROJECT[1]: ${profile.project1}  `
+                : "등록된 프로젝트가 없습니다."}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.project2 ? `PROJECT[2]: ${profile.project2}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.project3 ? `PROJECT[3]: ${profile.project3}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.project4 ? `PROJECT[4]: ${profile.project4}  ` : ""}
+            </Typography>
+            <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
+              {profile.project5 ? `PROJECT[5]: ${profile.project5}  ` : ""}
             </Typography>
             {projectModal && <ProjectModal setProjectModal={setProjectModal} />}
           </Grid>
