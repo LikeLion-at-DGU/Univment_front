@@ -43,7 +43,6 @@ const Mypage = () => {
     project5: "",
   });
   const [imgLoading, setImgLoading] = useState(false);
-  const [rendering, setRendering] = useState(false);
 
   // Modal
   const [basicModal, setBasicModal] = useState(false);
@@ -140,9 +139,17 @@ const Mypage = () => {
   const onDeleteBasic = (e) => {
     e.preventDefault();
     if (window.confirm("기본 정보를 삭제하시겠습니까?")) {
-      axios.delete(`http://54.180.165.166/mypage/namecardprofile/${id}/`).catch((error) => {
-        console.log(error);
-      });
+      axios
+        .delete(`http://54.180.165.166/mypage/namecardprofile/${id}/`)
+        .then(() => {
+          setProfile({
+            ...profile,
+          });
+          alert("기본 정보가 삭제되었습니다.");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       return;
     }
@@ -150,9 +157,14 @@ const Mypage = () => {
   const onDeleteClub = (e) => {
     e.preventDefault();
     if (window.confirm("클럽(동아리) 목록을 삭제하시겠습니까?")) {
-      axios.delete(`http://54.180.165.166/mypage/namecardclubs/${id}/`).catch((error) => {
-        console.log(error);
-      });
+      axios
+        .delete(`http://54.180.165.166/mypage/namecardclubs/${id}/`)
+        .then((response) => {
+          alert("클럽(동아리) 정보가 삭제되었습니다.");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       return;
     }
@@ -160,9 +172,14 @@ const Mypage = () => {
   const onDeleteContest = (e) => {
     e.preventDefault();
     if (window.confirm("(경진)대회 목록을 삭제하시겠습니까?")) {
-      axios.delete(`http://54.180.165.166/mypage/namecardcontests/${id}/`).catch((error) => {
-        console.log(error);
-      });
+      axios
+        .delete(`http://54.180.165.166/mypage/namecardcontests/${id}/`)
+        .then((response) => {
+          alert("(경진)대회 목록이 삭제되었습니다.");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       return;
     }
@@ -170,9 +187,14 @@ const Mypage = () => {
   const onDeleteProject = (e) => {
     e.preventDefault();
     if (window.confirm("프로젝트 목록을 삭제하시겠습니까?")) {
-      axios.delete(`http://54.180.165.166/mypage/namecardprojects/${id}/`).catch((error) => {
-        console.log(error);
-      });
+      axios
+        .delete(`http://54.180.165.166/mypage/namecardprojects/${id}/`)
+        .then((response) => {
+          alert("프로젝트 목록이 삭제되었습니다.");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       return;
     }

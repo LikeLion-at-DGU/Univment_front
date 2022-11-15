@@ -5,17 +5,42 @@ import { AuthContext } from "../context/AuthContext";
 import styles from "../static/css/Modal.module.css";
 
 const CategoryModal = ({ setCategoryModal }) => {
+  const id = localStorage.getItem("id");
   const { category, setCategory } = useContext(AuthContext);
+  const [newCategory, setNewCategory] = useState({});
   // Modal
   const outSection = useRef();
   const closeModal = (e) => {
     if (e.target === outSection.current) setCategoryModal(false);
   };
+  // Handling
   const onChange = (e) => {
-    setCategory([e.target.value]);
+    const { value, name } = e.target;
+    setNewCategory([...category, { [name]: value, color: "#000" }]);
   };
   const onSubmit = async (e) => {
     e.preventDefault();
+    const joinData = {
+      name: newCategory.name,
+      isDefault: true,
+      color: newCategory.color,
+      generated_user: id,
+    };
+    await axios
+      .post("http://54.180.165.166/post/category/", joinData)
+      .then((response) => {
+        console.log(response);
+        alert("새 카테고리 등록 성공");
+        setCategoryModal(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 403) {
+          alert(error.response.data.detail);
+          setCategoryModal(false);
+          console.clear();
+        }
+      });
   };
   return (
     <>
@@ -58,7 +83,7 @@ const CategoryModal = ({ setCategoryModal }) => {
             variant="filled"
             color="info"
             id="category"
-            name="category"
+            name="name"
             label="카테고리 추가"
             inputProps={{
               style: {

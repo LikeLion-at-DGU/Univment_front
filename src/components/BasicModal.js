@@ -3,14 +3,9 @@ import axios from "axios";
 import React, { memo, useRef, useState } from "react";
 import styles from "../static/css/Modal.module.css";
 
-const BasicModal = ({ setBasicModal }) => {
+const BasicModal = ({ setBasicModal, profile, setProfile }) => {
   const id = localStorage.getItem("id");
-  const [basic, setBasic] = useState({
-    user: id,
-    myname: "",
-    email: "",
-    major: "",
-  });
+
   // Modal
   const outSection = useRef();
   const closeModal = (e) => {
@@ -20,16 +15,22 @@ const BasicModal = ({ setBasicModal }) => {
   // Handler
   const onChange = (e) => {
     const { value, name } = e.target;
-    setBasic({
-      ...basic,
+    setProfile({
+      ...profile,
       [name]: value,
     });
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (basic.myname && basic.email) {
+    const joinData = {
+      user: id,
+      myname: profile.myname,
+      email: profile.email,
+      major: profile.major,
+    };
+    if (profile.myname && profile.email) {
       await axios
-        .post(`http://54.180.165.166/mypage/namecardprofile/`, basic)
+        .post(`http://54.180.165.166/mypage/namecardprofile/`, joinData)
         .then((response) => {
           console.log(response);
           alert("프로필 기본 정보 등록 성공");
