@@ -4,68 +4,45 @@
 
 ## TEAM Composition
 
-Frontend : 오준서
+Frontend : 오준서\
 Backend : 박영신, 류슬기, 오민영
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prologue
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `👀취업할 때 되니 내가 어떤 대학 생활을 했는지, 궁금한 적 없으신가요?`\
 
-### `npm test`
+동아리, 대외 활동, 공모전, 학생회..\
+여러분들의 대학 생활은 어떠했나요?\
+꽃다운 20대의 일부를 함께했던 당신의 추억은 어떻게 기억되고 있나요.\
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+가지각색 다채롭게 채울 수 있는 나만의 대학 시절을 기록하는 방법,
+`UNIVMENT`에서 자신만의 경험과 시간을 기록해보세요.
 
-### `npm run build`
+## Tool
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/>
+<img src="https://img.shields.io/badge/django-092E20?style=flat-square&logo=django&logoColor=white"/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Perpose
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+▶ 본격적 대학 기관 대면 전환에 따른 대학 개인 활동 및 경험 기록 유도
 
-### `npm run eject`
+▶ 대학생 특화된 기록 중심의 플랫폼
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+▶ 개인 대학 시절 포트폴리오로서의 활용 유도
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+▶ 대학 시절 '나'를 설명할 수 있는 하나의 디지털 명함으로서의 기능
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Target
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+🎯 전면 대면 전환 이후 활동 다양성 증대에 따라 기록의 필요성 느끼는 대학생
 
-## Learn More
+🎯 자신의 활동을 체계적으로 정리하는 것에 어려움을 느끼고 약간의 틀이 필요한 대학생
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+🎯 취업을 위한 자기소개서 항목이 막막하게 느껴지는 대학생
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+🎯 쉽고 재미있게 포트폴리오나 활동 일지를 만들고 싶은 대학생
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🎯 비교적 시간이 오래 걸리는 수기 말고 디지털로 기록을 남기고 싶은 대학생
