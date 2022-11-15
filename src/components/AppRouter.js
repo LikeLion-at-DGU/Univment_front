@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 import FastRecord from "../pages/FastRecord";
 import Home from "../pages/Home";
 import InitialPage from "../pages/InitialPage";

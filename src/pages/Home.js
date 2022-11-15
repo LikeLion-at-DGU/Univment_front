@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
-import { Button, Grid, Typography, Container } from "@mui/material/";
+import { Grid, Typography, Container } from "@mui/material/";
 import MypageComponent from "../components/MypageComponent";
 import axios from "axios";
 import AddCategoryModal from "../components/AddCategoryModal";

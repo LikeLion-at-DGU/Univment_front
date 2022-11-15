@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import axios from "axios";
 import React, { useEffect } from "react";
