@@ -12,6 +12,8 @@ import ClubModal from "../components/ClubModal";
 import ContestModal from "../components/ContestModal";
 import ProjectModal from "../components/ProjectModal";
 import { useNavigate } from "react-router-dom";
+import { removeCookie } from "../components/cookie";
+import { Instance } from "../components/Instance";
 
 const Mypage = () => {
   const id = localStorage.getItem("id");
@@ -85,6 +87,7 @@ const Mypage = () => {
         alert("사용자 정보를 찾을 수 없습니다. 다시 로그인해주세요.");
         localStorage.clear();
         console.clear();
+        removeCookie("access-token");
         setIsLoggedIn(false);
         navigate("/signin");
       }

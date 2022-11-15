@@ -60,15 +60,15 @@ const FastRecord = () => {
     } else {
       window.alert("이미지를 다시 첨부하세요.");
     }
-    formData.append("title", inputs.title);
-    formData.append("answer1", inputs.answer1);
-    formData.append("answer2", inputs.answer2);
-    formData.append("answer3", inputs.answer3);
-    formData.append("answer4", inputs.answer4);
-    formData.append("category", inputs.category);
-    formData.append("timeline", inputs.timeline);
-    formData.append("email", inputs.email);
-    formData.append("password", inputs.password);
+    formData.append("title", inputs?.title);
+    formData.append("answer1", inputs?.answer1);
+    formData.append("answer2", inputs?.answer2);
+    formData.append("answer3", inputs?.answer3);
+    formData.append("answer4", inputs?.answer4);
+    formData.append("category", inputs?.category);
+    formData.append("timeline", inputs?.timeline);
+    formData.append("email", inputs?.email);
+    formData.append("password", inputs?.password);
     await axios
       .post("http://54.180.165.166/post/postwithlogin/", formData, {
         headers: {
