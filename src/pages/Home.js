@@ -25,7 +25,6 @@ const Home = () => {
       const request = await Instance.get("http://54.180.165.166/post/category/", {
         onlyusercontent: true,
       });
-
       setNewCategory({ name: request?.data.name, color: "#18264f" });
     } catch (error) {
       console.log(error);

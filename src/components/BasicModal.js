@@ -5,7 +5,12 @@ import styles from "../static/css/Modal.module.css";
 
 const BasicModal = ({ setBasicModal, profile, setProfile }) => {
   const id = localStorage.getItem("id");
-
+  const [newBasic, setNewBasic] = useState({
+    user: id,
+    myname: "",
+    email: "",
+    major: "",
+  });
   // Modal
   const outSection = useRef();
   const closeModal = (e) => {
@@ -15,8 +20,8 @@ const BasicModal = ({ setBasicModal, profile, setProfile }) => {
   // Handler
   const onChange = (e) => {
     const { value, name } = e.target;
-    setProfile({
-      ...profile,
+    setNewBasic({
+      ...newBasic,
       [name]: value,
     });
   };
@@ -24,16 +29,22 @@ const BasicModal = ({ setBasicModal, profile, setProfile }) => {
     e.preventDefault();
     const joinData = {
       user: id,
-      myname: profile.myname,
-      email: profile.email,
-      major: profile.major,
+      myname: newBasic.myname,
+      email: newBasic.email,
+      major: newBasic.major,
     };
-    if (profile.myname && profile.email) {
+    if (joinData.myname && joinData.email) {
       await axios
         .post(`http://54.180.165.166/mypage/namecardprofile/`, joinData)
         .then((response) => {
           console.log(response);
           alert("프로필 기본 정보 등록 성공");
+          setProfile({
+            ...profile,
+            myname: response.data.myname,
+            email: response.data.email,
+            major: response.data.major,
+          });
           setBasicModal(false);
         })
         .catch((error) => {
