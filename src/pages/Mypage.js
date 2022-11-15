@@ -40,6 +40,7 @@ const Mypage = () => {
     project4: "",
     project5: "",
   });
+  const [imgLoading, setImgLoading] = useState(false);
 
   // Modal
   const [basicModal, setBasicModal] = useState(false);
@@ -102,6 +103,7 @@ const Mypage = () => {
       ...profile,
       image: file,
     });
+    setImgLoading(true);
     // if (profile?.image) {
     //   alert("이미지 첨부 성공, 등록 버튼을 눌러 수정사항을 저장하세요.");
     // } else {
@@ -118,6 +120,7 @@ const Mypage = () => {
       window.alert("이미지를 첨부해주세요.");
       return;
     }
+    setImgLoading(false);
     await axios
       .put("http://127.0.0.1:8000/auth/user/", formData, {
         headers: {
@@ -191,7 +194,31 @@ const Mypage = () => {
             >
               등록
             </Button>
-            <DefaultImg profileImage={profile.image} />
+            {imgLoading ? (
+              <Grid
+                container
+                sx={{
+                  border: "none",
+                  borderRadius: 5,
+                  width: "20vh",
+                  height: "20vh",
+                  boxShadow: "7px 5px 15px -7px rgba(0, 0, 0, 0.5)",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: "Jeju Myeongjo",
+                    fontWeight: "bold",
+                  }}
+                >
+                  이미지 등록 대기 중..
+                </Typography>
+              </Grid>
+            ) : (
+              <DefaultImg profileImage={profile.image} />
+            )}
           </Grid>
           {/* 베이직 그리드------------------------------------------------ */}
           <Grid
