@@ -1,54 +1,44 @@
-import {
-  Grid,
-  TextField,
-  Container,
-  Typography,
-  Button,
-  FormControl,
-  FormHelperText,
-} from "@mui/material";
+import { Grid, TextField, Container, Typography, Button, FormControl } from "@mui/material";
 import axios from "axios";
-import React, { memo, useContext, useRef, useState } from "react";
-import styled from "styled-components";
-import { AuthContext } from "../context/AuthContext";
+import React, { memo, useRef, useState } from "react";
 import styles from "../static/css/Modal.module.css";
-const FormHelperTexts = styled(FormHelperText)`
-  font-weight: 700 !important;
-  color: #d32f2f !important;
-`;
-const BasicModal = ({ setBasicModal, profile, setProfile }) => {
+
+const BasicModal = ({ setBasicModal }) => {
+  const id = localStorage.getItem("id");
+  const [basic, setBasic] = useState({
+    user: id,
+    myname: "",
+    email: "",
+    major: "",
+  });
   // Modal
   const outSection = useRef();
   const closeModal = (e) => {
     if (e.target === outSection.current) setBasicModal(false);
   };
-  // Error
-  const [nameMessage, setNameMessage] = useState("");
-  const [emailMessage, setEmailMessage] = useState("");
 
   // Handler
   const onChange = (e) => {
     const { value, name } = e.target;
-    setProfile({
-      ...profile,
+    setBasic({
+      ...basic,
       [name]: value,
     });
   };
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post(`http://127.0.0.1:8000/mypage/namecardprofile/`, profile)
+      .post(`http://127.0.0.1:8000/mypage/namecardprofile/`, basic)
       .then((response) => {
         console.log(response);
-        setBasicModal(false);
         alert("프로필 기본 정보 등록 성공");
+        setBasicModal(false);
       })
       .catch((error) => {
         console.log(error);
         if (error.response.status === 403) {
           alert(error.request.response);
         }
-        setNameMessage(error.response);
         setBasicModal(false);
       });
   };

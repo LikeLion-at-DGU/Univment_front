@@ -1,15 +1,14 @@
 import { Grid, TextField, Container, Typography, Button } from "@mui/material";
 import axios from "axios";
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 
 import styles from "../static/css/Modal.module.css";
 
 const ProjectModal = ({ setProjectModal }) => {
   const id = localStorage.getItem("id");
-  const [input, setInput] = useState("");
   // State
   const [project, setProject] = useState({
-    id: id,
+    user: id,
     project1: "",
     project2: "",
     project3: "",
@@ -23,30 +22,32 @@ const ProjectModal = ({ setProjectModal }) => {
     if (e.target === outSection.current) setProjectModal(false);
   };
   const onChange = (e) => {
-    setInput(e.target.value);
+    const { name, value } = e.target;
+    setProject({
+      ...project,
+      [name]: value,
+    });
   };
-  // useEffect(() => {
-  //   setNewClub({ name: input, color: "#f0f0e4" });
-  // }, [input]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // setNewClub([...category, newCategory]);
-    // const addCategoryData = {
-    //   name: input,
-    //   isDefault: false,
-    //   generated_user: id,
-    // };
-    // await axios
-    //   .post("http://127.0.0.1:8000/post/category/", addCategoryData)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    setInput("");
+    await axios
+      .post("http://127.0.0.1:8000/mypage/namecardclubs/", project)
+      .then((response) => {
+        console.log(response);
+        alert("프로필 프로젝트 정보 등록 성공");
+        setProjectModal(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 403) {
+          alert(error.request.response);
+          setProjectModal(false);
+          console.clear();
+        }
+      });
   };
+
   return (
     <>
       <Container className={styles.modalContainer} ref={outSection} onClick={closeModal}>
@@ -81,7 +82,7 @@ const ProjectModal = ({ setProjectModal }) => {
             color="#f0f0e4"
             marginTop={10}
           >
-            본인의 프로젝트 경력을 추가하세요.
+            새로운 프로젝트 경력을 추가하세요.
           </Typography>
           <TextField
             autoFocus
@@ -89,9 +90,77 @@ const ProjectModal = ({ setProjectModal }) => {
             fullWidth
             variant="filled"
             color="info"
-            id="category"
-            name="category"
-            label="프로젝트 경력 추가"
+            id="club1"
+            name="club1"
+            label="프로젝트1 추가"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="club2"
+            label="프로젝트2 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="club3"
+            label="프로젝트3 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="club4"
+            label="프로젝트4 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="club5"
+            label="프로젝트5 추가 - 선택"
             inputProps={{
               style: {
                 backgroundColor: "#f0f0e4",

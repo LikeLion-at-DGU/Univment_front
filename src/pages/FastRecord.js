@@ -81,6 +81,7 @@ const FastRecord = () => {
       })
       .catch((error) => {
         console.log(error);
+        console.log(inputs);
       });
   };
 

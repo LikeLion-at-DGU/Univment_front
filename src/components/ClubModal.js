@@ -1,15 +1,14 @@
 import { Grid, TextField, Container, Typography, Button } from "@mui/material";
 import axios from "axios";
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 
 import styles from "../static/css/Modal.module.css";
 
 const ClubModal = ({ setClubModal }) => {
   const id = localStorage.getItem("id");
-  const [input, setInput] = useState("");
   // State
   const [club, setClub] = useState({
-    id: id,
+    user: id,
     club1: "",
     club2: "",
     club3: "",
@@ -23,30 +22,32 @@ const ClubModal = ({ setClubModal }) => {
     if (e.target === outSection.current) setClubModal(false);
   };
   const onChange = (e) => {
-    setInput(e.target.value);
+    const { name, value } = e.target;
+    setClub({
+      ...club,
+      [name]: value,
+    });
   };
-  // useEffect(() => {
-  //   setNewClub({ name: input, color: "#f0f0e4" });
-  // }, [input]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // setNewClub([...category, newCategory]);
-    // const addCategoryData = {
-    //   name: input,
-    //   isDefault: false,
-    //   generated_user: id,
-    // };
-    // await axios
-    //   .post("http://127.0.0.1:8000/post/category/", addCategoryData)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    setInput("");
+    await axios
+      .post("http://127.0.0.1:8000/mypage/namecardclubs/", club)
+      .then((response) => {
+        console.log(response);
+        alert("프로필 클럽(동아리) 정보 등록 성공");
+        setClubModal(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 403) {
+          alert(error.request.response);
+          setClubModal(false);
+          console.clear();
+        }
+      });
   };
+
   return (
     <>
       <Container className={styles.modalContainer} ref={outSection} onClick={closeModal}>
@@ -89,9 +90,77 @@ const ClubModal = ({ setClubModal }) => {
             fullWidth
             variant="filled"
             color="info"
-            id="category"
-            name="category"
-            label="클럽(동아리) 추가"
+            id="club1"
+            name="club1"
+            label="클럽(동아리)1 추가"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="club2"
+            label="클럽(동아리)2 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="club3"
+            label="클럽(동아리)3 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="club4"
+            label="클럽(동아리)4 추가 - 선택"
+            inputProps={{
+              style: {
+                backgroundColor: "#f0f0e4",
+                opacity: "75%",
+                borderRadius: 15,
+              },
+            }}
+            sx={{ marginTop: 5, maxWidth: "sm" }}
+            onChange={onChange}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            color="info"
+            id="club"
+            name="club5"
+            label="클럽(동아리)5 추가 - 선택"
             inputProps={{
               style: {
                 backgroundColor: "#f0f0e4",
