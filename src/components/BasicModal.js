@@ -29,7 +29,7 @@ const BasicModal = ({ setBasicModal }) => {
     e.preventDefault();
     if (basic.myname && basic.email) {
       await axios
-        .post(`http://127.0.0.1:8000/mypage/namecardprofile/`, basic)
+        .post(`http://54.180.165.166/mypage/namecardprofile/`, basic)
         .then((response) => {
           console.log(response);
           alert("프로필 기본 정보 등록 성공");

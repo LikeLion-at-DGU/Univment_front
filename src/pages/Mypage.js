@@ -53,11 +53,11 @@ const Mypage = () => {
   // Fetch
   const fetchData = async () => {
     try {
-      const requestImg = await axios.get("http://127.0.0.1:8000/auth/user/");
-      const requestBasic = await axios.get("http://127.0.0.1:8000/mypage/namecardprofile/");
-      const requestClub = await axios.get("http://127.0.0.1:8000/mypage/namecardclubs/");
-      const requestContest = await axios.get("http://127.0.0.1:8000/mypage/namecardcontests/");
-      const requestProject = await axios.get("http://127.0.0.1:8000/mypage/namecardprojects/");
+      const requestImg = await axios.get("http://54.180.165.166/auth/user/");
+      const requestBasic = await axios.get("http://54.180.165.166/mypage/namecardprofile/");
+      const requestClub = await axios.get("http://54.180.165.166/mypage/namecardclubs/");
+      const requestContest = await axios.get("http://54.180.165.166/mypage/namecardcontests/");
+      const requestProject = await axios.get("http://54.180.165.166/mypage/namecardprojects/");
       setProfile({
         ...profile,
         myname: requestBasic?.data[0]?.myname,
@@ -117,7 +117,7 @@ const Mypage = () => {
     }
     setImgLoading(false);
     await axios
-      .put("http://127.0.0.1:8000/auth/user/", formData, {
+      .put("http://54.180.165.166/auth/user/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -137,7 +137,7 @@ const Mypage = () => {
   const onDeleteBasic = (e) => {
     e.preventDefault();
     if (window.confirm("기본 정보를 삭제하시겠습니까?")) {
-      axios.delete(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`).catch((error) => {
+      axios.delete(`http://54.180.165.166/mypage/namecardprofile/${id}/`).catch((error) => {
         console.log(error);
       });
     } else {
@@ -147,7 +147,7 @@ const Mypage = () => {
   const onDeleteClub = (e) => {
     e.preventDefault();
     if (window.confirm("클럽(동아리) 목록을 삭제하시겠습니까?")) {
-      axios.delete(`http://127.0.0.1:8000/mypage/namecardclubs/${id}/`).catch((error) => {
+      axios.delete(`http://54.180.165.166/mypage/namecardclubs/${id}/`).catch((error) => {
         console.log(error);
       });
     } else {
@@ -157,7 +157,7 @@ const Mypage = () => {
   const onDeleteContest = (e) => {
     e.preventDefault();
     if (window.confirm("(경진)대회 목록을 삭제하시겠습니까?")) {
-      axios.delete(`http://127.0.0.1:8000/mypage/namecardcontests/${id}/`).catch((error) => {
+      axios.delete(`http://54.180.165.166/mypage/namecardcontests/${id}/`).catch((error) => {
         console.log(error);
       });
     } else {
@@ -167,7 +167,7 @@ const Mypage = () => {
   const onDeleteProject = (e) => {
     e.preventDefault();
     if (window.confirm("프로젝트 목록을 삭제하시겠습니까?")) {
-      axios.delete(`http://127.0.0.1:8000/mypage/namecardprojects/${id}/`).catch((error) => {
+      axios.delete(`http://54.180.165.166/mypage/namecardprojects/${id}/`).catch((error) => {
         console.log(error);
       });
     } else {

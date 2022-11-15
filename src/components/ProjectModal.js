@@ -32,7 +32,7 @@ const ProjectModal = ({ setProjectModal }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://127.0.0.1:8000/mypage/namecardclubs/", project)
+      .post("http://54.180.165.166/mypage/namecardclubs/", project)
       .then((response) => {
         console.log(response);
         alert("프로필 프로젝트 정보 등록 성공");

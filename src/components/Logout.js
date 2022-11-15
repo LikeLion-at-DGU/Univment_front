@@ -12,7 +12,7 @@ const Logout = () => {
   const onLogout = async () => {
     if (window.confirm("정말 로그아웃하시겠습니까?")) {
       await axios
-        .post("http://127.0.0.1:8000/auth/logout/", {
+        .post("http://54.180.165.166/auth/logout/", {
           refresh: refreshToken,
         })
         .then(() => {

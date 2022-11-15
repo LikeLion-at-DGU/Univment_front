@@ -20,7 +20,7 @@ const Home = () => {
   const [newCategory, setNewCategory] = useState([]);
   const fetchData = async () => {
     try {
-      const request = await axios.get("http://127.0.0.1:8000/post/category/", {
+      const request = await axios.get("http://54.180.165.166/post/category/", {
         onlyusercontent: true,
       });
 

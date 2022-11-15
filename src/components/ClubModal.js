@@ -32,7 +32,7 @@ const ClubModal = ({ setClubModal }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://127.0.0.1:8000/mypage/namecardclubs/", club)
+      .post("http://54.180.165.166/mypage/namecardclubs/", club)
       .then((response) => {
         console.log(response);
         alert("프로필 클럽(동아리) 정보 등록 성공");

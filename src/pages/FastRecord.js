@@ -70,7 +70,7 @@ const FastRecord = () => {
     formData.append("email", inputs.email);
     formData.append("password", inputs.password);
     await axios
-      .post("http://127.0.0.1:8000/post/postwithlogin/", formData, {
+      .post("http://54.180.165.166/post/postwithlogin/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -201,7 +201,7 @@ const FastRecord = () => {
                       borderRadius: 5,
                       width: "20vh",
                       height: "20vh",
-                      backgroundImage: `url(http://127.0.0.1:8000/media/${inputs.image.name})`,
+                      backgroundImage: `url(http://54.180.165.166/media/${inputs.image.name})`,
                       backgroundSize: `cover`,
                       backgroundRepeat: `no-repeat`,
                       backgroundPosition: `center`,
