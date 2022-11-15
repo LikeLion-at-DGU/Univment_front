@@ -41,6 +41,7 @@ const Mypage = () => {
     project5: "",
   });
   const [imgLoading, setImgLoading] = useState(false);
+  const [rendering, setRendering] = useState(false);
 
   // Modal
   const [basicModal, setBasicModal] = useState(false);
@@ -132,6 +133,46 @@ const Mypage = () => {
         alert("프로필 이미지 등록 실패");
         console.log(error);
       });
+  };
+  const onDeleteBasic = (e) => {
+    e.preventDefault();
+    if (window.confirm("기본 정보를 삭제하시겠습니까?")) {
+      axios.delete(`http://127.0.0.1:8000/mypage/namecardprofile/${id}/`).catch((error) => {
+        console.log(error);
+      });
+    } else {
+      return;
+    }
+  };
+  const onDeleteClub = (e) => {
+    e.preventDefault();
+    if (window.confirm("클럽(동아리) 목록을 삭제하시겠습니까?")) {
+      axios.delete(`http://127.0.0.1:8000/mypage/namecardclubs/${id}/`).catch((error) => {
+        console.log(error);
+      });
+    } else {
+      return;
+    }
+  };
+  const onDeleteContest = (e) => {
+    e.preventDefault();
+    if (window.confirm("(경진)대회 목록을 삭제하시겠습니까?")) {
+      axios.delete(`http://127.0.0.1:8000/mypage/namecardcontests/${id}/`).catch((error) => {
+        console.log(error);
+      });
+    } else {
+      return;
+    }
+  };
+  const onDeleteProject = (e) => {
+    e.preventDefault();
+    if (window.confirm("프로젝트 목록을 삭제하시겠습니까?")) {
+      axios.delete(`http://127.0.0.1:8000/mypage/namecardprojects/${id}/`).catch((error) => {
+        console.log(error);
+      });
+    } else {
+      return;
+    }
   };
   console.log(profile);
   return (
@@ -246,6 +287,20 @@ const Mypage = () => {
             </Typography>
             <Button
               variant="contained"
+              className={styles.deleteBtn}
+              sx={{
+                color: "#fff",
+                backgroundColor: "#18264f",
+                border: "1px solid #383b3d",
+                fontFamily: "Jeju Myeongjo",
+                position: "absolute",
+              }}
+              onClick={onDeleteBasic}
+            >
+              삭제
+            </Button>
+            <Button
+              variant="contained"
               className={styles.basicBtn}
               sx={{
                 color: "#fff",
@@ -329,6 +384,20 @@ const Mypage = () => {
           >
             <Button
               variant="contained"
+              className={styles.deleteBtn}
+              sx={{
+                color: "#fff",
+                backgroundColor: "#18264f",
+                border: "1px solid #383b3d",
+                fontFamily: "Jeju Myeongjo",
+                position: "absolute",
+              }}
+              onClick={onDeleteClub}
+            >
+              삭제
+            </Button>
+            <Button
+              variant="contained"
               className={styles.clubBtn}
               sx={{
                 color: "#fff",
@@ -354,16 +423,16 @@ const Mypage = () => {
               {profile.club1 ? `CLUB[1]: ${profile.club1}  ` : "등록된 클럽이 없습니다."}
             </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              {profile.club1 ? `CLUB[2]: ${profile.club2}  ` : ""}
+              {profile.club2 ? `CLUB[2]: ${profile.club2}  ` : ""}
             </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              {profile.club1 ? `CLUB[3]: ${profile.club3}  ` : ""}
+              {profile.club3 ? `CLUB[3]: ${profile.club3}  ` : ""}
             </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              {profile.club1 ? `CLUB[4]: ${profile.club4}  ` : ""}
+              {profile.club4 ? `CLUB[4]: ${profile.club4}  ` : ""}
             </Typography>
             <Typography sx={{ fontFamily: "Jeju Myeongjo", margin: "1vh 0 0 1.5vh" }}>
-              {profile.club1 ? `CLUB[5]: ${profile.club5}  ` : ""}
+              {profile.club5 ? `CLUB[5]: ${profile.club5}  ` : ""}
             </Typography>
             {clubModal && <ClubModal setClubModal={setClubModal} />}
           </Grid>
@@ -380,6 +449,20 @@ const Mypage = () => {
               position: "relative",
             }}
           >
+            <Button
+              variant="contained"
+              className={styles.deleteBtn}
+              sx={{
+                color: "#fff",
+                backgroundColor: "#18264f",
+                border: "1px solid #383b3d",
+                fontFamily: "Jeju Myeongjo",
+                position: "absolute",
+              }}
+              onClick={onDeleteContest}
+            >
+              삭제
+            </Button>
             <Button
               variant="contained"
               className={styles.clubBtn}
@@ -436,6 +519,20 @@ const Mypage = () => {
               marginBottom: 10,
             }}
           >
+            <Button
+              variant="contained"
+              className={styles.deleteBtn}
+              sx={{
+                color: "#fff",
+                backgroundColor: "#18264f",
+                border: "1px solid #383b3d",
+                fontFamily: "Jeju Myeongjo",
+                position: "absolute",
+              }}
+              onClick={onDeleteProject}
+            >
+              삭제
+            </Button>
             <Button
               variant="contained"
               className={styles.clubBtn}
