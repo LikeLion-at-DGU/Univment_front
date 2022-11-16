@@ -247,7 +247,7 @@ const Mypage = () => {
                 position: "absolute",
               }}
               onClick={fileSubmit}
-              // disabled={}
+            // disabled={}
             >
               등록
             </Button>
@@ -270,7 +270,7 @@ const Mypage = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  이미지 등록 대기 중..
+                  이미지 등록 대기 중...
                 </Typography>
               </Grid>
             ) : (

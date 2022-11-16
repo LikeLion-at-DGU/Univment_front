@@ -196,18 +196,26 @@ const FastRecord = () => {
               <Grid item xs={12}>
                 {inputs.image ? (
                   <Grid
+                    container
                     sx={{
                       border: "none",
                       borderRadius: 5,
-                      width: "20vh",
-                      height: "20vh",
-                      backgroundImage: `url(http://54.180.165.166/media/${inputs.image.name})`,
-                      backgroundSize: `cover`,
-                      backgroundRepeat: `no-repeat`,
-                      backgroundPosition: `center`,
+                      width: "30vh",
+                      height: "30vh",
                       boxShadow: "7px 5px 15px -7px rgba(0, 0, 0, 0.5)",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
-                  ></Grid>
+                  >
+                    <Typography
+                      sx={{
+                        fontFamily: "Jeju Myeongjo",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      이미지 등록 대기 중...
+                    </Typography>
+                  </Grid>
                 ) : (
                   <Grid hidden></Grid>
                 )}
