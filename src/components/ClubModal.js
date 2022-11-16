@@ -39,7 +39,7 @@ const ClubModal = ({ setClubModal, profile, setProfile }) => {
       club5: newClub.club5,
     };
     await axios
-      .post("http://54.180.165.166/mypage/namecardclubs/", joinData)
+      .post("http://10.80.25.142:8000/mypage/namecardclubs/", joinData)
       .then((response) => {
         console.log(response);
         alert("프로필 클럽(동아리) 정보 등록 성공");

@@ -22,7 +22,7 @@ const Home = () => {
   const [newCategory, setNewCategory] = useState([]);
   const fetchData = async () => {
     try {
-      const request = await Instance.get("http://54.180.165.166/post/category/", {
+      const request = await Instance.get("http://10.80.25.142:8000/post/category/", {
         onlyusercontent: true,
       });
       setNewCategory({ name: request?.data.name, color: "#18264f" });

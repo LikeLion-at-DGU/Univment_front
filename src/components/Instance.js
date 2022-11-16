@@ -4,11 +4,11 @@ import { getCookie, removeCookie, setCookie } from "./cookie";
 const ACCESS_TOKEN = getCookie("access-token");
 const REFRESH_TOKEN = localStorage.getItem("refresh-token");
 export const Instance = axios.create({
-  baseURL: "http://54.180.165.166/",
+  baseURL: "http://10.80.25.142:8000/",
   withCredentials: true,
   headers: {
     Authorization: `Bearer ` + ACCESS_TOKEN,
-    "Access-Control-Allow-Origin": "http://54.180.165.166/",
+    "Access-Control-Allow-Origin": "http://10.80.25.142:8000/",
   },
 });
 
@@ -40,7 +40,7 @@ Instance.interceptors.response.use(
       if (errResponseStatus === 403) {
         const refreshToken = REFRESH_TOKEN;
         try {
-          const { data } = await axios.post("http://54.180.165.166/auth/token/refresh/", {
+          const { data } = await axios.post("http://10.80.25.142:8000/auth/token/refresh/", {
             refresh: refreshToken,
           });
           const newAccessToken = data.data.access;
@@ -64,7 +64,7 @@ Instance.interceptors.response.use(
           // refresh token을 이용하여 access token 재발급
           async function regenerateToken() {
             return await axios
-              .post("http://54.180.165.166/auth/token/refresh/", {
+              .post("http://10.80.25.142:8000/auth/token/refresh/", {
                 refresh: preRefreshToken,
               })
               .then(async (res) => {

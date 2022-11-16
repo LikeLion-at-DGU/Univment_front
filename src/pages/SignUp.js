@@ -45,7 +45,7 @@ const Boxs = styled(Box)`
 `;
 
 // Axios Global settings-------------------------------------------------------------------
-axios.defaults.baseURL = "http://54.180.165.166/";
+axios.defaults.baseURL = "http://10.80.25.142:8000/";
 axios.defaults.withCredentials = true;
 
 // main Component--------------------------------------------------------------------------
@@ -145,7 +145,7 @@ const SignUp = () => {
     };
     // const { name, email, password1, password2 } = joinData;
     await axios
-      .post("http://54.180.165.166/auth/registration/", joinData)
+      .post("http://10.80.25.142:8000/auth/registration/", joinData)
       .then((response) => {
         console.log(response.data);
         const accessToken = response.data.access_token;

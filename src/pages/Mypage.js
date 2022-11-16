@@ -54,11 +54,11 @@ const Mypage = () => {
   // Fetch
   const fetchData = async () => {
     try {
-      const requestImg = await axios.get("http://54.180.165.166/auth/user/");
-      const requestBasic = await axios.get("http://54.180.165.166/mypage/namecardprofile/");
-      const requestClub = await axios.get("http://54.180.165.166/mypage/namecardclubs/");
-      const requestContest = await axios.get("http://54.180.165.166/mypage/namecardcontests/");
-      const requestProject = await axios.get("http://54.180.165.166/mypage/namecardprojects/");
+      const requestImg = await axios.get("http://10.80.25.142:8000/auth/user/");
+      const requestBasic = await axios.get("http://10.80.25.142:8000/mypage/namecardprofile/");
+      const requestClub = await axios.get("http://10.80.25.142:8000/mypage/namecardclubs/");
+      const requestContest = await axios.get("http://10.80.25.142:8000/mypage/namecardcontests/");
+      const requestProject = await axios.get("http://10.80.25.142:8000/mypage/namecardprojects/");
       setProfile({
         ...profile,
         myname: requestBasic?.data[0]?.myname,
@@ -119,7 +119,7 @@ const Mypage = () => {
     }
     setImgLoading(false);
     await axios
-      .put("http://54.180.165.166/auth/user/", formData, {
+      .put("http://10.80.25.142:8000/auth/user/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -140,7 +140,7 @@ const Mypage = () => {
     e.preventDefault();
     if (window.confirm("기본 정보를 삭제하시겠습니까?")) {
       axios
-        .delete(`http://54.180.165.166/mypage/namecardprofile/${id}/`)
+        .delete(`http://10.80.25.142:8000/mypage/namecardprofile/${id}/`)
         .then(() => {
           setProfile({
             ...profile,
@@ -158,7 +158,7 @@ const Mypage = () => {
     e.preventDefault();
     if (window.confirm("클럽(동아리) 목록을 삭제하시겠습니까?")) {
       axios
-        .delete(`http://54.180.165.166/mypage/namecardclubs/${id}/`)
+        .delete(`http://10.80.25.142:8000/mypage/namecardclubs/${id}/`)
         .then((response) => {
           alert("클럽(동아리) 정보가 삭제되었습니다.");
         })
@@ -173,7 +173,7 @@ const Mypage = () => {
     e.preventDefault();
     if (window.confirm("(경진)대회 목록을 삭제하시겠습니까?")) {
       axios
-        .delete(`http://54.180.165.166/mypage/namecardcontests/${id}/`)
+        .delete(`http://10.80.25.142:8000/mypage/namecardcontests/${id}/`)
         .then((response) => {
           alert("(경진)대회 목록이 삭제되었습니다.");
         })
@@ -188,7 +188,7 @@ const Mypage = () => {
     e.preventDefault();
     if (window.confirm("프로젝트 목록을 삭제하시겠습니까?")) {
       axios
-        .delete(`http://54.180.165.166/mypage/namecardprojects/${id}/`)
+        .delete(`http://10.80.25.142:8000/mypage/namecardprojects/${id}/`)
         .then((response) => {
           alert("프로젝트 목록이 삭제되었습니다.");
         })

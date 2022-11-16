@@ -35,7 +35,7 @@ const BasicModal = ({ setBasicModal, profile, setProfile }) => {
     };
     if (joinData.myname && joinData.email) {
       await axios
-        .post(`http://54.180.165.166/mypage/namecardprofile/`, joinData)
+        .post(`http://10.80.25.142:8000/mypage/namecardprofile/`, joinData)
         .then((response) => {
           console.log(response);
           alert("프로필 기본 정보 등록 성공");

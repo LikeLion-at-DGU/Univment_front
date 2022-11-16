@@ -30,7 +30,7 @@ const AddCategoryModal = ({ setAddCategoryModal }) => {
       generated_user: id,
     };
     await axios
-      .post("http://54.180.165.166/post/category/", addCategoryData)
+      .post("http://10.80.25.142:8000/post/category/", addCategoryData)
       .then((response) => {
         console.log(response);
       })

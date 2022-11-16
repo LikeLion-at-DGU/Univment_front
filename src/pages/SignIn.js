@@ -36,7 +36,7 @@ const SignIn = () => {
     };
 
     await axios
-      .post("http://54.180.165.166/auth/login/", user)
+      .post("http://10.80.25.142:8000/auth/login/", user)
       .then((response) => {
         const accessToken = response.data.access_token;
         // API 요청 콜마다 헤더에 accessToken 담아 보내기
@@ -57,7 +57,11 @@ const SignIn = () => {
       })
       .catch((error) => {
         console.log(error);
-        alert("이메일 또는 비밀번호가 일치하지 않습니다");
+        if (error.request.status === 0) {
+          alert(error.message)
+        } else {
+          alert(error.response?.data.non_field_errors);
+        }
       });
   };
 
