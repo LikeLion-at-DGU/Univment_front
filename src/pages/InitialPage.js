@@ -44,7 +44,7 @@ const InitialPage = () => {
               color: "#fff",
               backgroundColor: "#18264f",
               border: "1px solid #383b3d",
-              width: "12vh",
+              width: "14vh",
               fontFamily: "Jeju Myeongjo",
             }}
             onClick={yesClick}
@@ -57,7 +57,7 @@ const InitialPage = () => {
               color: "#fff",
               backgroundColor: "#18264f",
               border: "1px solid #383b3d",
-              width: "12vh",
+              width: "14vh",
               fontFamily: "Jeju Myeongjo",
             }}
             onClick={noClick}
