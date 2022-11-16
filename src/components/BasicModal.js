@@ -3,9 +3,9 @@ import axios from "axios";
 import React, { memo, useRef, useState } from "react";
 import styles from "../static/css/Modal.module.css";
 
-const BasicModal = ({ setBasicModal }) => {
+const BasicModal = ({ setBasicModal, profile, setProfile }) => {
   const id = localStorage.getItem("id");
-  const [basic, setBasic] = useState({
+  const [newBasic, setNewBasic] = useState({
     user: id,
     myname: "",
     email: "",
@@ -20,19 +20,31 @@ const BasicModal = ({ setBasicModal }) => {
   // Handler
   const onChange = (e) => {
     const { value, name } = e.target;
-    setBasic({
-      ...basic,
+    setNewBasic({
+      ...newBasic,
       [name]: value,
     });
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (basic.myname && basic.email) {
+    const joinData = {
+      user: id,
+      myname: newBasic.myname,
+      email: newBasic.email,
+      major: newBasic.major,
+    };
+    if (joinData.myname && joinData.email) {
       await axios
-        .post(`http://54.180.165.166/mypage/namecardprofile/`, basic)
+        .post(`http://54.180.165.166/mypage/namecardprofile/`, joinData)
         .then((response) => {
           console.log(response);
           alert("프로필 기본 정보 등록 성공");
+          setProfile({
+            ...profile,
+            myname: response.data.myname,
+            email: response.data.email,
+            major: response.data.major,
+          });
           setBasicModal(false);
         })
         .catch((error) => {

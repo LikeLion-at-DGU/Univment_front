@@ -260,7 +260,7 @@ const SignUp = () => {
                 sx={{
                   mt: 3,
                   mb: 2,
-                  bgcolor: "#383b3d",
+                  bgcolor: "#18264f",
                   fontFamily: "Jeju Myeongjo",
                 }}
                 size="large"
