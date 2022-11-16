@@ -70,7 +70,7 @@ const FastRecord = () => {
     formData.append("email", inputs?.email);
     formData.append("password", inputs?.password);
     await axios
-      .post("http://54.180.165.166/post/postwithlogin/", formData, {
+      .post("http://10.80.25.142:8000/post/postwithlogin/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

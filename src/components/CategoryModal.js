@@ -27,7 +27,7 @@ const CategoryModal = ({ setCategoryModal }) => {
       generated_user: id,
     };
     await axios
-      .post("http://54.180.165.166/post/category/", joinData)
+      .post("http://10.80.25.142:8000/post/category/", joinData)
       .then((response) => {
         console.log(response);
         alert("새 카테고리 등록 성공");
